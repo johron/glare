@@ -1,18 +1,24 @@
 package me.johanrong.glare.node
 
-import me.johanrong.glare.core.IScript
+import me.johanrong.glare.core.INodeScript
 import me.johanrong.glare.type.Transform
 
-class Node (
+open class Node (
     var name: String,
     var transform: Transform,
     private var parent: Node? = null,
     private var children: MutableList<Node> = mutableListOf(),
-    private var script: IScript? = null
+    private var script: INodeScript? = null
 ) {
     constructor(name: String): this(
         name,
         Transform()
+    )
+
+    constructor(name: String, script: INodeScript): this(
+        name,
+        Transform(),
+        script = script
     )
 
     init {
@@ -42,7 +48,7 @@ class Node (
         return parent
     }
 
-    fun getScript(): IScript? {
+    fun getScript(): INodeScript? {
         return script
     }
 

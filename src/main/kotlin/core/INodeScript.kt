@@ -1,6 +1,6 @@
 package me.johanrong.glare.core
 
-interface IScript {
+interface INodeScript {
     fun init()
     fun update(delta: Double)
     fun render(/*delta: Double*/)

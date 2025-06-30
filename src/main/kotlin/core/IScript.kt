@@ -1,7 +1,7 @@
 package me.johanrong.glare.core
 
-interface IGame {
-    fun init(engine: GlareEngine)
+interface IScript {
+    fun init(engine: GlareEngine? = null)
     fun update(delta: Double)
     fun render(/*delta: Double*/)
     fun cleanup()

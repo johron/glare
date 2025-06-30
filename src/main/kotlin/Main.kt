@@ -1,7 +1,7 @@
 package me.johanrong.glare
 
 import me.johanrong.glare.core.GlareEngine
-import me.johanrong.glare.core.IGame
+import me.johanrong.glare.core.IScript
 import me.johanrong.glare.core.Window
 
 fun main() {
@@ -16,12 +16,12 @@ fun main() {
     GlareEngine(window, TestGame())
 }
 
-class TestGame : IGame {
-    private lateinit var engine: GlareEngine
+class TestGame () : IScript  {
+    var engine: GlareEngine? = null
 
-    override fun init(engine: GlareEngine) {
+    override fun init(engine: GlareEngine?) {
         this.engine = engine
-        println("Game initialized")
+        println("Game initialized with engine: $engine")
     }
 
     override fun update(delta: Double) {

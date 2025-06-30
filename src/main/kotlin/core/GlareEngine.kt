@@ -3,7 +3,7 @@ package me.johanrong.glare.core
 import me.johanrong.glare.render.Renderer
 import me.johanrong.glare.util.NANOSECOND
 
-class GlareEngine (val window: Window, game: IGame) {
+class GlareEngine (val window: Window, game: IScript) {
     private var delta = 0.0
     private var isRunning = true
 

@@ -1,7 +1,7 @@
 package me.johanrong.glare.core
 
-interface IScript {
-    fun init()
+interface IRootScript {
+    fun init(engine: GlareEngine)
     fun update(delta: Double)
     fun render(/*delta: Double*/)
     fun cleanup()

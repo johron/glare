@@ -1,6 +1,8 @@
 #version 400 core
 
 in vec3 position;
+in vec2 textureCoord;
+in vec3 normal;
 
 uniform mat4 transformMatrix;
 uniform mat4 projectionMatrix;

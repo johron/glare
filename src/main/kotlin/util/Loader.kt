@@ -30,12 +30,14 @@ fun loadObj(path: String): Mesh {
 
 fun storeMesh(obj: Obj): Mesh {
     val id: Int = createVAO()
-    storeIndiciesBuffer(ObjData.getFaceVertexIndices(obj))
-    storeDataInAttribList(0, 3, ObjData.getVertices(obj))
-    storeDataInAttribList(1, 2, ObjData.getTexCoords(obj, 0))
-    storeDataInAttribList(2, 3, ObjData.getNormals(obj))
+    storeIndiciesBuffer(ObjData.getFaceVertexIndicesArray(obj))
+    storeDataInAttribList(0, 3, ObjData.getVerticesArray(obj))
+    storeDataInAttribList(1, 2, ObjData.getTexCoordsArray(obj, 0))
+    storeDataInAttribList(2, 3, ObjData.getNormalsArray(obj))
     unbind()
-    return Mesh(id, ObjData.getFaceVertexIndices(obj).remaining())
+
+    val vertexCount = ObjData.getFaceVertexIndicesArray(obj).size
+    return Mesh(id, vertexCount)
 }
 
 private fun createVAO(): Int {
@@ -45,18 +47,20 @@ private fun createVAO(): Int {
     return id
 }
 
-private fun storeIndiciesBuffer(indices: IntBuffer) {
+private fun storeIndiciesBuffer(indices: IntArray) {
     val vbo = GL15.glGenBuffers()
     vbos.add(vbo)
     GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, vbo)
-    GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, indices, GL15.GL_STATIC_DRAW)
+    val buffer: IntBuffer = storeDataInIntBuffer(indices)
+    GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, buffer, GL15.GL_STATIC_DRAW)
 }
 
-private fun storeDataInAttribList(attribNo: Int, vertexCount: Int, data: FloatBuffer) {
+private fun storeDataInAttribList(attribNo: Int, vertexCount: Int, data: FloatArray) {
     val vbo = GL15.glGenBuffers()
     vbos.add(vbo)
     GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vbo)
-    GL15.glBufferData(GL15.GL_ARRAY_BUFFER, data, GL15.GL_STATIC_DRAW)
+    val buffer: FloatBuffer = storeDataInFloatBuffer(data)
+    GL15.glBufferData(GL15.GL_ARRAY_BUFFER, buffer, GL15.GL_STATIC_DRAW)
     GL20.glVertexAttribPointer(attribNo, vertexCount, GL11.GL_FLOAT, false, 0, 0)
     GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0)
 }

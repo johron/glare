@@ -7,7 +7,7 @@ import org.joml.Vector3f
 class Transform (
     var position: Vector3d,
     var rotation: Euler,
-    var scale: Vector3f
+    var scale: Vector3f,
 ) {
     constructor (): this(
         Vector3d(0.0),
@@ -44,6 +44,9 @@ class Transform (
         val matrix = Matrix4f()
         matrix.identity()
             .translate(getPosition())
+            .rotateX(rotation.toRadians().x)
+            .rotateY(rotation.toRadians().y)
+            .rotateZ(rotation.toRadians().z)
             .scale(scale)
 
         return matrix

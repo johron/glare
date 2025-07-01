@@ -1,9 +1,8 @@
 package me.johanrong.glare.core
 
-import me.johanrong.glare.node.base.Camera
 import me.johanrong.glare.node.RootNode
+import me.johanrong.glare.node.base.Camera
 import me.johanrong.glare.render.Renderer
-import me.johanrong.glare.util.GLARE_ENGINE
 import me.johanrong.glare.util.GLARE_VERSION
 import me.johanrong.glare.util.NANOSECOND
 import me.johanrong.glare.util.log

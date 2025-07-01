@@ -30,7 +30,6 @@ class MeshRenderer (val engine: GlareEngine) : IRenderer {
     fun renderChildren(parent: Node) {
         for (child in parent.getChildren()) {
             if (child is MeshNode) {
-                println("Rendering mesh: ${child.name} with mesh ID: ${child.getMesh().getId()}")
                 GL30.glBindVertexArray(child.getMesh().getId())
                 GL20.glEnableVertexAttribArray(0)
                 GL20.glEnableVertexAttribArray(1)
@@ -40,6 +39,9 @@ class MeshRenderer (val engine: GlareEngine) : IRenderer {
                 shader.setUniform("transformMatrix", engine.camera!!.transform.getTransformMatrix())
 
                 GL11.glDrawElements(GL11.GL_TRIANGLES, child.getMesh().getVertexCount(), GL11.GL_UNSIGNED_INT, 0)
+                GL20.glDisableVertexAttribArray(0)
+                GL20.glDisableVertexAttribArray(1)
+                GL20.glDisableVertexAttribArray(2)
                 GL30.glBindVertexArray(0)
             }
             renderChildren(child)

@@ -1,11 +1,16 @@
 package me.johanrong.glare.core
 
+import me.johanrong.glare.node.base.Camera
+import me.johanrong.glare.node.RootNode
 import me.johanrong.glare.render.Renderer
 import me.johanrong.glare.util.NANOSECOND
 
 class GlareEngine (val window: Window, game: IRootScript) {
     private var delta = 0.0
     private var isRunning = true
+
+    val root = RootNode()
+    var camera: Camera? = null
 
     private val renderer: Renderer = Renderer(this)
 
@@ -21,6 +26,7 @@ class GlareEngine (val window: Window, game: IRootScript) {
             }
 
             game.update(delta)
+            root.update(delta)
             window.update()
             renderer.render()
 

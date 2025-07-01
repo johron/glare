@@ -1,7 +1,8 @@
 package me.johanrong.glare.render
 
-import me.johanrong.glare.node.Camera
+import me.johanrong.glare.node.base.Camera
 
 interface IRenderer {
-    fun render(camera: Camera)
+    fun render()
+    fun cleanup()
 }

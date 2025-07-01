@@ -2,7 +2,7 @@ package me.johanrong.glare
 
 import me.johanrong.glare.TestGame.Companion.engine
 import me.johanrong.glare.core.IScript
-import me.johanrong.glare.node.Camera
+import me.johanrong.glare.node.base.Camera
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.type.Keycode
 import me.johanrong.glare.util.Input
@@ -25,6 +25,7 @@ class FreecamScript : IScript {
     override fun update(delta: Double) {
         if (input.isKeyHeld(Keycode.W)) {
             //node.transform.translate(0.0, 0.0, 5.0 * delta)
+            //println("Moving forward")
         }
     }
 

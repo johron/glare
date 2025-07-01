@@ -3,8 +3,6 @@ package me.johanrong.glare
 import me.johanrong.glare.core.GlareEngine
 import me.johanrong.glare.core.IRootScript
 import me.johanrong.glare.core.Window
-import me.johanrong.glare.node.Node
-import me.johanrong.glare.node.RootNode
 
 fun main() {
     val window = Window(
@@ -21,20 +19,18 @@ fun main() {
 class TestGame : IRootScript {
     companion object {
         lateinit var engine: GlareEngine
-        lateinit var root: RootNode
     }
 
     override fun init(engine: GlareEngine) {
         println("Game initialized with engine: $engine")
 
         TestGame.engine = engine
-        root = RootNode()
-        Freecam(root)
+        engine.camera = Freecam(engine.root)
     }
 
     override fun update(delta: Double) {
-        root.update(delta)
         //println("root update")
+        println(engine.camera?.transform?.position)
     }
 
     override fun render() {

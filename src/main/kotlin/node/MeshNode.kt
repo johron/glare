@@ -1,5 +1,12 @@
 package me.johanrong.glare.node
 
-class MeshNode {
+import me.johanrong.glare.type.Mesh
+import me.johanrong.glare.type.Transform
 
+class MeshNode (name: String, parent: Node, private val mesh: Mesh, transform: Transform) : Node (name, parent, transform) {
+    constructor(name: String, parent: Node, mesh: Mesh): this(name, parent, mesh, Transform())
+
+   fun getMesh(): Mesh {
+        return mesh
+    }
 }

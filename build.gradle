@@ -4,11 +4,14 @@ plugins {
 
 project.ext.lwjglVersion = "3.3.3"
 project.ext.lwjglNatives = "natives-linux"
+
 project.ext.jomlVersion = "1.10.8"
 project.ext.jomlPrimVersion = "1.10.0"
 
+project.ext.objVersion = "0.4.0"
+
 group = 'me.johanrong.glare'
-version = '1.0-SNAPSHOT'
+version = '0.0.1'
 
 repositories {
     mavenCentral()
@@ -19,6 +22,8 @@ dependencies {
 
     implementation "org.joml:joml:${jomlVersion}"
     implementation "org.joml:joml-primitives:${jomlPrimVersion}"
+
+    implementation "de.javagl:obj:${objVersion}"
 
     implementation "org.lwjgl:lwjgl"
     implementation "org.lwjgl:lwjgl-assimp"
@@ -94,6 +99,7 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
 kotlin {
     jvmToolchain(22)
 }

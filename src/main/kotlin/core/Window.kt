@@ -1,5 +1,9 @@
 package me.johanrong.glare.core
 
+import me.johanrong.glare.util.FOV
+import me.johanrong.glare.util.Z_FAR
+import me.johanrong.glare.util.Z_NEAR
+import org.joml.Matrix4f
 import org.lwjgl.glfw.GLFW
 import org.lwjgl.glfw.GLFWErrorCallback
 import org.lwjgl.opengl.GL
@@ -14,6 +18,7 @@ class Window (
     var vSync: Boolean
 ) {
     private var handle: Long
+    private var projectionMatrix: Matrix4f = Matrix4f()
 
     init {
         GLFWErrorCallback.createPrint(System.err).set()
@@ -89,5 +94,10 @@ class Window (
 
     fun getHandle(): Long {
         return handle
+    }
+
+    fun updateProjectionMatrix(): Matrix4f {
+        val aspectRatio = width.toFloat() / height.toFloat()
+        return projectionMatrix.setPerspective(FOV, aspectRatio, Z_NEAR, Z_FAR)
     }
 }

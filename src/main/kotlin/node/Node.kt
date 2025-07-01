@@ -16,9 +16,22 @@ open class Node (
         parent,
     )
 
-    constructor(name: String, script: IScript, parent: Node): this(
+    constructor(name: String, parent: Node?, transform: Transform): this(
         name,
         Transform(),
+        parent,
+    )
+
+    constructor(name: String, parent: Node, script: IScript): this(
+        name,
+        Transform(),
+        parent,
+        script = script
+    )
+
+    constructor(name: String, parent: Node, script: IScript, transform: Transform): this(
+        name,
+        transform,
         parent,
         script = script
     )

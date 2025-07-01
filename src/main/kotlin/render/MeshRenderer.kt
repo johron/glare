@@ -8,8 +8,7 @@ class MeshRenderer (val engine: GlareEngine) : IRenderer {
             return
         }
 
-
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 
     override fun cleanup() {

@@ -28,9 +28,9 @@ class TestGame : IRootScript {
         println("Game initialized with engine: $engine")
 
         TestGame.engine = engine
-        engine.camera = Freecam(engine.root, Transform(0.0, 0.0, 5.0))
+        engine.camera = Freecam(engine.root, Transform(0.0, 0.0, -5.0))
 
-        val mesh = loadObj("/model/cube.obj")
+        val mesh = loadObj("/model/bunny.obj")
         val meshNode = MeshNode("Cube", engine.root, mesh)
     }
 

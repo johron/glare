@@ -29,7 +29,6 @@ class Window (
 
         GLFW.glfwDefaultWindowHints()
         GLFW.glfwWindowHint(GLFW.GLFW_VISIBLE, GL11.GL_FALSE)
-
         GLFW.glfwWindowHint(GLFW.GLFW_CONTEXT_VERSION_MAJOR, 3)
         GLFW.glfwWindowHint(GLFW.GLFW_CONTEXT_VERSION_MINOR, 2)
         GLFW.glfwWindowHint(GLFW.GLFW_OPENGL_PROFILE, GLFW.GLFW_OPENGL_CORE_PROFILE)
@@ -98,6 +97,6 @@ class Window (
 
     fun updateProjectionMatrix(): Matrix4f {
         val aspectRatio = width.toFloat() / height.toFloat()
-        return projectionMatrix.setPerspective(FOV, aspectRatio, Z_NEAR, Z_FAR)
+        return projectionMatrix.setPerspective(Math.toRadians(FOV).toFloat(), aspectRatio, Z_NEAR, Z_FAR)
     }
 }

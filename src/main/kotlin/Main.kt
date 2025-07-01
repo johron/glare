@@ -3,6 +3,8 @@ package me.johanrong.glare
 import me.johanrong.glare.core.GlareEngine
 import me.johanrong.glare.core.IRootScript
 import me.johanrong.glare.core.Window
+import me.johanrong.glare.node.Node
+import me.johanrong.glare.node.RootNode
 
 fun main() {
     val window = Window(
@@ -17,19 +19,26 @@ fun main() {
 }
 
 class TestGame : IRootScript {
-    lateinit var engine: GlareEngine
+    companion object {
+        lateinit var engine: GlareEngine
+        lateinit var root: RootNode
+    }
 
     override fun init(engine: GlareEngine) {
-        this.engine = engine
         println("Game initialized with engine: $engine")
+
+        TestGame.engine = engine
+        root = RootNode()
+        Freecam(root)
     }
 
     override fun update(delta: Double) {
-        println("Game updated with delta: $delta")
+        root.update(delta)
+        //println("root update")
     }
 
     override fun render() {
-        println("Game rendered")
+        //println("Game rendered")
     }
 
     override fun cleanup() {

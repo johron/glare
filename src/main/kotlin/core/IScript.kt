@@ -1,7 +1,9 @@
 package me.johanrong.glare.core
 
-interface INodeScript {
-    fun init()
+import me.johanrong.glare.node.Node
+
+interface IScript {
+    fun init(node: Node)
     fun update(delta: Double)
     fun render(/*delta: Double*/)
     fun cleanup()

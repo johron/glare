@@ -1,5 +1,5 @@
 package me.johanrong.glare.node
 
-class MeshNode () : Node {
+class MeshNode {
 
 }

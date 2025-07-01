@@ -1,8 +1,6 @@
 package me.johanrong.glare.type
 
-import org.lwjgl.glfw.GLFW
-
-enum class Keycode(code: Int) {
+enum class Keycode(val code: Int) {
     ZERO(48),
     ONE(49),
     TWO(50),
@@ -70,15 +68,4 @@ enum class Keycode(code: Int) {
     F10(299),
     F11(300),
     F12(301),
-}
-
-enum class MouseButton(code: Int) {
-    LEFT(0),
-    RIGHT(1),
-    MIDDLE(2),
-    THREE(3),
-    FOUR(4),
-    FIVE(5),
-    SIX(6),
-    LAST(7),
 }

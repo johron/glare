@@ -1,28 +1,31 @@
 package me.johanrong.glare.node
 
-import me.johanrong.glare.core.INodeScript
+import me.johanrong.glare.core.IScript
 import me.johanrong.glare.type.Transform
 
 open class Node (
     var name: String,
     var transform: Transform,
-    private var parent: Node? = null,
+    private var parent: Node?,
     private var children: MutableList<Node> = mutableListOf(),
-    private var script: INodeScript? = null
+    private var script: IScript? = null
 ) {
-    constructor(name: String): this(
-        name,
-        Transform()
-    )
-
-    constructor(name: String, script: INodeScript): this(
+    constructor(name: String, parent: Node?): this(
         name,
         Transform(),
+        parent,
+    )
+
+    constructor(name: String, script: IScript, parent: Node): this(
+        name,
+        Transform(),
+        parent,
         script = script
     )
 
     init {
-        script?.init()
+        script?.init(this)
+        parent?.addChild(this)
     }
 
     fun addChild(child: Node) {
@@ -48,7 +51,7 @@ open class Node (
         return parent
     }
 
-    fun getScript(): INodeScript? {
+    fun getScript(): IScript? {
         return script
     }
 
@@ -57,5 +60,12 @@ open class Node (
         parent?.removeChild(this)
         parent = null
         script = null
+    }
+
+    fun update(delta: Double) {
+        script?.update(delta)
+        for (child in children) {
+            child.update(delta)
+        }
     }
 }

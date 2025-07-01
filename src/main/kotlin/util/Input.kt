@@ -9,11 +9,11 @@ import org.lwjgl.glfw.GLFW
 class Input (val engine: GlareEngine) {
 
     fun isKeyHeld(key: Keycode): Boolean {
-        return GLFW.glfwGetKey(engine.window.getHandle(), key.ordinal) == GLFW.GLFW_PRESS
+        return GLFW.glfwGetKey(engine.window.getHandle(), key.code) == GLFW.GLFW_PRESS
     }
 
     fun isKeyReleased(key: Keycode): Boolean {
-        return GLFW.glfwGetKey(engine.window.getHandle(), key.ordinal) == GLFW.GLFW_RELEASE
+        return GLFW.glfwGetKey(engine.window.getHandle(), key.code) == GLFW.GLFW_RELEASE
     }
 
     fun isKeyPressed(key: Keycode): Boolean {
@@ -22,7 +22,7 @@ class Input (val engine: GlareEngine) {
     }
 
     fun isMouseButtonPressed(button: MouseButton): Boolean {
-        return GLFW.glfwGetMouseButton(engine.window.getHandle(), button.ordinal) == GLFW.GLFW_PRESS
+        return GLFW.glfwGetMouseButton(engine.window.getHandle(), button.code) == GLFW.GLFW_PRESS
     }
 
     fun getMousePosition(): Vector2d {

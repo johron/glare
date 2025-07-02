@@ -11,6 +11,10 @@ class Material (private var texture: Texture?) {
         this.texture = texture
     }
 
+    fun setTexture(id: Int) {
+        this.texture = Texture(id)
+    }
+
     fun hasTexture(): Boolean {
         return texture != null
     }

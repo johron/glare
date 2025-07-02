@@ -40,6 +40,10 @@ class Shader (vertexPath: String, fragmentPath: String) {
         GL20.glUniform3f(uniforms[uniformName]!!, value.x, value.y, value.z)
     }
 
+    fun setUniform(uniformName: String?, value: Int) {
+        GL20.glUniform1i(uniforms[uniformName]!!, value)
+    }
+
     fun setUniform(uniformName: String, value: Matrix4f) {
         MemoryStack.stackPush().use { stack ->
             GL20.glUniformMatrix4fv(

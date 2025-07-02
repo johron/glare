@@ -6,6 +6,7 @@ import me.johanrong.glare.core.Window
 import me.johanrong.glare.node.MeshNode
 import me.johanrong.glare.type.Transform
 import me.johanrong.glare.util.loadObj
+import me.johanrong.glare.util.loadTexture
 
 fun main() {
     val window = Window(
@@ -30,7 +31,9 @@ class TestGame : IRootScript {
         TestGame.engine = engine
         engine.camera = Freecam(engine.root, Transform(0.0, 0.0, -5.0))
 
-        val mesh = loadObj("/model/saucer.obj")
+        val texture = loadTexture("texture/grass.jpg")
+        val mesh = loadObj("/model/bunny.obj")
+        mesh.getMaterial().setTexture(texture)
         val meshNode = MeshNode("Node", engine.root, mesh, Transform(-2.0, 0.0, 0.0))
     }
 

@@ -37,7 +37,7 @@ class GlareEngine (val window: Window, game: IRootScript) {
             val endTime = System.nanoTime()
             delta = (endTime - startTime) / NANOSECOND.toDouble()
 
-            if (frames % 10 == 0) {
+            if (frames % 100 == 0 && delta > 0.0) {
                 window.setTitle("${window.getTitle()} - ${(1.0 / delta).toInt()} FPS")
                 frames = 0
             }

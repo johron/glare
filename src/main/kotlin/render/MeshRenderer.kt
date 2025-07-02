@@ -11,9 +11,9 @@ class MeshRenderer (val engine: GlareEngine) : IRenderer {
     val shader = Shader("/shader/mesh.vert", "/shader/mesh.frag")
 
     init {
-        shader.createUniform("viewMatrix")
-        shader.createUniform("projectionMatrix")
         shader.createUniform("transformMatrix")
+        shader.createUniform("projectionMatrix")
+        shader.createUniform("viewMatrix")
     }
 
     override fun render() {
@@ -35,8 +35,8 @@ class MeshRenderer (val engine: GlareEngine) : IRenderer {
                 GL20.glEnableVertexAttribArray(1)
                 GL20.glEnableVertexAttribArray(2)
 
+                shader.setUniform("transformMatrix", child.transform.getTransformMatrix())
                 shader.setUniform("viewMatrix", engine.camera!!.transform.getViewMatrix())
-                shader.setUniform("transformMatrix", engine.camera!!.transform.getTransformMatrix())
 
                 GL11.glDrawElements(GL11.GL_TRIANGLES, child.getMesh().getVertexCount(), GL11.GL_UNSIGNED_INT, 0)
                 GL20.glDisableVertexAttribArray(0)

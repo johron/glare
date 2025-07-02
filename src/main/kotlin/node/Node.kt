@@ -55,6 +55,10 @@ open class Node (
         return children
     }
 
+    fun getFirstChild(name: String): Node? {
+        return children.firstOrNull { it.name == name }
+    }
+
     fun setParent(parent: Node) {
         this.parent = parent
         parent.addChild(this)

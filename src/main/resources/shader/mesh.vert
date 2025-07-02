@@ -1,8 +1,7 @@
 #version 400 core
 
 in vec3 position;
-in vec2 textureCoord;
-in vec3 normal;
+//layout(location = 0) in vec3 position;
 
 uniform mat4 transformMatrix;
 uniform mat4 projectionMatrix;

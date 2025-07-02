@@ -26,8 +26,16 @@ class FreecamScript : IScript {
 
     override fun update(delta: Double) {
         if (input.isKeyHeld(Keycode.W)) {
-            //node.transform.translate(0.0, 0.0, 5.0 * delta)
-            //println("Moving forward")
+            node.transform.translate(0.0, 0.0, 5.0 * delta)
+        }
+        if (input.isKeyHeld(Keycode.S)) {
+            node.transform.translate(0.0, 0.0, -5.0 * delta)
+        }
+        if (input.isKeyHeld(Keycode.A)) {
+            node.transform.translate(5.0 * delta, 0.0, 0.0)
+        }
+        if (input.isKeyHeld(Keycode.D)) {
+            node.transform.translate(-5.0 * delta, 0.0, 0.0)
         }
     }
 

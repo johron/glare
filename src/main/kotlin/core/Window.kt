@@ -29,16 +29,15 @@ class Window (
 
         GLFW.glfwDefaultWindowHints()
         GLFW.glfwWindowHint(GLFW.GLFW_VISIBLE, GL11.GL_FALSE)
+        GLFW.glfwWindowHint(GLFW.GLFW_RESIZABLE, GL11.GL_TRUE)
         GLFW.glfwWindowHint(GLFW.GLFW_CONTEXT_VERSION_MAJOR, 3)
         GLFW.glfwWindowHint(GLFW.GLFW_CONTEXT_VERSION_MINOR, 2)
         GLFW.glfwWindowHint(GLFW.GLFW_OPENGL_PROFILE, GLFW.GLFW_OPENGL_CORE_PROFILE)
         GLFW.glfwWindowHint(GLFW.GLFW_OPENGL_FORWARD_COMPAT, GL11.GL_TRUE)
 
-        GLFW.glfwWindowHint(GLFW.GLFW_RESIZABLE, GL11.GL_TRUE)
         GLFW.glfwWindowHint(GLFW.GLFW_MAXIMIZED, if (maximized) GLFW.GLFW_TRUE else GLFW.GLFW_FALSE)
 
         handle = GLFW.glfwCreateWindow(width, height, title, MemoryUtil.NULL, MemoryUtil.NULL)
-
         if (handle == MemoryUtil.NULL) {
             throw IllegalStateException("Failed to create the GLFW window")
         }
@@ -64,8 +63,8 @@ class Window (
         GL11.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
         GL11.glEnable(GL11.GL_DEPTH_TEST)
         GL11.glEnable(GL11.GL_STENCIL_TEST)
-        GL11.glEnable(GL11.GL_CULL_FACE)
-        GL11.glCullFace(GL11.GL_BACK)
+        //GL11.glEnable(GL11.GL_CULL_FACE)
+        //GL11.glCullFace(GL11.GL_BACK)
     }
 
     fun shouldClose(): Boolean {
@@ -73,8 +72,8 @@ class Window (
     }
 
     fun update() {
-        GLFW.glfwPollEvents()
         GLFW.glfwSwapBuffers(handle)
+        GLFW.glfwPollEvents()
     }
 
     fun cleanup() {

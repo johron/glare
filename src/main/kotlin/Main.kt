@@ -30,13 +30,15 @@ class TestGame : IRootScript {
         TestGame.engine = engine
         engine.camera = Freecam(engine.root, Transform(0.0, 0.0, -5.0))
 
-        val mesh = loadObj("/model/bunny.obj")
-        val meshNode = MeshNode("Cube", engine.root, mesh)
+        val mesh = loadObj("/model/cube.obj")
+        val meshNode = MeshNode("Node", engine.root, mesh)
     }
 
     override fun update(delta: Double) {
         //println("root update")
         //println(engine.camera?.transform?.position)
+        val node = engine.root.getFirstChild("Node")
+        node!!.transform.rotation.addY(25.0 * delta)
     }
 
     override fun render() {

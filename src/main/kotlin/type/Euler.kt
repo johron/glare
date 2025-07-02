@@ -3,9 +3,9 @@ package me.johanrong.glare.type
 import org.joml.Vector3f
 
 class Euler (
-    private var x: Float,
-    private var y: Float,
-    private var z: Float
+    private var x: Double,
+    private var y: Double,
+    private var z: Double
 ) {
     init {
         x = x % 360
@@ -13,29 +13,39 @@ class Euler (
         z = z % 360
     }
 
-    constructor (d: Float): this(d, d, d)
+    constructor (d: Double): this(d, d, d)
 
-    fun getX(): Float = x
-    fun getY(): Float = y
-    fun getZ(): Float = z
+    fun getX(): Double = x
+    fun getY(): Double = y
+    fun getZ(): Double = z
 
-    fun setX(value: Float) {
+    fun addX(value: Double) {
+        x = (x + value) % 360
+    }
+    fun addY(value: Double) {
+        y = (y + value) % 360
+    }
+    fun addZ(value: Double) {
+        z = (z + value) % 360
+    }
+
+    fun setX(value: Double) {
         x = value % 360
     }
 
-    fun setY(value: Float) {
+    fun setY(value: Double) {
         y = value % 360
     }
 
-    fun setZ(value: Float) {
+    fun setZ(value: Double) {
         z = value % 360
     }
 
     fun toRadians(): Vector3f {
         return Vector3f(
-            Math.toRadians(x.toDouble()).toFloat(),
-            Math.toRadians(y.toDouble()).toFloat(),
-            Math.toRadians(z.toDouble()).toFloat()
+            Math.toRadians(x).toFloat(),
+            Math.toRadians(y).toFloat(),
+            Math.toRadians(z).toFloat()
         )
     }
 }

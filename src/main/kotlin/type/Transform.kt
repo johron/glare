@@ -11,13 +11,13 @@ class Transform (
 ) {
     constructor (): this(
         Vector3d(0.0),
-        Euler(0f),
+        Euler(0.0),
         Vector3f(1f)
     )
 
     constructor (position: Vector3d): this(
         position,
-        Euler(0f),
+        Euler(0.0),
         Vector3f(1f)
     )
 
@@ -33,7 +33,7 @@ class Transform (
             .rotate(rotation.toRadians().x, Vector3f(1f, 0f, 0f))
             .rotate(rotation.toRadians().y, Vector3f(0f, 1f, 0f))
             .rotate(rotation.toRadians().z, Vector3f(0f, 0f, 1f))
-            .translate(-position.x.toFloat(), -position.y.toFloat(), -position.z.toFloat())
+            .translate(position.x.toFloat(), position.y.toFloat(), position.z.toFloat())
     }
 
     fun getPosition(): Vector3f {

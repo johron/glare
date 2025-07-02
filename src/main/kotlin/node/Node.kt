@@ -18,7 +18,7 @@ open class Node (
 
     constructor(name: String, parent: Node?, transform: Transform): this(
         name,
-        Transform(),
+        transform,
         parent,
     )
 

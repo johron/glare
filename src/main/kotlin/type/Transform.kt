@@ -33,7 +33,7 @@ class Transform (
             .rotate(rotation.toRadians().x, Vector3f(1f, 0f, 0f))
             .rotate(rotation.toRadians().y, Vector3f(0f, 1f, 0f))
             .rotate(rotation.toRadians().z, Vector3f(0f, 0f, 1f))
-            .translate(position.x.toFloat(), position.y.toFloat(), position.z.toFloat())
+            .translate(position.x.toFloat(), -position.y.toFloat(), position.z.toFloat())
     }
 
     fun getPosition(): Vector3f {

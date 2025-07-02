@@ -37,6 +37,13 @@ class FreecamScript : IScript {
         if (input.isKeyHeld(Keycode.D)) {
             node.transform.translate(-5.0 * delta, 0.0, 0.0)
         }
+
+        if (input.isKeyHeld(Keycode.SPACE)) {
+            node.transform.translate(0.0, 5.0 * delta, 0.0)
+        }
+        if (input.isKeyHeld(Keycode.SHIFT)) {
+            node.transform.translate(0.0, -5.0 * delta, 0.0)
+        }
     }
 
     override fun render() {

@@ -31,9 +31,9 @@ class TestGame : IRootScript {
         TestGame.engine = engine
         engine.camera = Freecam(engine.root, Transform(0.0, 0.0, -5.0))
 
-        val texture = loadTexture("texture/grass.jpg")
+        //val texture = loadTexture("texture/grass2.png")
         val mesh = loadObj("/model/bunny.obj")
-        mesh.getMaterial().setTexture(texture)
+        //mesh.getMaterial().setTexture(texture)
         val meshNode = MeshNode("Node", engine.root, mesh, Transform(-2.0, 0.0, 0.0))
     }
 

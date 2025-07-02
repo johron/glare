@@ -15,6 +15,7 @@ import org.lwjgl.system.MemoryStack
 import java.nio.ByteBuffer
 import java.nio.FloatBuffer
 import java.nio.IntBuffer
+import java.util.Arrays
 
 private val vaos = mutableListOf<Int>()
 private val vbos = mutableListOf<Int>()
@@ -28,15 +29,27 @@ fun loadText(path: String): String {
 fun loadObj(path: String): Mesh {
     val inputStream = object {}.javaClass.getResourceAsStream(path) ?: throw Exception("Resource not found: $path")
     val obj = ObjUtils.convertToRenderable(ObjReader.read(inputStream))
+
+    val indices = ObjData.getFaceVertexIndices(obj)
+    val vertices = ObjData.getVertices(obj)
+    val texCoords = ObjData.getTexCoords(obj,2)
+
+    val id: Int = createVAO()
+    storeIndiciesBuffer(indices)
+    storeDataInAttribList(0, 3, vertices)
+    storeDataInAttribList(1, 2, texCoords)
+    //storeDataInAttribList(2, 3, ObjData.getNormals(obj))
+    unbind()
     inputStream.close()
 
-    return storeMesh(obj)
+    val vertexCount = ObjData.getFaceVertexIndicesArray(obj).size
+    return Mesh(id, vertexCount)
 }
 
 fun loadTexture(path: String): Int {
     val width: Int
     val height: Int
-    val buffer: ByteBuffer?
+    val buffer: ByteBuffer
 
     MemoryStack.stackPush().use { stack ->
         object {}.javaClass.getClassLoader().getResourceAsStream(path).use { res ->
@@ -52,7 +65,7 @@ fun loadTexture(path: String): Int {
             val h = stack.mallocInt(1)
             val c = stack.mallocInt(1)
 
-            buffer = STBImage.stbi_load_from_memory(imageBuffer, w, h, c, 4)
+            buffer = STBImage.stbi_load_from_memory(imageBuffer, w, h, c, 4)!!
 
             if (buffer == null) {
                 throw java.lang.Exception("Could not load texture file: " + path + ": " + STBImage.stbi_failure_reason())
@@ -81,18 +94,6 @@ fun loadTexture(path: String): Int {
     GL30.glGenerateMipmap(GL11.GL_TEXTURE_2D)
     STBImage.stbi_image_free(buffer)
     return id
-}
-
-fun storeMesh(obj: Obj): Mesh {
-    val id: Int = createVAO()
-    storeIndiciesBuffer(ObjData.getFaceVertexIndices(obj))
-    storeDataInAttribList(0, 3, ObjData.getVertices(obj))
-    storeDataInAttribList(1, 2, ObjData.getTexCoords(obj, 0))
-    //storeDataInAttribList(2, 3, ObjData.getNormals(obj))
-    unbind()
-
-    val vertexCount = ObjData.getFaceVertexIndicesArray(obj).size
-    return Mesh(id, vertexCount)
 }
 
 private fun createVAO(): Int {

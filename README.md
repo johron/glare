@@ -8,6 +8,7 @@
 - [Obj 0.4.0](https://github.com/javagl/Obj)
 
 ## Example Usage
+- Currently only has linux natives for LWJGL
 ```kotlin
 fun main() {
     val window = Window(

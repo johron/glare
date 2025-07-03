@@ -32,12 +32,15 @@ fun loadObj(path: String): Mesh {
 
     val indices = ObjData.getFaceVertexIndices(obj)
     val vertices = ObjData.getVertices(obj)
-    val texCoords = ObjData.getTexCoords(obj,2)
+    val texCoords = ObjData.getTexCoords(obj, 2)
+    val texCoordsArray = ObjData.getTexCoordsArray(obj, 2)
 
     val id: Int = createVAO()
     storeIndiciesBuffer(indices)
     storeDataInAttribList(0, 3, vertices)
-    storeDataInAttribList(1, 2, texCoords)
+    if (!texCoordsArray.isEmpty()) {
+        storeDataInAttribList(1, 2, texCoords)
+    }
     //storeDataInAttribList(2, 3, ObjData.getNormals(obj))
     unbind()
     inputStream.close()

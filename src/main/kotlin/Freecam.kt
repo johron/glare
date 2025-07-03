@@ -32,10 +32,10 @@ class FreecamScript : IScript {
             node.transform.translate(0.0, 0.0, -5.0 * delta)
         }
         if (input.isKeyHeld(Keycode.A)) {
-            node.transform.translate(5.0 * delta, 0.0, 0.0)
+            node.transform.translate(-5.0 * delta, 0.0, 0.0)
         }
         if (input.isKeyHeld(Keycode.D)) {
-            node.transform.translate(-5.0 * delta, 0.0, 0.0)
+            node.transform.translate(5.0 * delta, 0.0, 0.0)
         }
 
         if (input.isKeyHeld(Keycode.SPACE)) {

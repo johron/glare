@@ -3,49 +3,49 @@ package me.johanrong.glare.type
 import org.joml.Vector3f
 
 class Euler (
-    private var x: Double,
-    private var y: Double,
-    private var z: Double
+    private var roll: Double,
+    private var pitch: Double,
+    private var yaw: Double
 ) {
     init {
-        x = x % 360
-        y = y % 360
-        z = z % 360
+        roll = roll % 360
+        pitch = pitch % 360
+        yaw = yaw % 360
     }
 
     constructor (d: Double): this(d, d, d)
 
-    fun getX(): Double = x
-    fun getY(): Double = y
-    fun getZ(): Double = z
+    fun getRoll(): Double = roll
+    fun getPitch(): Double = pitch
+    fun getYaw(): Double = yaw
 
-    fun addX(value: Double) {
-        x = (x + value) % 360
+    fun addRoll(value: Double) {
+        roll = (roll + value) % 360
     }
-    fun addY(value: Double) {
-        y = (y + value) % 360
+    fun addPitch(value: Double) {
+        pitch = (pitch + value) % 360
     }
-    fun addZ(value: Double) {
-        z = (z + value) % 360
-    }
-
-    fun setX(value: Double) {
-        x = value % 360
+    fun addYaw(value: Double) {
+        yaw = (yaw + value) % 360
     }
 
-    fun setY(value: Double) {
-        y = value % 360
+    fun setRoll(value: Double) {
+        roll = value % 360
     }
 
-    fun setZ(value: Double) {
-        z = value % 360
+    fun setPitch(value: Double) {
+        pitch = value % 360
+    }
+
+    fun setYaw(value: Double) {
+        yaw = value % 360
     }
 
     fun toRadians(): Vector3f {
         return Vector3f(
-            Math.toRadians(x).toFloat(),
-            Math.toRadians(y).toFloat(),
-            Math.toRadians(z).toFloat()
+            Math.toRadians(pitch).toFloat(),
+            Math.toRadians(yaw).toFloat(),
+            Math.toRadians(roll).toFloat(),
         )
     }
 }

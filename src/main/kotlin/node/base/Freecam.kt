@@ -19,7 +19,6 @@ class FreecamScript : IScript {
 
     override fun init(node: Node) {
         this.node = node
-        println("${engine.window.getHandle()}")
     }
 
     override fun update(delta: Double) {
@@ -44,12 +43,6 @@ class FreecamScript : IScript {
         }
     }
 
-    override fun render() {
-        //TODO("Not yet implemented")
-    }
-
-    override fun cleanup() {
-        TODO("Not yet implemented")
-    }
-
+    override fun render() {}
+    override fun cleanup() {}
 }

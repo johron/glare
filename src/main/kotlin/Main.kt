@@ -8,6 +8,7 @@ import me.johanrong.glare.node.base.Freecam
 import me.johanrong.glare.type.Euler
 import me.johanrong.glare.type.Transform
 import me.johanrong.glare.util.Loader
+import me.johanrong.glare.util.log
 
 fun main() {
     val window = Window(
@@ -27,8 +28,6 @@ class TestGame : IRootScript {
     }
 
     override fun init(engine: GlareEngine) {
-        println("Game initialized with engine: $engine")
-
         TestGame.engine = engine
         engine.camera = Freecam(engine.root, Transform(Euler(0.0, 0.0, 0.0)))
 

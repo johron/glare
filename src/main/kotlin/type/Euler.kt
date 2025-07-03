@@ -14,6 +14,7 @@ class Euler (
     }
 
     constructor (d: Double): this(d, d, d)
+    constructor (): this(0.0)
 
     fun getRoll(): Double = roll
     fun getPitch(): Double = pitch

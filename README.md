@@ -15,8 +15,8 @@ fun main() {
         "Test Game",
         1280,
         720,
-        maximized = false,
-        vSync = true
+        maximized = true,
+        vSync = true,
     )
 
     GlareEngine(window, TestGame())
@@ -28,12 +28,10 @@ class TestGame : IRootScript {
     }
 
     override fun init(engine: GlareEngine) {
-        println("Game initialized with engine: $engine")
-
         TestGame.engine = engine
-        engine.camera = Freecam(engine.root, Transform(Euler(0.0, 0.0, 0.0)))
+        engine.camera = Freecam(engine.root, Transform(Euler()))
 
-        val mesh = loadObj("/model/cube.obj")
+        val mesh = Loader.loadObj("/model/Untitled.obj")
         val meshNode = MeshNode("Node", engine.root, mesh, Transform(0.0, 0.0, -5.0))
     }
 
@@ -43,10 +41,7 @@ class TestGame : IRootScript {
     }
 
     override fun render() {}
-
-    override fun cleanup() {
-        println("Game cleaned up")
-    }
+    override fun cleanup() {}
 }
 ```
 

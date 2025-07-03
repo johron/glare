@@ -15,7 +15,7 @@ fun main() {
         "Test Game",
         1280,
         720,
-        maximized = true,
+        maximized = false,
         vSync = true,
     )
 

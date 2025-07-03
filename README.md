@@ -1,8 +1,11 @@
 # Glare
 - Modular game engine made in Kotlin using LWJGL
 
-## Dependencies
+## Dependencies and frameworks used
 - Java 22
+- [LWJGL 3.3.3](https://www.lwjgl.org/)
+- [JOML 1.10.8](https://github.com/JOML-CI/JOML)
+- [Obj 0.4.0](https://github.com/javagl/Obj)
 
 ## Example Usage
 ```kotlin

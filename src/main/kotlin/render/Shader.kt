@@ -1,6 +1,6 @@
 package me.johanrong.glare.render
 
-import me.johanrong.glare.util.loadText
+import me.johanrong.glare.util.Loader
 import org.joml.Matrix4f
 import org.joml.Vector3f
 import org.joml.Vector4f
@@ -19,8 +19,8 @@ class Shader (vertexPath: String, fragmentPath: String) {
             throw Exception("Could not create shader program")
         }
 
-        vertexShaderId = createShader(loadText(vertexPath), GL20.GL_VERTEX_SHADER)
-        fragmentShaderId = createShader(loadText(fragmentPath), GL20.GL_FRAGMENT_SHADER)
+        vertexShaderId = createShader(Loader.loadPlain(vertexPath), GL20.GL_VERTEX_SHADER)
+        fragmentShaderId = createShader(Loader.loadPlain(fragmentPath), GL20.GL_FRAGMENT_SHADER)
         link()
     }
 

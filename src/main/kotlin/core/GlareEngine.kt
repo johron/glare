@@ -3,8 +3,7 @@ package me.johanrong.glare.core
 import me.johanrong.glare.node.RootNode
 import me.johanrong.glare.node.base.Camera
 import me.johanrong.glare.render.Renderer
-import me.johanrong.glare.util.GLARE_VERSION
-import me.johanrong.glare.util.NANOSECOND
+import me.johanrong.glare.util.Constants
 import me.johanrong.glare.util.log
 
 class GlareEngine (val window: Window, game: IRootScript) {
@@ -17,7 +16,7 @@ class GlareEngine (val window: Window, game: IRootScript) {
     private val renderer: Renderer = Renderer(this)
 
     init {
-        log("v$GLARE_VERSION - Initialized")
+        log("v${Constants.GLARE_VERSION} - Initialized")
 
         game.init(this)
 
@@ -35,7 +34,7 @@ class GlareEngine (val window: Window, game: IRootScript) {
             renderer.render()
 
             val endTime = System.nanoTime()
-            delta = (endTime - startTime) / NANOSECOND.toDouble()
+            delta = (endTime - startTime) / Constants.NANOSECOND.toDouble()
 
             if (frames % 100 == 0 && delta > 0.0) {
                 window.setTitle("${window.getTitle()} - ${(1.0 / delta).toInt()} FPS")

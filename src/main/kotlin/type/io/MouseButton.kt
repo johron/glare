@@ -1,4 +1,4 @@
-package me.johanrong.glare.type
+package me.johanrong.glare.type.io
 
 enum class MouseButton(val code: Int) {
     LEFT(0),

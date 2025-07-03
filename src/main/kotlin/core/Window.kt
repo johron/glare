@@ -1,8 +1,7 @@
 package me.johanrong.glare.core
 
-import me.johanrong.glare.util.FOV
-import me.johanrong.glare.util.Z_FAR
-import me.johanrong.glare.util.Z_NEAR
+import me.johanrong.glare.util.Defaults
+import me.johanrong.glare.util.Constants
 import org.joml.Matrix4f
 import org.lwjgl.glfw.GLFW
 import org.lwjgl.glfw.GLFWErrorCallback
@@ -15,7 +14,8 @@ class Window (
     var width: Int,
     var height: Int,
     var maximized: Boolean,
-    var vSync: Boolean
+    var vSync: Boolean,
+    var fov: Double = Defaults.FOV,
 ) {
     private var handle: Long
     private var projectionMatrix: Matrix4f = Matrix4f()
@@ -42,11 +42,11 @@ class Window (
             throw IllegalStateException("Failed to create the GLFW window")
         }
 
-        GLFW.glfwSetFramebufferSizeCallback(handle) { handle: Long, width: Int, height: Int -> {
+        GLFW.glfwSetFramebufferSizeCallback(handle) { handle: Long, width: Int, height: Int ->
             this.width = width
             this.height = height
-            GL11.glViewport(0, 0, width, height) // TODO: Maybe this should be moved to a render method, since it is OpenGL related
-        }}
+            GL11.glViewport(0, 0, width, height)
+        }
 
         GLFW.glfwMakeContextCurrent(handle)
 
@@ -96,6 +96,6 @@ class Window (
 
     fun updateProjectionMatrix(): Matrix4f {
         val aspectRatio = width.toFloat() / height.toFloat()
-        return projectionMatrix.setPerspective(Math.toRadians(FOV).toFloat(), aspectRatio, Z_NEAR, Z_FAR)
+        return projectionMatrix.setPerspective(Math.toRadians(fov).toFloat(), aspectRatio, Constants.Z_NEAR, Constants.Z_FAR)
     }
 }

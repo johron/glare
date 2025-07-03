@@ -1,4 +1,4 @@
-package me.johanrong.glare.type
+package me.johanrong.glare.type.io
 
 enum class Keycode(val code: Int) {
     ZERO(48),

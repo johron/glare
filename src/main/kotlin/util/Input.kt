@@ -1,8 +1,8 @@
 package me.johanrong.glare.util
 
 import me.johanrong.glare.core.GlareEngine
-import me.johanrong.glare.type.Keycode
-import me.johanrong.glare.type.MouseButton
+import me.johanrong.glare.type.io.Keycode
+import me.johanrong.glare.type.io.MouseButton
 import org.joml.Vector2d
 import org.lwjgl.glfw.GLFW
 

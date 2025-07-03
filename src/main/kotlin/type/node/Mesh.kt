@@ -1,4 +1,4 @@
-package me.johanrong.glare.type
+package me.johanrong.glare.type.node
 
 class Mesh (private val id: Int, private val vertexCount: Int, private val material: Material) {
     constructor(id: Int, vertexCount: Int) : this(id, vertexCount, Material())

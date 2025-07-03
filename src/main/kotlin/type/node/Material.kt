@@ -1,4 +1,4 @@
-package me.johanrong.glare.type
+package me.johanrong.glare.type.node
 
 class Material (private var texture: Texture?) {
     constructor(): this(null)

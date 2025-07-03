@@ -1,13 +1,11 @@
-package me.johanrong.glare
+package me.johanrong.glare.node.base
 
 import me.johanrong.glare.TestGame.Companion.engine
 import me.johanrong.glare.core.IScript
-import me.johanrong.glare.node.base.Camera
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.type.Keycode
 import me.johanrong.glare.type.Transform
 import me.johanrong.glare.util.Input
-
 
 class Freecam (name: String, parent: Node, transform: Transform) : Camera(name, FreecamScript(), parent, transform) {
     constructor (parent: Node) : this("Freecam", parent, Transform())

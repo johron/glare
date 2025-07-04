@@ -13,7 +13,6 @@ class GlareEngine (val window: Window, game: IRootScript) {
     private var isRunning = true
 
     var root = Node("Root", null)
-
     var camera: Camera? = null
 
     private val renderer: Renderer = Renderer(this)

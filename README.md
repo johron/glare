@@ -1,6 +1,9 @@
 # Glare
 - Modular game engine made in Kotlin using LWJGL
 
+## TODO
+- [ ] Move old node types to the component system
+
 ## Dependencies and frameworks used
 - Java 22
 - [LWJGL 3.3.3](https://www.lwjgl.org/)

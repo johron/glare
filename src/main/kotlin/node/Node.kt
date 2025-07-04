@@ -2,6 +2,7 @@ package me.johanrong.glare.node
 
 import me.johanrong.glare.core.IScript
 import me.johanrong.glare.node.component.IComponent
+import me.johanrong.glare.type.Component
 import me.johanrong.glare.type.Transform
 
 open class Node (
@@ -103,20 +104,15 @@ open class Node (
         components.remove(component)
     }
 
-    fun <T : IComponent> getComponent2(componentClass: Class<T>): T? {
-        return components.firstOrNull { it::class.java == componentClass } as? T
+    fun getComponent(type: Component): IComponent? {
+        return components.firstOrNull { it.type == type }
     }
 
-    fun getComponent(componentClass: Class<out IComponent>): IComponent? {
-        return components.firstOrNull { it::class.java == componentClass }
+    fun hasComponent(type: Component): Boolean {
+        return components.any { it.type == type }
     }
 
     fun getComponents(): List<IComponent> {
         return components
     }
-
-    fun hasComponent(componentClass: Class<out IComponent>): Boolean {
-        return components.any { it::class.java == componentClass }
-    }
-
 }

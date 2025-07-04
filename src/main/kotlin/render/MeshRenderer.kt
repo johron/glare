@@ -3,6 +3,7 @@ package me.johanrong.glare.render
 import me.johanrong.glare.core.GlareEngine
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.component.mesh.MeshComponent
+import me.johanrong.glare.type.Component
 import org.lwjgl.opengl.GL11
 import org.lwjgl.opengl.GL13
 import org.lwjgl.opengl.GL20
@@ -32,7 +33,9 @@ class MeshRenderer (val engine: GlareEngine) : IRenderer {
 
     fun renderChildren(parent: Node) {
         for (child in parent.getChildren()) {
-            child.getComponent2(MeshComponent::class.java)?.let { component ->
+            child.getComponent(Component.MESH)?.let { component ->
+                component as MeshComponent
+
                 GL30.glBindVertexArray(component.mesh.getId())
                 GL20.glEnableVertexAttribArray(0)
 

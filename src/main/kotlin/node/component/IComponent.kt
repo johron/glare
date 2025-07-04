@@ -1,6 +1,10 @@
 package me.johanrong.glare.node.component
 
+import me.johanrong.glare.type.Component
+
 interface IComponent {
+    val type: Component
+
     fun getComponentName(): String {
         return this::class.simpleName ?: throw Exception("Could not retrieve component name")
     }

@@ -2,7 +2,7 @@ package me.johanrong.glare.render
 
 import me.johanrong.glare.core.GlareEngine
 import me.johanrong.glare.node.Node
-import me.johanrong.glare.node.component.MeshComponent
+import me.johanrong.glare.node.component.mesh.MeshComponent
 import org.lwjgl.opengl.GL11
 import org.lwjgl.opengl.GL13
 import org.lwjgl.opengl.GL20

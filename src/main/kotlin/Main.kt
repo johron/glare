@@ -6,7 +6,7 @@ import me.johanrong.glare.core.Window
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.base.Freecam
 import me.johanrong.glare.node.component.EngineRefComponent
-import me.johanrong.glare.node.component.MeshComponent
+import me.johanrong.glare.node.component.mesh.MeshComponent
 import me.johanrong.glare.type.Euler
 import me.johanrong.glare.type.Transform
 import me.johanrong.glare.util.Loader

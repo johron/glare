@@ -3,6 +3,7 @@ package me.johanrong.glare
 import me.johanrong.glare.core.GlareEngine
 import me.johanrong.glare.core.IScript
 import me.johanrong.glare.core.Window
+import me.johanrong.glare.core.core.IRootScript
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.base.Freecam
 import me.johanrong.glare.node.component.EngineRefComponent
@@ -23,15 +24,13 @@ fun main() {
     GlareEngine(window, TestGame())
 }
 
-class TestGame : IScript {
+class TestGame : IRootScript {
     companion object {
         lateinit var engine: GlareEngine
     }
 
-    override fun init(parent: Node) {
-        parent.getComponent(EngineRefComponent::class.java)?.let {
-            engine = it.getEngine()
-        }
+    override fun init(engine: GlareEngine) {
+        TestGame.engine = engine
         engine.camera = Freecam(engine.root, Transform(Euler(0.0, 0.0, 0.0)))
 
         //val texture = loadTexture("texture/uv.png")

@@ -18,6 +18,13 @@ open class Node (
         parent,
     )
 
+    constructor(name: String, parent: Node?, components: MutableList<IComponent>): this(
+        name,
+        Transform(),
+        parent,
+        components = components
+    )
+
     constructor(name: String, parent: Node?, transform: Transform): this(
         name,
         transform,
@@ -96,11 +103,20 @@ open class Node (
         components.remove(component)
     }
 
-    fun <T : IComponent> getComponent(componentClass: Class<T>): T? {
+    fun <T : IComponent> getComponent2(componentClass: Class<T>): T? {
         return components.firstOrNull { it::class.java == componentClass } as? T
+    }
+
+    fun getComponent(componentClass: Class<out IComponent>): IComponent? {
+        return components.firstOrNull { it::class.java == componentClass }
+    }
+
+    fun getComponents(): List<IComponent> {
+        return components
     }
 
     fun hasComponent(componentClass: Class<out IComponent>): Boolean {
         return components.any { it::class.java == componentClass }
     }
+
 }

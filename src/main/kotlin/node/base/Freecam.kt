@@ -6,16 +6,17 @@ import me.johanrong.glare.node.Node
 import me.johanrong.glare.type.Transform
 import me.johanrong.glare.type.io.Keycode
 import me.johanrong.glare.type.io.MouseButton
+import me.johanrong.glare.util.Defaults
 import me.johanrong.glare.util.Input
 import org.joml.Math
 import org.joml.Vector3d
 
-class Freecam (name: String, parent: Node, transform: Transform) : Camera(name, FreecamScript(), parent, transform) {
-    constructor (parent: Node) : this("Freecam", parent, Transform())
-    constructor (parent: Node, transform: Transform) : this("Freecam", parent, transform)
+class Freecam (name: String, parent: Node, transform: Transform, speed: Double?) : Camera(name, FreecamScript(), parent, transform) {
+    constructor (parent: Node) : this("Freecam", parent, Transform(), null)
+    constructor (parent: Node, transform: Transform) : this("Freecam", parent, transform, null)
 }
 
-class FreecamScript : IScript {
+class FreecamScript(var speed: Double = Defaults.FREECAM_SPEED) : IScript {
     lateinit var node: Camera
 
     var input = Input(engine)
@@ -32,7 +33,7 @@ class FreecamScript : IScript {
                 0.0,
                 Math.cos(yawRad)
             )
-            forward.normalize().mul(delta * 5)
+            forward.normalize().mul(delta * speed)
             node.transform.position.add(forward)
         }
         if (input.isKeyHeld(Keycode.S)) {
@@ -42,7 +43,7 @@ class FreecamScript : IScript {
                 0.0,
                 -Math.cos(yawRad)
             )
-            backward.normalize().mul(delta * 5)
+            backward.normalize().mul(delta * speed)
             node.transform.position.add(backward)
         }
         if (input.isKeyHeld(Keycode.A)) {
@@ -52,7 +53,7 @@ class FreecamScript : IScript {
                 0.0,
                 Math.sin(yawRad)
             )
-            left.normalize().mul(delta * 5)
+            left.normalize().mul(delta * speed)
             node.transform.position.add(left)
         }
         if (input.isKeyHeld(Keycode.D)) {
@@ -62,15 +63,15 @@ class FreecamScript : IScript {
                 0.0,
                 -Math.sin(yawRad)
             )
-            right.normalize().mul(delta * 5)
+            right.normalize().mul(delta * speed)
             node.transform.position.add(right)
         }
 
         if (input.isKeyHeld(Keycode.SPACE)) {
-            node.transform.translate(0.0, 5.0 * delta, 0.0)
+            node.transform.translate(0.0, speed * delta, 0.0)
         }
         if (input.isKeyHeld(Keycode.SHIFT)) {
-            node.transform.translate(0.0, -5.0 * delta, 0.0)
+            node.transform.translate(0.0, -speed * delta, 0.0)
         }
 
         val deltaMouse = input.getMouseDelta()

@@ -32,7 +32,7 @@ class MeshRenderer (val engine: GlareEngine) : IRenderer {
 
     fun renderChildren(parent: Node) {
         for (child in parent.getChildren()) {
-            child.getComponent(MeshComponent::class.java)?.let { component ->
+            child.getComponent2(MeshComponent::class.java)?.let { component ->
                 GL30.glBindVertexArray(component.mesh.getId())
                 GL20.glEnableVertexAttribArray(0)
 

@@ -1,5 +1,6 @@
 package me.johanrong.glare.core
 
+import me.johanrong.glare.core.core.IRootScript
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.base.Camera
 import me.johanrong.glare.node.component.EngineRefComponent
@@ -7,11 +8,12 @@ import me.johanrong.glare.render.Renderer
 import me.johanrong.glare.util.Constants
 import me.johanrong.glare.util.log
 
-class GlareEngine (val window: Window, game: IScript) {
+class GlareEngine (val window: Window, game: IRootScript) {
     private var delta = 0.0
     private var isRunning = true
 
-    val root = Node("Root", null)
+    var root = Node("Root", null)
+
     var camera: Camera? = null
 
     private val renderer: Renderer = Renderer(this)
@@ -19,8 +21,7 @@ class GlareEngine (val window: Window, game: IScript) {
     init {
         log("v${Constants.GLARE_VERSION} - Initialized")
 
-        root.addComponent(EngineRefComponent(this))
-        game.init(Node("", null)) // This empty node should never be used, only to make things happy
+        game.init(this) // This empty node should never be used, only to make things happy
 
         var frames = 0
         while (isRunning) {

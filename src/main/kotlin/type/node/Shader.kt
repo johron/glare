@@ -1,4 +1,4 @@
-package me.johanrong.glare.render
+package me.johanrong.glare.type.node
 
 import me.johanrong.glare.util.Loader
 import org.joml.Matrix4f
@@ -6,6 +6,7 @@ import org.joml.Vector3f
 import org.joml.Vector4f
 import org.lwjgl.opengl.GL20
 import org.lwjgl.system.MemoryStack
+import kotlin.collections.get
 
 class Shader (vertexPath: String, fragmentPath: String) {
     val programId: Int = GL20.glCreateProgram()

@@ -2,7 +2,7 @@
 - Modular game engine made in Kotlin using LWJGL
 
 ## TODO
-- [ ] Move old node types to the component system
+- [ ] Move old node types to the component system, including Mesh, material, texture, shader, ..
 
 ## Dependencies and frameworks used
 - Java 22

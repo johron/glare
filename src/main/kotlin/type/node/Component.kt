@@ -1,4 +1,4 @@
-package me.johanrong.glare.type
+package me.johanrong.glare.type.node
 
 enum class Component {
     MESH,

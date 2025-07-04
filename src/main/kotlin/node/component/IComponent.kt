@@ -1,6 +1,6 @@
 package me.johanrong.glare.node.component
 
-import me.johanrong.glare.type.Component
+import me.johanrong.glare.type.node.Component
 
 interface IComponent {
     val type: Component

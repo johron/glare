@@ -3,12 +3,12 @@ package me.johanrong.glare
 import me.johanrong.glare.core.GlareEngine
 import me.johanrong.glare.core.IRootScript
 import me.johanrong.glare.core.Window
-import me.johanrong.glare.node.MeshNode
+import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.base.Freecam
+import me.johanrong.glare.node.component.MeshComponent
 import me.johanrong.glare.type.Euler
 import me.johanrong.glare.type.Transform
 import me.johanrong.glare.util.Loader
-import me.johanrong.glare.util.log
 
 fun main() {
     val window = Window(
@@ -32,9 +32,10 @@ class TestGame : IRootScript {
         engine.camera = Freecam(engine.root, Transform(Euler(0.0, 0.0, 0.0)))
 
         //val texture = loadTexture("texture/uv.png")
-        val mesh = Loader.loadObj("/model/Untitled.obj")
+        val mesh = Loader.loadObj("/model/cube.obj")
         //mesh.getMaterial().setTexture(texture)
-        val meshNode = MeshNode("Node", engine.root, mesh, Transform(0.0, 0.0, -5.0))
+        val node = Node("Node", engine.root, Transform(0.0, 0.0, -5.0))
+        node.addComponent(MeshComponent(mesh))
     }
 
     override fun update(delta: Double) {

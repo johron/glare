@@ -1,8 +1,8 @@
 package me.johanrong.glare.render
 
 import me.johanrong.glare.core.GlareEngine
-import me.johanrong.glare.node.MeshNode
 import me.johanrong.glare.node.Node
+import me.johanrong.glare.node.component.MeshComponent
 import org.lwjgl.opengl.GL11
 import org.lwjgl.opengl.GL13
 import org.lwjgl.opengl.GL20
@@ -32,27 +32,25 @@ class MeshRenderer (val engine: GlareEngine) : IRenderer {
 
     fun renderChildren(parent: Node) {
         for (child in parent.getChildren()) {
-            if (child is MeshNode) {
-                GL30.glBindVertexArray(child.getMesh().getId())
+            child.getComponent(MeshComponent::class.java)?.let { component ->
+                GL30.glBindVertexArray(component.mesh.getId())
                 GL20.glEnableVertexAttribArray(0)
-                //GL20.glEnableVertexAttribArray(2)
 
-                if (child.getMesh().getMaterial().getTexture() != null) {
+                if (component.mesh.getMaterial().getTexture() != null) {
                     GL20.glEnableVertexAttribArray(1)
                     GL20.glActiveTexture(GL13.GL_TEXTURE0)
-                    GL11.glBindTexture(GL11.GL_TEXTURE_2D, child.getMesh().getMaterial().getTexture()!!.getId())
+                    GL11.glBindTexture(GL11.GL_TEXTURE_2D, component.mesh.getMaterial().getTexture()!!.getId())
                 }
 
                 shader.setUniform("transformMatrix", child.transform.getTransformMatrix())
                 shader.setUniform("viewMatrix", engine.camera!!.transform.getViewMatrix())
                 shader.setUniform("textureSampler", 0)
-                shader.setUniform("hasTexture", if (child.getMesh().getMaterial().getTexture() != null) 1 else 0)
+                shader.setUniform("hasTexture", if (component.mesh.getMaterial().getTexture() != null) 1 else 0)
 
-                GL11.glDrawElements(GL11.GL_TRIANGLES, child.getMesh().getVertexCount(), GL11.GL_UNSIGNED_INT, 0)
+                GL11.glDrawElements(GL11.GL_TRIANGLES, component.mesh.getVertexCount(), GL11.GL_UNSIGNED_INT, 0)
                 GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0)
                 GL20.glDisableVertexAttribArray(0)
                 GL20.glDisableVertexAttribArray(1)
-                //GL20.glDisableVertexAttribArray(2)
 
                 GL30.glBindVertexArray(0)
             }

@@ -1,6 +1,7 @@
 package me.johanrong.glare.node
 
 import me.johanrong.glare.core.IScript
+import me.johanrong.glare.node.component.IComponent
 import me.johanrong.glare.type.Transform
 
 open class Node (
@@ -8,6 +9,7 @@ open class Node (
     var transform: Transform,
     private var parent: Node?,
     private var children: MutableList<Node> = mutableListOf(),
+    private var components: MutableList<IComponent> = mutableListOf(),
     private var script: IScript? = null
 ) {
     constructor(name: String, parent: Node?): this(
@@ -84,5 +86,21 @@ open class Node (
         for (child in children) {
             child.update(delta)
         }
+    }
+
+    fun addComponent(component: IComponent) {
+        components.add(component)
+    }
+
+    fun removeComponent(component: IComponent) {
+        components.remove(component)
+    }
+
+    fun <T : IComponent> getComponent(componentClass: Class<T>): T? {
+        return components.firstOrNull { it::class.java == componentClass } as? T
+    }
+
+    fun hasComponent(componentClass: Class<out IComponent>): Boolean {
+        return components.any { it::class.java == componentClass }
     }
 }

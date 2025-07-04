@@ -3,6 +3,8 @@ package me.johanrong.glare.type
 import org.joml.Matrix4f
 import org.joml.Vector3d
 import org.joml.Vector3f
+import kotlin.math.cos
+import kotlin.math.sin
 
 class Transform (
     var position: Vector3d,
@@ -35,9 +37,8 @@ class Transform (
 
     constructor (x: Double, y: Double, z: Double): this(Vector3d(x, y, z))
 
-    fun translate(x: Double, y: Double, z: Double): Transform {
+    fun translate(x: Double, y: Double, z: Double) {
         position.add(x, y, z)
-        return this
     }
 
     fun getViewMatrix(): Matrix4f {

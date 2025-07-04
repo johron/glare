@@ -2,7 +2,9 @@ package me.johanrong.glare.core
 
 import me.johanrong.glare.util.Defaults
 import me.johanrong.glare.util.Constants
+import me.johanrong.glare.util.Input
 import org.joml.Matrix4f
+import org.joml.Vector2d
 import org.lwjgl.glfw.GLFW
 import org.lwjgl.glfw.GLFWErrorCallback
 import org.lwjgl.opengl.GL

@@ -15,7 +15,7 @@ fun main() {
         "Glare GE",
         1280,
         720,
-        maximized = true,
+        maximized = false,
         vSync = true,
     )
 

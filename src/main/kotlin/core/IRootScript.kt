@@ -1,6 +1,4 @@
-package me.johanrong.glare.core.core
-
-import me.johanrong.glare.core.GlareEngine
+package me.johanrong.glare.core
 
 interface IRootScript {
     fun init(engine: GlareEngine)

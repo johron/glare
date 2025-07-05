@@ -3,7 +3,7 @@ package me.johanrong.glare.util
 import de.javagl.obj.ObjData
 import de.javagl.obj.ObjReader
 import de.javagl.obj.ObjUtils
-import me.johanrong.glare.type.node.Mesh
+import me.johanrong.glare.node.component.mesh.MeshComponent
 import org.lwjgl.BufferUtils
 import org.lwjgl.opengl.GL11
 import org.lwjgl.opengl.GL15
@@ -25,7 +25,7 @@ object Loader {
         return list?.joinToString("\n") ?: throw Exception("Resource not found: $path")
     }
 
-    fun loadObj(path: String): Mesh {
+    fun loadObj(path: String): MeshComponent {
         val inputStream = object {}.javaClass.getResourceAsStream(path) ?: throw Exception("Resource not found: $path")
         val obj = ObjUtils.convertToRenderable(ObjReader.read(inputStream))
 
@@ -45,7 +45,7 @@ object Loader {
         inputStream.close()
 
         val vertexCount = ObjData.getFaceVertexIndicesArray(obj).size
-        return Mesh(id, vertexCount)
+        return MeshComponent(id, vertexCount)
     }
 
     fun loadTexture(path: String): Int {

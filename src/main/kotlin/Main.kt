@@ -37,7 +37,7 @@ class TestGame : IRootScript {
         val mesh = Loader.loadObj("/model/cube.obj")
         //mesh.getMaterial().setTexture(texture)
         val node = Node("Node", engine.root, Transform(0.0, 0.0, -5.0))
-        node.addComponent(MeshComponent(mesh))
+        node.addComponent(mesh)
     }
 
     override fun update(delta: Double) {

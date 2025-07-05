@@ -34,24 +34,24 @@ class MeshRenderer (val engine: GlareEngine) : IRenderer {
 
     fun renderChildren(parent: Node) {
         for (child in parent.getChildren()) {
-            child.getComponent(Component.MESH)?.let { component ->
-                component as MeshComponent
+            if (child.hasComponent(Component.MESH)) {
+                val mesh = child.getComponent(Component.MESH) as MeshComponent
 
-                GL30.glBindVertexArray(component.mesh.getId())
+                GL30.glBindVertexArray(mesh.getId())
                 GL20.glEnableVertexAttribArray(0)
 
-                if (component.mesh.getMaterial().getTexture() != null) {
+                if (mesh.getMaterial().getTexture() != null) {
                     GL20.glEnableVertexAttribArray(1)
                     GL20.glActiveTexture(GL13.GL_TEXTURE0)
-                    GL11.glBindTexture(GL11.GL_TEXTURE_2D, component.mesh.getMaterial().getTexture()!!.getId())
+                    GL11.glBindTexture(GL11.GL_TEXTURE_2D, mesh.getMaterial().getTexture()!!.getId())
                 }
 
                 shader.setUniform("transformMatrix", child.transform.getTransformMatrix())
                 shader.setUniform("viewMatrix", engine.camera!!.transform.getViewMatrix())
                 shader.setUniform("textureSampler", 0)
-                shader.setUniform("hasTexture", if (component.mesh.getMaterial().getTexture() != null) 1 else 0)
+                shader.setUniform("hasTexture", if (mesh.getMaterial().getTexture() != null) 1 else 0)
 
-                GL11.glDrawElements(GL11.GL_TRIANGLES, component.mesh.getVertexCount(), GL11.GL_UNSIGNED_INT, 0)
+                GL11.glDrawElements(GL11.GL_TRIANGLES, mesh.getVertexCount(), GL11.GL_UNSIGNED_INT, 0)
                 GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0)
                 GL20.glDisableVertexAttribArray(0)
                 GL20.glDisableVertexAttribArray(1)

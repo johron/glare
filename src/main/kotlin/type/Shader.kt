@@ -1,4 +1,4 @@
-package me.johanrong.glare.type.node
+package me.johanrong.glare.type
 
 import me.johanrong.glare.util.Loader
 import org.joml.Matrix4f

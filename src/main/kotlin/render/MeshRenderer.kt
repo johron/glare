@@ -3,8 +3,9 @@ package me.johanrong.glare.render
 import me.johanrong.glare.core.GlareEngine
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.component.mesh.MeshComponent
-import me.johanrong.glare.type.node.Component
-import me.johanrong.glare.type.node.Shader
+import me.johanrong.glare.node.component.mesh.TextureComponent
+import me.johanrong.glare.type.Component
+import me.johanrong.glare.type.Shader
 import org.lwjgl.opengl.GL11
 import org.lwjgl.opengl.GL13
 import org.lwjgl.opengl.GL20
@@ -40,16 +41,19 @@ class MeshRenderer (val engine: GlareEngine) : IRenderer {
                 GL30.glBindVertexArray(mesh.getId())
                 GL20.glEnableVertexAttribArray(0)
 
-                if (mesh.getMaterial().getTexture() != null) {
+                if (child.hasComponent(Component.TEXTURE)) {
+                    val texture = child.getComponent(Component.TEXTURE) as TextureComponent
                     GL20.glEnableVertexAttribArray(1)
                     GL20.glActiveTexture(GL13.GL_TEXTURE0)
-                    GL11.glBindTexture(GL11.GL_TEXTURE_2D, mesh.getMaterial().getTexture()!!.getId())
+                    GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture.getId())
+                    shader.setUniform("hasTexture", 1)
+                } else {
+                    shader.setUniform("hasTexture", 0)
                 }
 
                 shader.setUniform("transformMatrix", child.transform.getTransformMatrix())
                 shader.setUniform("viewMatrix", engine.camera!!.transform.getViewMatrix())
                 shader.setUniform("textureSampler", 0)
-                shader.setUniform("hasTexture", if (mesh.getMaterial().getTexture() != null) 1 else 0)
 
                 GL11.glDrawElements(GL11.GL_TRIANGLES, mesh.getVertexCount(), GL11.GL_UNSIGNED_INT, 0)
                 GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0)

@@ -4,6 +4,7 @@ import de.javagl.obj.ObjData
 import de.javagl.obj.ObjReader
 import de.javagl.obj.ObjUtils
 import me.johanrong.glare.node.component.mesh.MeshComponent
+import me.johanrong.glare.node.component.mesh.TextureComponent
 import org.lwjgl.BufferUtils
 import org.lwjgl.opengl.GL11
 import org.lwjgl.opengl.GL15
@@ -48,7 +49,7 @@ object Loader {
         return MeshComponent(id, vertexCount)
     }
 
-    fun loadTexture(path: String): Int {
+    fun loadTexture(path: String): TextureComponent {
         val width: Int
         val height: Int
         val buffer: ByteBuffer
@@ -95,7 +96,7 @@ object Loader {
         )
         GL30.glGenerateMipmap(GL11.GL_TEXTURE_2D)
         STBImage.stbi_image_free(buffer)
-        return id
+        return TextureComponent(id)
     }
 
     private fun createVAO(): Int {

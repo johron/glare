@@ -33,11 +33,11 @@ class TestGame : IRootScript {
         TestGame.engine = engine
         engine.camera = Freecam(engine.root, Transform(Euler(0.0, 0.0, 0.0)))
 
-        //val texture = Loader.loadTexture("texture/map.png")
-        val mesh = Loader.loadObj("/model/cube.obj")
-        //mesh.getMaterial().setTexture(texture)
         val node = Node("Node", engine.root, Transform(0.0, 0.0, -5.0))
+        val texture = Loader.loadTexture("texture/map.png")
+        val mesh = Loader.loadObj("/model/cube.obj")
         node.addComponent(mesh)
+        node.addComponent(texture)
     }
 
     override fun update(delta: Double) {

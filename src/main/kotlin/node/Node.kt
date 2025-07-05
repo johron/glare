@@ -2,7 +2,7 @@ package me.johanrong.glare.node
 
 import me.johanrong.glare.core.IScript
 import me.johanrong.glare.node.component.IComponent
-import me.johanrong.glare.type.node.Component
+import me.johanrong.glare.type.Component
 import me.johanrong.glare.type.Transform
 
 open class Node (
@@ -97,10 +97,16 @@ open class Node (
     }
 
     fun addComponent(component: IComponent) {
+        if (hasComponent(component.type)) {
+            throw Exception("Component of type ${component.type} already exists in this node.")
+        }
         components.add(component)
     }
 
     fun removeComponent(component: IComponent) {
+        if (!hasComponent(component.type)) {
+            throw Exception("Component of type ${component.type} does not exist in this node.")
+        }
         components.remove(component)
     }
 

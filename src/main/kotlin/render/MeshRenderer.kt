@@ -25,7 +25,9 @@ class MeshRenderer (val engine: GlareEngine) : IRenderer {
             if (child.hasComponent(Component.MESH)) {
                 val mesh = child.getComponent(Component.MESH) as MeshComponent
                 val shader = (child.getComponent(Component.SHADER) ?:
-                    throw Exception("For now MeshRenderer requires a ShaderComponent to render meshes.")) as ShaderComponent
+                    throw Exception("For now MeshRenderer requires a ShaderComponent to render meshes, " +
+                            "in the future shaders will be automatic and done differently"))
+                        as ShaderComponent
 
                 shader.bind()
                 shader.setUniform("projectionMatrix", engine.window.updateProjectionMatrix())

@@ -44,17 +44,10 @@ class TestGame : IRootScript {
     }
 
     override fun update(delta: Double) {
-        //println("root update")
-        //println(engine.camera?.transform?.position)
         val node = engine.root.getFirstChild("Node")
         node!!.transform.rotation.addYaw(100.0 * delta)
     }
 
-    override fun render() {
-        //println("Game rendered")
-    }
-
-    override fun cleanup() {
-        println("Game cleaned up")
-    }
+    override fun render() {}
+    override fun cleanup() {}
 }

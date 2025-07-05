@@ -1,18 +1,16 @@
 package me.johanrong.glare.util
 
 import me.johanrong.glare.core.GlareEngine
-import me.johanrong.glare.core.Window
 import me.johanrong.glare.type.io.Keycode
 import me.johanrong.glare.type.io.MouseButton
 import org.joml.Vector2d
 import org.lwjgl.glfw.GLFW
 
-class Input (val engine: GlareEngine) {
+object Input {
+    lateinit var engine: GlareEngine
     var lastMousePosition: Vector2d = Vector2d()
 
-    init {
-        lastMousePosition = getMousePosition()
-    }
+    private val pressedKeys = mutableSetOf<Keycode>()
 
     fun isKeyHeld(key: Keycode): Boolean {
         return GLFW.glfwGetKey(engine.window.getHandle(), key.code) == GLFW.GLFW_PRESS
@@ -22,8 +20,16 @@ class Input (val engine: GlareEngine) {
         return GLFW.glfwGetKey(engine.window.getHandle(), key.code) == GLFW.GLFW_RELEASE
     }
 
-    fun isKeyPressed(key: Keycode): Boolean {
-        println("Not implemented yet")
+    fun hasPressedKey(key: Keycode): Boolean {
+        val isPressed = GLFW.glfwGetKey(engine.window.getHandle(), key.code) == GLFW.GLFW_PRESS
+        val isReleased = GLFW.glfwGetKey(engine.window.getHandle(), key.code) == GLFW.GLFW_RELEASE
+
+        if (isPressed) {
+            pressedKeys.add(key)
+        } else if (isReleased && pressedKeys.contains(key)) {
+            pressedKeys.remove(key)
+            return true
+        }
         return false
     }
 

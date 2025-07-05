@@ -6,6 +6,7 @@ import me.johanrong.glare.node.base.Camera
 import me.johanrong.glare.node.component.EngineRefComponent
 import me.johanrong.glare.render.Renderer
 import me.johanrong.glare.util.Constants
+import me.johanrong.glare.util.Input
 import me.johanrong.glare.util.log
 
 class GlareEngine (val window: Window, game: IRootScript) {
@@ -20,7 +21,8 @@ class GlareEngine (val window: Window, game: IRootScript) {
     init {
         log("v${Constants.GLARE_VERSION} - Initialized")
 
-        game.init(this) // This empty node should never be used, only to make things happy
+        Input.engine = this
+        game.init(this)
 
         var frames = 0
         while (isRunning) {

@@ -1,7 +1,6 @@
 package me.johanrong.glare.render
 
 import me.johanrong.glare.core.GlareEngine
-import me.johanrong.glare.node.component.mesh.ShaderComponent
 import org.lwjgl.opengl.GL11
 
 class Renderer (var engine: GlareEngine) : IRenderer {

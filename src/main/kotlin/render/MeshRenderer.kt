@@ -5,38 +5,30 @@ import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.component.mesh.MeshComponent
 import me.johanrong.glare.node.component.mesh.TextureComponent
 import me.johanrong.glare.type.Component
-import me.johanrong.glare.type.Shader
+import me.johanrong.glare.node.component.mesh.ShaderComponent
 import org.lwjgl.opengl.GL11
 import org.lwjgl.opengl.GL13
 import org.lwjgl.opengl.GL20
 import org.lwjgl.opengl.GL30
 
 class MeshRenderer (val engine: GlareEngine) : IRenderer {
-    val shader = Shader("/shader/mesh.vert", "/shader/mesh.frag")
-
-    init {
-        shader.createUniform("transformMatrix")
-        shader.createUniform("projectionMatrix")
-        shader.createUniform("viewMatrix")
-        shader.createUniform("textureSampler")
-        shader.createUniform("hasTexture")
-    }
-
     override fun render() {
         if (engine.camera == null) {
             return
         }
 
-        shader.bind()
-        shader.setUniform("projectionMatrix", engine.window.updateProjectionMatrix())
         renderChildren(engine.root)
-        shader.unbind()
     }
 
     fun renderChildren(parent: Node) {
         for (child in parent.getChildren()) {
             if (child.hasComponent(Component.MESH)) {
                 val mesh = child.getComponent(Component.MESH) as MeshComponent
+                val shader = (child.getComponent(Component.SHADER) ?:
+                    throw Exception("For now MeshRenderer requires a ShaderComponent to render meshes.")) as ShaderComponent
+
+                shader.bind()
+                shader.setUniform("projectionMatrix", engine.window.updateProjectionMatrix())
 
                 GL30.glBindVertexArray(mesh.getId())
                 GL20.glEnableVertexAttribArray(0)
@@ -61,6 +53,7 @@ class MeshRenderer (val engine: GlareEngine) : IRenderer {
                 GL20.glDisableVertexAttribArray(1)
 
                 GL30.glBindVertexArray(0)
+                shader.unbind()
             }
             renderChildren(child)
         }

@@ -8,6 +8,7 @@ import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.base.Freecam
 import me.johanrong.glare.node.component.EngineRefComponent
 import me.johanrong.glare.node.component.mesh.MeshComponent
+import me.johanrong.glare.node.component.mesh.ShaderComponent
 import me.johanrong.glare.type.Euler
 import me.johanrong.glare.type.Transform
 import me.johanrong.glare.util.Loader
@@ -34,10 +35,12 @@ class TestGame : IRootScript {
         engine.camera = Freecam(engine.root, Transform(Euler(0.0, 0.0, 0.0)))
 
         val node = Node("Node", engine.root, Transform(0.0, 0.0, -5.0))
+        val shader = ShaderComponent("/shader/mesh.vert", "/shader/mesh.frag")
         val texture = Loader.loadTexture("texture/map.png")
         val mesh = Loader.loadObj("/model/cube.obj")
-        node.addComponent(mesh)
         node.addComponent(texture)
+        node.addComponent(mesh)
+        node.addComponent(shader)
     }
 
     override fun update(delta: Double) {

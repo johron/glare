@@ -1,12 +1,13 @@
 package me.johanrong.glare.render
 
 import me.johanrong.glare.core.GlareEngine
+import me.johanrong.glare.node.component.mesh.ShaderComponent
 import org.lwjgl.opengl.GL11
 
-class Renderer (var engine: GlareEngine) {
+class Renderer (var engine: GlareEngine) : IRenderer {
     var meshRenderer = MeshRenderer(engine)
 
-    fun render() {
+    override fun render() {
         clear()
 
         meshRenderer.render()
@@ -14,5 +15,9 @@ class Renderer (var engine: GlareEngine) {
 
     fun clear() {
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT or GL11.GL_DEPTH_BUFFER_BIT)
+    }
+
+    override fun cleanup() {
+        meshRenderer.cleanup()
     }
 }

@@ -1,5 +1,7 @@
-package me.johanrong.glare.type
+package me.johanrong.glare.node.component.mesh
 
+import me.johanrong.glare.node.component.IComponent
+import me.johanrong.glare.type.Component
 import me.johanrong.glare.util.Loader
 import org.joml.Matrix4f
 import org.joml.Vector3f
@@ -8,7 +10,9 @@ import org.lwjgl.opengl.GL20
 import org.lwjgl.system.MemoryStack
 import kotlin.collections.get
 
-class Shader (vertexPath: String, fragmentPath: String) {
+class ShaderComponent(vertexPath: String, fragmentPath: String) : IComponent {
+    override val type = Component.SHADER
+
     val programId: Int = GL20.glCreateProgram()
 
     private val vertexShaderId: Int
@@ -23,6 +27,12 @@ class Shader (vertexPath: String, fragmentPath: String) {
         vertexShaderId = createShader(Loader.loadPlain(vertexPath), GL20.GL_VERTEX_SHADER)
         fragmentShaderId = createShader(Loader.loadPlain(fragmentPath), GL20.GL_FRAGMENT_SHADER)
         link()
+
+        createUniform("transformMatrix")
+        createUniform("projectionMatrix")
+        createUniform("viewMatrix")
+        createUniform("textureSampler")
+        createUniform("hasTexture")
     }
 
     fun createUniform(name: String) {

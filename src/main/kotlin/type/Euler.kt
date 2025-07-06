@@ -2,7 +2,7 @@ package me.johanrong.glare.type
 
 import org.joml.Vector3f
 
-class Euler (
+data class Euler (
     private var roll: Double,
     private var pitch: Double,
     private var yaw: Double

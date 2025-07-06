@@ -1,17 +1,18 @@
 package me.johanrong.glare
 
 import me.johanrong.glare.core.GlareEngine
-import me.johanrong.glare.core.IScript
 import me.johanrong.glare.core.Window
 import me.johanrong.glare.core.IRootScript
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.base.Freecam
-import me.johanrong.glare.node.component.EngineRefComponent
-import me.johanrong.glare.node.component.mesh.MeshComponent
 import me.johanrong.glare.node.component.mesh.ShaderComponent
 import me.johanrong.glare.type.Euler
 import me.johanrong.glare.type.Transform
+import me.johanrong.glare.type.io.Keycode
+import me.johanrong.glare.util.Input
 import me.johanrong.glare.util.Loader
+import org.joml.Vector3d
+import org.joml.Vector3f
 
 fun main() {
     val window = Window(
@@ -32,7 +33,7 @@ class TestGame : IRootScript {
 
     override fun init(engine: GlareEngine) {
         TestGame.engine = engine
-        engine.camera = Freecam(engine.root, Transform(Euler(0.0, 0.0, 0.0)))
+        engine.camera = Freecam(engine.root, Transform(Euler(0.0, 0.0, -90.0)))
 
         val node = Node("Node", engine.root, Transform(0.0, 0.0, -5.0))
         val shader = ShaderComponent("/shader/mesh.vert", "/shader/mesh.frag")
@@ -41,11 +42,26 @@ class TestGame : IRootScript {
         node.addComponent(texture)
         node.addComponent(mesh)
         node.addComponent(shader)
+
+        val node2 = Node("Node", engine.root, Transform(5.0, 0.0, -5.0))
+        node2.addComponent(texture)
+        node2.addComponent(mesh)
+        node2.addComponent(shader)
     }
 
     override fun update(delta: Double) {
         val node = engine.root.getFirstChild("Node")
         node!!.transform.rotation.addYaw(100.0 * delta)
+
+        println(engine.camera!!.transform.position)
+
+        if (Input.hasPressedKey(Keycode.G)) {
+            val node = Node("test", engine.root, Transform(engine.camera!!.transform.clone().position, Vector3f(0.1f)))
+            val shader = ShaderComponent("/shader/mesh.vert", "/shader/mesh.frag")
+            val mesh = Loader.loadObj("/model/cube.obj")
+            node.addComponent(mesh)
+            node.addComponent(shader)
+        }
     }
 
     override fun render() {}

@@ -6,6 +6,7 @@ import me.johanrong.glare.node.component.mesh.MeshComponent
 import me.johanrong.glare.node.component.mesh.TextureComponent
 import me.johanrong.glare.type.Component
 import me.johanrong.glare.node.component.mesh.ShaderComponent
+import org.joml.Matrix4f
 import org.lwjgl.opengl.GL11
 import org.lwjgl.opengl.GL13
 import org.lwjgl.opengl.GL20

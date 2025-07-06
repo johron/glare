@@ -32,10 +32,15 @@ class TestGame : IRootScript {
 
     override fun init(engine: GlareEngine) {
         TestGame.engine = engine
-        engine.camera = Freecam(engine.root, Transform(Euler()))
+        engine.camera = Freecam(engine.root, Transform(Euler(0.0, 0.0, -90.0)))
 
-        val mesh = Loader.loadObj("/model/Untitled.obj")
-        val meshNode = MeshNode("Node", engine.root, mesh, Transform(0.0, 0.0, -5.0))
+        val node = Node("Node", engine.root, Transform(0.0, 0.0, -5.0))
+        val shader = ShaderComponent("/shader/mesh.vert", "/shader/mesh.frag")
+        val texture = Loader.loadTexture("texture/map.png")
+        val mesh = Loader.loadObj("/model/cube.obj")
+        node.addComponent(texture)
+        node.addComponent(mesh)
+        node.addComponent(shader)
     }
 
     override fun update(delta: Double) {

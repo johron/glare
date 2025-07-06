@@ -8,7 +8,6 @@ import org.joml.Vector3f
 import org.joml.Vector4f
 import org.lwjgl.opengl.GL20
 import org.lwjgl.system.MemoryStack
-import kotlin.collections.get
 
 class ShaderComponent(vertexPath: String, fragmentPath: String) : IComponent {
     override val type = Component.SHADER

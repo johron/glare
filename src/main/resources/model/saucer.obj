@@ -1,6 +1,5 @@
 # This file uses centimeters as units for non-parametric coordinates.
 
-mtllib flying sacuer.mtl
 v 0.707107 -0.042593 -0.707107
 v 0.000000 -0.042593 -1.000000
 v -0.707107 -0.042593 -0.707107

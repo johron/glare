@@ -1,8 +1,8 @@
 package me.johanrong.glare
 
 import me.johanrong.glare.core.GlareEngine
-import me.johanrong.glare.core.Window
 import me.johanrong.glare.core.IRootScript
+import me.johanrong.glare.core.Window
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.base.Freecam
 import me.johanrong.glare.node.component.mesh.ShaderComponent
@@ -11,7 +11,6 @@ import me.johanrong.glare.type.Transform
 import me.johanrong.glare.type.io.Keycode
 import me.johanrong.glare.util.Input
 import me.johanrong.glare.util.Loader
-import org.joml.Vector3d
 import org.joml.Vector3f
 
 fun main() {

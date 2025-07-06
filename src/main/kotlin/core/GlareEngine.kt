@@ -1,7 +1,7 @@
 package me.johanrong.glare.core
 
 import me.johanrong.glare.node.Node
-import me.johanrong.glare.node.base.Camera
+import me.johanrong.glare.node.Camera
 import me.johanrong.glare.render.Renderer
 import me.johanrong.glare.util.Constants
 import me.johanrong.glare.util.Input

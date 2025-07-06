@@ -5,7 +5,6 @@ import me.johanrong.glare.core.IRootScript
 import me.johanrong.glare.core.Window
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.base.Freecam
-import me.johanrong.glare.node.component.mesh.ShaderComponent
 import me.johanrong.glare.type.Euler
 import me.johanrong.glare.type.Transform
 import me.johanrong.glare.type.io.Keycode

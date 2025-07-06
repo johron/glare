@@ -1,6 +1,7 @@
 package me.johanrong.glare.node.base
 
 import me.johanrong.glare.core.IScript
+import me.johanrong.glare.node.Camera
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.type.Transform
 import me.johanrong.glare.type.io.Keycode

@@ -35,7 +35,7 @@ class TestGame : IRootScript {
         engine.camera = Freecam(engine.root, Transform(Euler(0.0, 0.0, -90.0)))
 
         val node = Node("Node", engine.root, Transform(0.0, 0.0, -5.0))
-        val shader = ShaderComponent("/shader/mesh.vert", "/shader/mesh.frag")
+        val shader = Loader.loadShader("/shader/mesh.vert", "/shader/mesh.frag")
         val texture = Loader.loadTexture("texture/map.png")
         val mesh = Loader.loadObj("/model/cube.obj")
         node.addComponent(texture)

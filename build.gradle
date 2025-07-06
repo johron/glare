@@ -63,37 +63,40 @@ dependencies {
     implementation "org.lwjgl:lwjgl-xxhash"
     implementation "org.lwjgl:lwjgl-yoga"
     implementation "org.lwjgl:lwjgl-zstd"
-    runtimeOnly "org.lwjgl:lwjgl::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-assimp::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-bgfx::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-glfw::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-jemalloc::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-libdivide::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-llvm::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-lmdb::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-lz4::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-meow::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-nanovg::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-nfd::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-nuklear::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-openal::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-opengl::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-opengles::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-openvr::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-opus::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-par::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-remotery::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-rpmalloc::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-shaderc::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-sse::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-stb::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-tinyexr::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-tinyfd::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-tootle::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-vma::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-xxhash::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-yoga::$lwjglNatives"
-    runtimeOnly "org.lwjgl:lwjgl-zstd::$lwjglNatives"
+
+['natives-linux', 'natives-windows', 'natives-macos'].each { nativePlatform ->
+    runtimeOnly "org.lwjgl:lwjgl::$nativePlatform"
+    runtimeOnly "org.lwjgl:lwjgl-assimp::$nativePlatform"
+    runtimeOnly "org.lwjgl:lwjgl-bgfx::$nativePlatform"
+    runtimeOnly "org.lwjgl:lwjgl-glfw::$nativePlatform"
+    runtimeOnly "org.lwjgl:lwjgl-jemalloc::$nativePlatform"
+    runtimeOnly "org.lwjgl:lwjgl-libdivide::$nativePlatform"
+    runtimeOnly "org.lwjgl:lwjgl-llvm::$nativePlatform"
+    runtimeOnly "org.lwjgl:lwjgl-lmdb::$nativePlatform"
+    runtimeOnly "org.lwjgl:lwjgl-lz4::$nativePlatform"
+    runtimeOnly "org.lwjgl:lwjgl-meow::$nativePlatform"
+    runtimeOnly "org.lwjgl:lwjgl-nanovg::$nativePlatform"
+    runtimeOnly "org.lwjgl:lwjgl-nfd::$nativePlatform"
+    runtimeOnly "org.lwjgl:lwjgl-nuklear::$nativePlatform"
+    runtimeOnly "org.lwjgl:lwjgl-openal::$nativePlatform"
+    runtimeOnly "org.lwjgl:lwjgl-opengl::$nativePlatform"
+    runtimeOnly "org.lwjgl:lwjgl-opengles::$nativePlatform"
+    runtimeOnly "org.lwjgl:lwjgl-openvr::$nativePlatform"
+    runtimeOnly "org.lwjgl:lwjgl-opus::$nativePlatform"
+    runtimeOnly "org.lwjgl:lwjgl-par::$nativePlatform"
+    runtimeOnly "org.lwjgl:lwjgl-remotery::$nativePlatform"
+    runtimeOnly "org.lwjgl:lwjgl-rpmalloc::$nativePlatform"
+    runtimeOnly "org.lwjgl:lwjgl-shaderc::$nativePlatform"
+    runtimeOnly "org.lwjgl:lwjgl-sse::$nativePlatform"
+    runtimeOnly "org.lwjgl:lwjgl-stb::$nativePlatform"
+    runtimeOnly "org.lwjgl:lwjgl-tinyexr::$nativePlatform"
+    runtimeOnly "org.lwjgl:lwjgl-tinyfd::$nativePlatform"
+    runtimeOnly "org.lwjgl:lwjgl-tootle::$nativePlatform"
+    runtimeOnly "org.lwjgl:lwjgl-vma::$nativePlatform"
+    runtimeOnly "org.lwjgl:lwjgl-xxhash::$nativePlatform"
+    runtimeOnly "org.lwjgl:lwjgl-yoga::$nativePlatform"
+    runtimeOnly "org.lwjgl:lwjgl-zstd::$nativePlatform"
+}
 }
 
 test {
@@ -102,4 +105,17 @@ test {
 
 kotlin {
     jvmToolchain(22)
+}
+tasks.jar {
+    manifest {
+        attributes(
+                'Implementation-Title': 'Glare',
+                'Implementation-Version': version,
+                'Main-Class': 'me.johanrong.glare.Main' // Replace with your main class if needed
+        )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }

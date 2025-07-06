@@ -1,5 +1,5 @@
 # Glare
-- Modular game engine made in Kotlin using LWJGL
+- A modular, cross-platform game engine built in Kotlin using LWJGL and OpenGL
 
 ## TODO
 - [x] Move old node types to the component system, including Mesh, material, texture, shader, ..
@@ -11,7 +11,7 @@
 - [Obj 0.4.0](https://github.com/javagl/Obj)
 
 ## Example Usage
-- Currently only has linux natives for LWJGL, and is probably already outdated. 
+- Example is probably already outdated. 
 ```kotlin
 fun main() {
     val window = Window(

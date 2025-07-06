@@ -30,24 +30,24 @@ object Loader {
     fun loadObj(path: String): MeshComponent {
         val inputStream = object {}.javaClass.getResourceAsStream(path) ?: throw Exception("Resource not found: $path")
         val obj = ObjUtils.convertToRenderable(ObjReader.read(inputStream))
-
-        val indices = ObjData.getFaceVertexIndices(obj)
-        val vertices = ObjData.getVertices(obj)
-        val texCoords = ObjData.getTexCoords(obj, 2)
-        val texCoordsArray = ObjData.getTexCoordsArray(obj, 2)
-
-        val id: Int = createVAO()
-        storeIndiciesBuffer(indices)
-        storeDataInAttribList(0, 3, vertices)
-        if (!texCoordsArray.isEmpty()) {
-            storeDataInAttribList(1, 2, texCoords)
-        }
-        //storeDataInAttribList(2, 3, ObjData.getNormals(obj))
-        unbind()
         inputStream.close()
 
-        val vertexCount = ObjData.getFaceVertexIndicesArray(obj).size
-        return MeshComponent(id, vertexCount)
+        val indices = ObjData.getFaceVertexIndicesArray(obj)
+        val vertices = ObjData.getVerticesArray(obj)
+        val texCoords = ObjData.getTexCoordsArray(obj, 2)
+
+        return loadMesh(indices, vertices, texCoords)
+    }
+
+    fun loadMesh(indices: IntArray, vertices: FloatArray, texCoords: FloatArray): MeshComponent {
+        val id: Int = createVAO()
+        storeIndiciesBuffer(storeDataArrayInBuffer(indices))
+        storeDataInAttribList(0, 3, storeDataArrayInBuffer(vertices))
+        if (!texCoords.isEmpty()) {
+            storeDataInAttribList(1, 2, storeDataArrayInBuffer(texCoords))
+        }
+        unbind()
+        return MeshComponent(id, indices.size)
     }
 
     fun loadTexture(path: String): TextureComponent {

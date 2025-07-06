@@ -51,8 +51,6 @@ class TestGame : IRootScript {
         val node = engine.root.getFirstChild("Node")
         node!!.transform.rotation.addYaw(100.0 * delta)
 
-        println(engine.camera!!.transform.position)
-
         if (Input.hasPressedKey(Keycode.G)) {
             val node = Node("test", engine.root, Transform(engine.camera!!.transform.clone().position, Vector3f(0.1f)))
             val shader = Loader.loadShader("/shader/mesh.vert", "/shader/mesh.frag")

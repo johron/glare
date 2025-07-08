@@ -1,6 +1,7 @@
 package me.johanrong.glare.core
 
 import me.johanrong.glare.node.Node
+import me.johanrong.glare.render.MeshRenderer
 import me.johanrong.glare.render.Renderer
 import me.johanrong.glare.type.Component
 import me.johanrong.glare.util.Constants
@@ -19,6 +20,8 @@ class GlareEngine (val window: Window, game: IRootScript) {
 
     init {
         log("v${Constants.GLARE_VERSION} - Initialized")
+
+        renderer.addRenderer(MeshRenderer(this))
 
         Input.engine = this
         game.init(this)
@@ -74,5 +77,9 @@ class GlareEngine (val window: Window, game: IRootScript) {
         } else {
             throw Exception("Could not set camera: Node does not have a Camera component")
         }
+    }
+
+    fun getRenderer(): Renderer {
+        return renderer
     }
 }

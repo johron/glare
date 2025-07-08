@@ -15,7 +15,7 @@
 ```kotlin
 fun main() {
     val window = Window(
-        "Test Game",
+        "Glare GE",
         1280,
         720,
         maximized = false,
@@ -32,7 +32,7 @@ class TestGame : IRootScript {
 
     override fun init(engine: GlareEngine) {
         TestGame.engine = engine
-        engine.camera = Freecam(engine.root, Transform(Euler(0.0, 0.0, -90.0)))
+        engine.setCamera(Freecam(engine.root, Transform(Euler(0.0, 0.0, -90.0))))
 
         val node = Node("Node", engine.root, Transform(0.0, 0.0, -5.0))
         val shader = ShaderComponent("/shader/mesh.vert", "/shader/mesh.frag")

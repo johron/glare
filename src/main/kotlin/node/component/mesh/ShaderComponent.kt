@@ -2,7 +2,7 @@ package me.johanrong.glare.node.component.mesh
 
 import me.johanrong.glare.node.component.IComponent
 import me.johanrong.glare.type.Component
-import me.johanrong.glare.util.Loader
+import me.johanrong.glare.util.loadPlain
 import org.joml.Matrix4f
 import org.joml.Vector3f
 import org.joml.Vector4f
@@ -23,8 +23,8 @@ class ShaderComponent(vertexPath: String, fragmentPath: String) : IComponent {
             throw Exception("Could not create shader program")
         }
 
-        vertexShaderId = createShader(Loader.loadPlain(vertexPath), GL20.GL_VERTEX_SHADER)
-        fragmentShaderId = createShader(Loader.loadPlain(fragmentPath), GL20.GL_FRAGMENT_SHADER)
+        vertexShaderId = createShader(loadPlain(vertexPath), GL20.GL_VERTEX_SHADER)
+        fragmentShaderId = createShader(loadPlain(fragmentPath), GL20.GL_FRAGMENT_SHADER)
         link()
 
         createUniform("transformMatrix")

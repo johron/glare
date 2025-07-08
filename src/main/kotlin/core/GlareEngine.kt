@@ -1,10 +1,11 @@
 package me.johanrong.glare.core
 
-import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.Camera
+import me.johanrong.glare.node.Node
 import me.johanrong.glare.render.Renderer
 import me.johanrong.glare.util.Constants
 import me.johanrong.glare.util.Input
+import me.johanrong.glare.util.Mesh
 import me.johanrong.glare.util.log
 
 class GlareEngine (val window: Window, game: IRootScript) {
@@ -50,7 +51,9 @@ class GlareEngine (val window: Window, game: IRootScript) {
     }
 
     private fun cleanup() {
+        Mesh.cleanup()
         window.cleanup()
+        renderer.cleanup()
     }
 
     fun getDelta(): Double {

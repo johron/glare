@@ -5,11 +5,13 @@ import me.johanrong.glare.core.IRootScript
 import me.johanrong.glare.core.Window
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.base.Freecam
+import me.johanrong.glare.node.component.mesh.ObjComponent
+import me.johanrong.glare.node.component.mesh.ShaderComponent
+import me.johanrong.glare.node.component.mesh.TextureComponent
 import me.johanrong.glare.type.Euler
 import me.johanrong.glare.type.Transform
 import me.johanrong.glare.type.io.Keycode
 import me.johanrong.glare.util.Input
-import me.johanrong.glare.util.Loader
 import org.joml.Vector3f
 
 fun main() {
@@ -34,9 +36,9 @@ class TestGame : IRootScript {
         engine.camera = Freecam(engine.root, Transform(Euler(0.0, 0.0, -90.0)))
 
         val node = Node("Node", engine.root, Transform(0.0, 0.0, -5.0))
-        val shader = Loader.loadShader("/shader/mesh.vert", "/shader/mesh.frag")
-        val texture = Loader.loadTexture("texture/map.png")
-        val mesh = Loader.loadObj("/model/cube.obj")
+        val shader = ShaderComponent("/shader/mesh.vert", "/shader/mesh.frag")
+        val texture = TextureComponent("texture/map.png")
+        val mesh = ObjComponent("/model/cube.obj")
         node.addComponent(texture)
         node.addComponent(mesh)
         node.addComponent(shader)
@@ -53,8 +55,8 @@ class TestGame : IRootScript {
 
         if (Input.hasPressedKey(Keycode.G)) {
             val node = Node("test", engine.root, Transform(engine.camera!!.transform.clone().position, Vector3f(0.1f)))
-            val shader = Loader.loadShader("/shader/mesh.vert", "/shader/mesh.frag")
-            val mesh = Loader.loadObj("/model/cube.obj")
+            val shader = ShaderComponent("/shader/mesh.vert", "/shader/mesh.frag")
+            val mesh = ObjComponent("/model/cube.obj")
             node.addComponent(mesh)
             node.addComponent(shader)
         }

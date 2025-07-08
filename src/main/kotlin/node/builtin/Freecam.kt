@@ -1,7 +1,6 @@
-package me.johanrong.glare.node.base
+package me.johanrong.glare.node.builtin
 
 import me.johanrong.glare.core.IScript
-import me.johanrong.glare.node.Camera
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.type.Transform
 import me.johanrong.glare.type.io.Keycode
@@ -11,7 +10,7 @@ import me.johanrong.glare.util.Input
 import org.joml.Math
 import org.joml.Vector3d
 
-class Freecam (name: String, parent: Node, transform: Transform, speed: Double?) : Camera(name, FreecamScript(), parent, transform) {
+class Freecam(name: String, parent: Node, transform: Transform, speed: Double?) : Camera(name, FreecamScript(), parent, transform) {
     constructor (parent: Node) : this("Freecam", parent, Transform(), null)
     constructor (parent: Node, transform: Transform) : this("Freecam", parent, transform, null)
 }

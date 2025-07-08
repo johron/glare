@@ -7,7 +7,7 @@ import me.johanrong.glare.node.component.IComponent
 import me.johanrong.glare.type.Component
 import me.johanrong.glare.util.Mesh
 
-open class MeshComponent(val data: Boolean = false) : IComponent {
+open class MeshComponent(isPrimary: Boolean = true) : IComponent {
     override val type = Component.MESH
 
     private val id: Int = Mesh.createVAO()
@@ -16,7 +16,7 @@ open class MeshComponent(val data: Boolean = false) : IComponent {
     private var vertices: FloatArray? = null
     private var texCoords: FloatArray? = null
 
-    constructor(indices: IntArray, vertices: FloatArray, texCoords: FloatArray) : this(true) {
+    constructor(indices: IntArray, vertices: FloatArray, texCoords: FloatArray) : this(false) {
         this.indices = indices
         this.vertices = vertices
         this.texCoords = texCoords
@@ -24,7 +24,7 @@ open class MeshComponent(val data: Boolean = false) : IComponent {
         load()
     }
 
-    constructor(path: String) : this(true) {
+    constructor(path: String) : this(false) {
         val inputStream = object {}.javaClass.getResourceAsStream(path) ?: throw Exception("Resource not found: $path")
         val obj = ObjUtils.convertToRenderable(ObjReader.read(inputStream))
         inputStream.close()
@@ -37,7 +37,7 @@ open class MeshComponent(val data: Boolean = false) : IComponent {
     }
 
     init {
-        if (!data) {
+        if (isPrimary) {
             throw Exception("Cannot use the primary constructor")
         }
     }

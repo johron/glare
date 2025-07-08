@@ -4,7 +4,7 @@ import me.johanrong.glare.core.GlareEngine
 import me.johanrong.glare.core.IRootScript
 import me.johanrong.glare.core.Window
 import me.johanrong.glare.node.Node
-import me.johanrong.glare.node.base.Freecam
+import me.johanrong.glare.node.builtin.Freecam
 import me.johanrong.glare.node.component.mesh.MeshComponent
 import me.johanrong.glare.node.component.mesh.ShaderComponent
 import me.johanrong.glare.node.component.mesh.TextureComponent

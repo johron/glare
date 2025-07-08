@@ -40,14 +40,14 @@ object Mesh {
         GL30.glBindVertexArray(0)
     }
 
-    fun storeDataArrayInBuffer(data: FloatArray): FloatBuffer {
-        val buffer = MemoryUtil.memAllocFloat(data.size)
+    fun storeDataArrayInBuffer(data: FloatArray?): FloatBuffer {
+        val buffer = MemoryUtil.memAllocFloat(data!!.size)
         buffer.put(data).flip()
         return buffer
     }
 
-    fun storeDataArrayInBuffer(data: IntArray): IntBuffer {
-        val buffer = MemoryUtil.memAllocInt(data.size)
+    fun storeDataArrayInBuffer(data: IntArray?): IntBuffer {
+        val buffer = MemoryUtil.memAllocInt(data!!.size)
         buffer.put(data).flip()
         return buffer
     }

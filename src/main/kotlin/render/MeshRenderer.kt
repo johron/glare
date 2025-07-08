@@ -62,5 +62,4 @@ class MeshRenderer (val engine: GlareEngine) : IRenderer {
     }
 
     override fun cleanup() {}
-
 }

@@ -10,6 +10,12 @@
 - [JOML 1.10.8](https://github.com/JOML-CI/JOML)
 - [Obj 0.4.0](https://github.com/javagl/Obj)
 
+## Additional Setup
+- Generate Constants
+```bash
+./gradlew generateConstants
+```
+
 ## Example Usage
 - Example is probably already outdated. 
 ```kotlin

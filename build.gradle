@@ -11,7 +11,7 @@ project.ext.jomlPrimVersion = "1.10.0"
 project.ext.objVersion = "0.4.0"
 
 group = 'me.johanrong.glare'
-version = '0.0.1'
+version = '0.0.5-alpha'
 
 repositories {
     mavenCentral()
@@ -111,7 +111,7 @@ tasks.jar {
         attributes(
                 'Implementation-Title': 'Glare',
                 'Implementation-Version': version,
-                'Main-Class': 'me.johanrong.glare.Main' // Replace with your main class if needed
+                'Main-Class': 'me.johanrong.glare.Main'
         )
     }
     from {
@@ -119,3 +119,18 @@ tasks.jar {
     }
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
+
+task generateConstants {
+    doLast {
+        def constantsFile = file("src/main/kotlin/util/GeneratedConstants.kt")
+        constantsFile.text = """
+            package me.johanrong.glare.util
+
+            object GeneratedConstants {
+                const val GLARE_VERSION: String = "${version}"
+            }
+        """.stripIndent()
+    }
+}
+
+compileKotlin.dependsOn(generateConstants)

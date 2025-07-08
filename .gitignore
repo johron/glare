@@ -4,3 +4,4 @@
 build/
 
 *.log
+src/main/kotlin/util/GeneratedConstants.kt

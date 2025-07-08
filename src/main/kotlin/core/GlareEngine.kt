@@ -1,8 +1,8 @@
 package me.johanrong.glare.core
 
-import me.johanrong.glare.node.builtin.Camera
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.render.Renderer
+import me.johanrong.glare.type.Component
 import me.johanrong.glare.util.Constants
 import me.johanrong.glare.util.Input
 import me.johanrong.glare.util.Mesh
@@ -11,9 +11,9 @@ import me.johanrong.glare.util.log
 class GlareEngine (val window: Window, game: IRootScript) {
     private var delta = 0.0
     private var isRunning = true
+    private var camera: Node? = null
 
     var root = Node("Root", null)
-    var camera: Camera? = null
 
     private val renderer: Renderer = Renderer(this)
 
@@ -58,5 +58,21 @@ class GlareEngine (val window: Window, game: IRootScript) {
 
     fun getDelta(): Double {
         return delta
+    }
+
+    fun getCamera(exception: Boolean = false): Node? {
+        if (camera == null && exception) {
+            throw Exception("No camera set in the engine")
+        }
+        return camera
+    }
+
+    fun setCamera(camera: Node) {
+        if (camera.hasComponent(Component.CAMERA)) {
+            this.camera = camera
+            log("Camera set to ${camera.name}")
+        } else {
+            throw Exception("Could not set camera: Node does not have a Camera component")
+        }
     }
 }

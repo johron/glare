@@ -46,14 +46,6 @@ data class Transform (
         position.add(x, y, z)
     }
 
-    fun getViewMatrix2(): Matrix4f {
-        return Matrix4f().identity()
-            .rotate(rotation.toRadians().x, Vector3f(1f, 0f, 0f))
-            .rotate(rotation.toRadians().y, Vector3f(0f, 1f, 0f))
-            .rotate(rotation.toRadians().z, Vector3f(0f, 0f, 1f))
-            .translate(-position.x.toFloat(), -position.y.toFloat(), -position.z.toFloat())
-    }
-
     fun getViewMatrix(): Matrix4f {
         val direction = Vector3f()
         direction.x = Math.cos(rotation.toRadians().y * Math.cos(rotation.toRadians().x))

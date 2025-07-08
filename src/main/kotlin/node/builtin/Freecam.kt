@@ -2,6 +2,7 @@ package me.johanrong.glare.node.builtin
 
 import me.johanrong.glare.core.IScript
 import me.johanrong.glare.node.Node
+import me.johanrong.glare.node.component.CameraComponent
 import me.johanrong.glare.type.Transform
 import me.johanrong.glare.type.io.Keycode
 import me.johanrong.glare.type.io.MouseButton
@@ -10,16 +11,19 @@ import me.johanrong.glare.util.Input
 import org.joml.Math
 import org.joml.Vector3d
 
-class Freecam(name: String, parent: Node, transform: Transform, speed: Double?) : Camera(name, FreecamScript(), parent, transform) {
-    constructor (parent: Node) : this("Freecam", parent, Transform(), null)
-    constructor (parent: Node, transform: Transform) : this("Freecam", parent, transform, null)
+class Freecam(name: String, parent: Node, transform: Transform, speed: Double = Defaults.FREECAM_SPEED) : Node(name, parent, FreecamScript(speed), transform) {
+    constructor(parent: Node, transform: Transform, speed: Double = Defaults.FREECAM_SPEED) : this("Freecam", parent, transform, speed)
+
+    init {
+        this.addComponent(CameraComponent())
+    }
 }
 
-class FreecamScript(var speed: Double = Defaults.FREECAM_SPEED) : IScript {
-    lateinit var node: Camera
+class FreecamScript(var speed: Double) : IScript {
+    lateinit var node: Node
 
     override fun init(parent: Node) {
-        this.node = parent as Camera
+        this.node = parent
     }
 
     override fun update(delta: Double) {

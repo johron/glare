@@ -33,7 +33,7 @@ class TestGame : IRootScript {
 
     override fun init(engine: GlareEngine) {
         TestGame.engine = engine
-        engine.camera = Freecam(engine.root, Transform(Euler(0.0, 0.0, -90.0)))
+        engine.setCamera(Freecam(engine.root, Transform(Euler(0.0, 0.0, -90.0))))
 
         val node = Node("Node", engine.root, Transform(0.0, 0.0, -5.0))
         val shader = ShaderComponent("/shader/mesh.vert", "/shader/mesh.frag")
@@ -54,7 +54,8 @@ class TestGame : IRootScript {
         node!!.transform.rotation.addYaw(100.0 * delta)
 
         if (Input.hasPressedKey(Keycode.G)) {
-            val node = Node("test", engine.root, Transform(engine.camera!!.transform.clone().position, Vector3f(0.1f)))
+            val camera = engine.getCamera()
+            val node = Node("test", engine.root, Transform(camera!!.transform.clone().position, Vector3f(0.1f)))
             val shader = ShaderComponent("/shader/mesh.vert", "/shader/mesh.frag")
             val mesh = MeshComponent("/model/cube.obj")
             node.addComponent(mesh)

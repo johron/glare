@@ -13,7 +13,7 @@ import org.lwjgl.opengl.GL30
 
 class MeshRenderer (val engine: GlareEngine) : IRenderer {
     override fun render() {
-        if (engine.camera == null) {
+        if (engine.getCamera() == null) {
             return
         }
 
@@ -21,6 +21,7 @@ class MeshRenderer (val engine: GlareEngine) : IRenderer {
     }
 
     fun renderChildren(parent: Node) {
+        val camera = engine.getCamera()!!
         for (child in parent.getChildren()) {
             if (child.hasComponent(Component.MESH)) {
                 val mesh = child.getComponent(Component.MESH) as MeshComponent
@@ -46,7 +47,7 @@ class MeshRenderer (val engine: GlareEngine) : IRenderer {
                 }
 
                 shader.setUniform("transformMatrix", child.transform.getTransformMatrix())
-                shader.setUniform("viewMatrix", engine.camera!!.transform.getViewMatrix())
+                shader.setUniform("viewMatrix", camera.transform.getViewMatrix())
                 shader.setUniform("textureSampler", 0)
 
                 GL11.glDrawElements(GL11.GL_TRIANGLES, mesh.getVertexCount(), GL11.GL_UNSIGNED_INT, 0)

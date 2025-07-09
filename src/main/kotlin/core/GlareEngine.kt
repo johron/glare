@@ -1,6 +1,7 @@
 package me.johanrong.glare.core
 
 import me.johanrong.glare.node.Node
+import me.johanrong.glare.node.component.EngineRefComponent
 import me.johanrong.glare.render.MeshRenderer
 import me.johanrong.glare.render.Renderer
 import me.johanrong.glare.type.Component
@@ -9,12 +10,12 @@ import me.johanrong.glare.util.Input
 import me.johanrong.glare.util.Mesh
 import me.johanrong.glare.util.log
 
-class GlareEngine (val window: Window, game: IRootScript) {
+class GlareEngine (val window: Window, game: IScript) {
     private var delta = 0.0
     private var isRunning = true
     private var camera: Node? = null
 
-    var root = Node("Root", null)
+    var root = Node("Root", null, components = mutableListOf(EngineRefComponent(this)))
 
     private val renderer: Renderer = Renderer(this)
 
@@ -24,7 +25,7 @@ class GlareEngine (val window: Window, game: IRootScript) {
         renderer.addRenderer(MeshRenderer(this))
 
         Input.engine = this
-        game.init(this)
+        game.init(root)
 
         var frames = 0
         while (isRunning) {

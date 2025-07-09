@@ -1,13 +1,15 @@
 package me.johanrong.glare
 
 import me.johanrong.glare.core.GlareEngine
-import me.johanrong.glare.core.IRootScript
+import me.johanrong.glare.core.IScript
 import me.johanrong.glare.core.Window
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.builtin.Freecam
+import me.johanrong.glare.node.component.EngineRefComponent
 import me.johanrong.glare.node.component.mesh.MeshComponent
 import me.johanrong.glare.node.component.mesh.ShaderComponent
 import me.johanrong.glare.node.component.mesh.TextureComponent
+import me.johanrong.glare.type.Component
 import me.johanrong.glare.type.Euler
 import me.johanrong.glare.type.Transform
 import me.johanrong.glare.type.io.Keycode
@@ -26,13 +28,13 @@ fun main() {
     GlareEngine(window, TestGame())
 }
 
-class TestGame : IRootScript {
+class TestGame : IScript {
     companion object {
         lateinit var engine: GlareEngine
     }
 
-    override fun init(engine: GlareEngine) {
-        TestGame.engine = engine
+    override fun init(parent: Node) {
+        engine = (parent.getComponent(Component.ENGINE_REF) as EngineRefComponent).getEngine()
         engine.setCamera(Freecam(engine.root, Transform(Euler(0.0, 0.0, -90.0))))
 
         val node = Node("Node", engine.root, Transform(0.0, 0.0, -5.0))

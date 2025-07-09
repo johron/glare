@@ -33,8 +33,8 @@ class TestGame : IScript {
         lateinit var engine: GlareEngine
     }
 
-    override fun init(parent: Node) {
-        engine = (parent.getComponent(Component.ENGINE_REF) as EngineRefComponent).getEngine()
+    override fun init(root: Node) {
+        engine = (root.getComponent(Component.ENGINE_REF) as EngineRefComponent).getEngine()
         engine.setCamera(Freecam(engine.root, Transform(Euler(0.0, 0.0, -90.0))))
 
         val node = Node("Node", engine.root, Transform(0.0, 0.0, -5.0))

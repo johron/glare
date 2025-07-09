@@ -31,13 +31,13 @@ fun main() {
     GlareEngine(window, TestGame())
 }
 
-class TestGame : IRootScript {
+class TestGame : IScript {
     companion object {
         lateinit var engine: GlareEngine
     }
 
-    override fun init(engine: GlareEngine) {
-        TestGame.engine = engine
+    override fun init(root: Node) {
+        engine = (root.getComponent(Component.ENGINE_REF) as EngineRefComponent).getEngine()
         engine.setCamera(Freecam(engine.root, Transform(Euler(0.0, 0.0, -90.0))))
 
         val node = Node("Node", engine.root, Transform(0.0, 0.0, -5.0))

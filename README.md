@@ -38,15 +38,27 @@ class TestGame : IScript {
 
     override fun init(root: Node) {
         engine = (root.getComponent(Component.ENGINE_REF) as EngineRefComponent).getEngine()
-        engine.setCamera(Freecam(engine.root, Transform(Euler(0.0, 0.0, -90.0))))
 
-        val node = Node("Node", engine.root, Transform(0.0, 0.0, -5.0))
+        val camera = NodeBuilder.go {
+            name = "Freecam"
+            transform = Transform(Euler(0.0, 0.0, -90.0))
+            parent = root
+            components = mutableListOf(CameraComponent())
+            script = FreecamScript()
+        }
+
+        engine.setCamera(camera)
+
         val shader = ShaderComponent("/shader/mesh.vert", "/shader/mesh.frag")
         val texture = TextureComponent("texture/map.png")
         val mesh = MeshComponent("/model/cube.obj")
-        node.addComponent(texture)
-        node.addComponent(mesh)
-        node.addComponent(shader)
+
+        NodeBuilder.go {
+            name = "Node"
+            transform = Transform(0.0, 0.0, -5.0)
+            parent = root
+            components = mutableListOf(shader, texture, mesh)
+        }
     }
 
     override fun update(delta: Double) {
@@ -56,6 +68,7 @@ class TestGame : IScript {
 
     override fun render() {}
     override fun cleanup() {}
+}
 }
 ```
 

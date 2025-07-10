@@ -1,4 +1,4 @@
-package me.johanrong.glare.node.builtin
+package me.johanrong.glare.node.prefab
 
 import me.johanrong.glare.core.IScript
 import me.johanrong.glare.node.Node
@@ -11,7 +11,11 @@ import me.johanrong.glare.util.Input
 import org.joml.Math
 import org.joml.Vector3d
 
-class Freecam(name: String, parent: Node, transform: Transform, speed: Double = Defaults.FREECAM_SPEED) : Node(name, parent, FreecamScript(speed), transform) {
+class Freecam(name: String,
+              parent: Node,
+              transform: Transform,
+              speed: Double = Defaults.FREECAM_SPEED
+) : Node(name, parent, FreecamScript(speed), transform) {
     constructor(parent: Node, transform: Transform, speed: Double = Defaults.FREECAM_SPEED) : this("Freecam", parent, transform, speed)
 
     init {

@@ -6,9 +6,9 @@ import me.johanrong.glare.type.Component
 import me.johanrong.glare.type.Transform
 
 open class Node (
-    var name: String,
-    var transform: Transform,
-    private var parent: Node?,
+    var name: String = "Node",
+    var transform: Transform = Transform(),
+    private var parent: Node? = null,
     private var children: MutableList<Node> = mutableListOf(),
     private var components: MutableList<IComponent> = mutableListOf(),
     private var script: IScript? = null

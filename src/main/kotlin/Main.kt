@@ -4,11 +4,12 @@ import me.johanrong.glare.core.GlareEngine
 import me.johanrong.glare.core.IScript
 import me.johanrong.glare.core.Window
 import me.johanrong.glare.node.Node
-import me.johanrong.glare.node.builtin.Freecam
+import me.johanrong.glare.node.NodeBuilder
 import me.johanrong.glare.node.component.EngineRefComponent
 import me.johanrong.glare.node.component.mesh.MeshComponent
 import me.johanrong.glare.node.component.mesh.ShaderComponent
 import me.johanrong.glare.node.component.mesh.TextureComponent
+import me.johanrong.glare.node.prefab.Freecam
 import me.johanrong.glare.type.Component
 import me.johanrong.glare.type.Euler
 import me.johanrong.glare.type.Transform
@@ -37,18 +38,23 @@ class TestGame : IScript {
         engine = (root.getComponent(Component.ENGINE_REF) as EngineRefComponent).getEngine()
         engine.setCamera(Freecam(engine.root, Transform(Euler(0.0, 0.0, -90.0))))
 
-        val node = Node("Node", engine.root, Transform(0.0, 0.0, -5.0))
         val shader = ShaderComponent("/shader/mesh.vert", "/shader/mesh.frag")
         val texture = TextureComponent("texture/map.png")
         val mesh = MeshComponent("/model/cube.obj")
-        node.addComponent(texture)
-        node.addComponent(mesh)
-        node.addComponent(shader)
 
-        val node2 = Node("Node", engine.root, Transform(5.0, 0.0, -5.0))
-        node2.addComponent(texture)
-        node2.addComponent(mesh)
-        node2.addComponent(shader)
+        val node = NodeBuilder.go {
+            name = "Node"
+            transform = Transform(0.0, 0.0, -5.0)
+            parent = root
+            components = mutableListOf(shader, texture, mesh)
+        }
+
+        val node2 = NodeBuilder.go {
+            name = "Node2"
+            transform = Transform(0.0, 2.0, -5.0)
+            parent = root
+            components = mutableListOf(shader, texture, mesh)
+        }
     }
 
     override fun update(delta: Double) {

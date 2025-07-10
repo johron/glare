@@ -12,7 +12,18 @@ class NodeBuilder {
     var components: MutableList<IComponent> = mutableListOf()
     var script: IScript? = null
 
+    // fun name(value: String) = apply { name = value }
+    // fun transform(value: Transform) = apply { transform = value }
+    // fun parent(value: Node) = apply { parent = value }
+    // fun children(value: MutableList<Node>) = apply { children = value }
+    // fun components(value: MutableList<IComponent>) = apply { components = value }
+    // fun script(value: IScript) = apply { script = value }
+
     fun build() : Node {
+        if (parent == null) {
+            throw Exception("Cannot build a node from a null parent")
+        }
+
         return Node(name, transform, parent, children, components, script)
     }
 

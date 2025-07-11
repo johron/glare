@@ -10,7 +10,7 @@ import me.johanrong.glare.node.component.EngineRefComponent
 import me.johanrong.glare.node.component.mesh.MeshComponent
 import me.johanrong.glare.node.component.mesh.ShaderComponent
 import me.johanrong.glare.node.component.mesh.TextureComponent
-import me.johanrong.glare.node.prefab.ModelBuilder
+import me.johanrong.glare.node.ModelBuilder
 import me.johanrong.glare.node.prefab.script.FreecamScript
 import me.johanrong.glare.type.Component
 import me.johanrong.glare.type.DoubleString
@@ -72,7 +72,7 @@ class TestGame : IScript {
                 transform = Transform(camera!!.transform.clone().position, Vector3f(0.1f))
                 parent = engine.root
                 mesh = "/model/cube.obj"
-                shader = DoubleString("/shader/mesh.frag", "/shader/mesh.vert")
+                shader = DoubleString("/shader/mesh.vert", "/shader/mesh.frag")
             }
         }
     }

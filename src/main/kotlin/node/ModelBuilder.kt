@@ -1,7 +1,5 @@
-package me.johanrong.glare.node.prefab
+package me.johanrong.glare.node
 
-import me.johanrong.glare.node.Node
-import me.johanrong.glare.node.NodeBuilder
 import me.johanrong.glare.node.component.mesh.MeshComponent
 import me.johanrong.glare.node.component.mesh.ShaderComponent
 import me.johanrong.glare.node.component.mesh.TextureComponent
@@ -28,7 +26,7 @@ class ModelBuilder : NodeBuilder() {
         }
 
         shader?.let {
-            node.addComponent(ShaderComponent(it.x, it.y))
+            node.addComponent(ShaderComponent(it))
         }
 
         return node

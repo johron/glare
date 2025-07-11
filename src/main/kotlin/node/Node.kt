@@ -13,39 +13,6 @@ open class Node (
     private var components: MutableList<IComponent> = mutableListOf(),
     private var script: IScript? = null
 ) {
-    constructor(name: String, parent: Node?): this(
-        name,
-        Transform(),
-        parent,
-    )
-
-    constructor(name: String, parent: Node?, components: MutableList<IComponent>): this(
-        name,
-        Transform(),
-        parent,
-        components = components
-    )
-
-    constructor(name: String, parent: Node?, transform: Transform): this(
-        name,
-        transform,
-        parent,
-    )
-
-    constructor(name: String, parent: Node, script: IScript): this(
-        name,
-        Transform(),
-        parent,
-        script = script
-    )
-
-    constructor(name: String, parent: Node, script: IScript, transform: Transform): this(
-        name,
-        transform,
-        parent,
-        script = script
-    )
-
     init {
         script?.init(this)
         parent?.addChild(this)

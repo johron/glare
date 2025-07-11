@@ -10,8 +10,10 @@ import me.johanrong.glare.node.component.EngineRefComponent
 import me.johanrong.glare.node.component.mesh.MeshComponent
 import me.johanrong.glare.node.component.mesh.ShaderComponent
 import me.johanrong.glare.node.component.mesh.TextureComponent
+import me.johanrong.glare.node.prefab.ModelBuilder
 import me.johanrong.glare.node.prefab.script.FreecamScript
 import me.johanrong.glare.type.Component
+import me.johanrong.glare.type.DoubleString
 import me.johanrong.glare.type.Euler
 import me.johanrong.glare.type.Transform
 import me.johanrong.glare.type.io.Keycode
@@ -49,22 +51,13 @@ class TestGame : IScript {
 
         engine.setCamera(camera)
 
-        val shader = ShaderComponent("/shader/mesh.vert", "/shader/mesh.frag")
-        val texture = TextureComponent("texture/map.png")
-        val mesh = MeshComponent("/model/cube.obj")
-
-        NodeBuilder.go {
+        ModelBuilder.go {
             name = "Node"
             transform = Transform(0.0, 0.0, -5.0)
             parent = root
-            components = mutableListOf(shader, texture, mesh)
-        }
-
-        NodeBuilder.go {
-            name = "Node2"
-            transform = Transform(0.0, 2.0, -5.0)
-            parent = root
-            components = mutableListOf(shader, texture, mesh)
+            mesh = "/model/cube.obj"
+            texture = "texture/map.png"
+            shader = DoubleString("/shader/mesh.vert", "/shader/mesh.frag")
         }
     }
 
@@ -74,11 +67,13 @@ class TestGame : IScript {
 
         if (Input.hasPressedKey(Keycode.G)) {
             val camera = engine.getCamera()
-            val node = Node("test", engine.root, Transform(camera!!.transform.clone().position, Vector3f(0.1f)))
-            val shader = ShaderComponent("/shader/mesh.vert", "/shader/mesh.frag")
-            val mesh = MeshComponent("/model/cube.obj")
-            node.addComponent(mesh)
-            node.addComponent(shader)
+            ModelBuilder.go {
+                name = "test"
+                transform = Transform(camera!!.transform.clone().position, Vector3f(0.1f))
+                parent = engine.root
+                mesh = "/model/cube.obj"
+                shader = DoubleString("/shader/mesh.frag", "/shader/mesh.vert")
+            }
         }
     }
 

@@ -1,6 +1,7 @@
 package me.johanrong.glare.core
 
 import me.johanrong.glare.node.Node
+import me.johanrong.glare.node.NodeBuilder
 import me.johanrong.glare.node.component.EngineRefComponent
 import me.johanrong.glare.render.MeshRenderer
 import me.johanrong.glare.render.Renderer
@@ -15,7 +16,11 @@ class GlareEngine (val window: Window, game: IScript) {
     private var isRunning = true
     private var camera: Node? = null
 
-    var root = Node("Root", null, components = mutableListOf(EngineRefComponent(this)))
+    var root = NodeBuilder.go {
+        name = "Root"
+        parent = null
+        components = mutableListOf(EngineRefComponent(this@GlareEngine))
+    }
 
     private val renderer: Renderer = Renderer(this)
 

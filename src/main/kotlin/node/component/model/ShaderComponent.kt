@@ -2,6 +2,7 @@ package me.johanrong.glare.node.component.mesh
 
 import me.johanrong.glare.node.component.IComponent
 import me.johanrong.glare.type.Component
+import me.johanrong.glare.type.DoubleString
 import me.johanrong.glare.util.loadPlain
 import org.joml.Matrix4f
 import org.joml.Vector3f
@@ -17,6 +18,8 @@ class ShaderComponent(vertexPath: String, fragmentPath: String) : IComponent {
     private val vertexShaderId: Int
     private val fragmentShaderId: Int
     private val uniforms: MutableMap<String, Int> = HashMap()
+
+    constructor(doubleString: DoubleString) : this(doubleString.x, doubleString.y)
 
     init {
         if (programId == 0) {

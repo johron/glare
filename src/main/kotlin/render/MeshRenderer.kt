@@ -2,9 +2,9 @@ package me.johanrong.glare.render
 
 import me.johanrong.glare.core.GlareEngine
 import me.johanrong.glare.node.Node
-import me.johanrong.glare.node.component.mesh.MeshComponent
-import me.johanrong.glare.node.component.mesh.ShaderComponent
-import me.johanrong.glare.node.component.mesh.TextureComponent
+import me.johanrong.glare.node.component.model.MeshComponent
+import me.johanrong.glare.node.component.model.ShaderComponent
+import me.johanrong.glare.node.component.model.TextureComponent
 import me.johanrong.glare.type.Component
 import org.lwjgl.opengl.GL11
 import org.lwjgl.opengl.GL13

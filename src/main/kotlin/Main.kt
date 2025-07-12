@@ -7,9 +7,6 @@ import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.NodeBuilder
 import me.johanrong.glare.node.component.CameraComponent
 import me.johanrong.glare.node.component.EngineRefComponent
-import me.johanrong.glare.node.component.mesh.MeshComponent
-import me.johanrong.glare.node.component.mesh.ShaderComponent
-import me.johanrong.glare.node.component.mesh.TextureComponent
 import me.johanrong.glare.node.ModelBuilder
 import me.johanrong.glare.node.prefab.script.FreecamScript
 import me.johanrong.glare.type.Component

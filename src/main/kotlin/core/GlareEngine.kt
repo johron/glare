@@ -5,6 +5,7 @@ import me.johanrong.glare.node.NodeBuilder
 import me.johanrong.glare.node.component.EngineRefComponent
 import me.johanrong.glare.render.MeshRenderer
 import me.johanrong.glare.render.Renderer
+import me.johanrong.glare.render.Shader
 import me.johanrong.glare.type.Component
 import me.johanrong.glare.util.Constants
 import me.johanrong.glare.util.Input
@@ -30,6 +31,7 @@ class GlareEngine (val window: Window, game: IScript) {
         renderer.addRenderer(MeshRenderer(this))
 
         Input.engine = this
+        Shader.engine = this
         game.init(root)
 
         var frames = 0

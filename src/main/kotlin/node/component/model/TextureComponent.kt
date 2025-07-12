@@ -1,4 +1,4 @@
-package me.johanrong.glare.node.component.mesh
+package me.johanrong.glare.node.component.model
 
 import me.johanrong.glare.node.component.IComponent
 import me.johanrong.glare.type.Component

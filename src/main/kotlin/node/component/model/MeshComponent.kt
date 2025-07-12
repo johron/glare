@@ -1,4 +1,4 @@
-package me.johanrong.glare.node.component.mesh
+package me.johanrong.glare.node.component.model
 
 import de.javagl.obj.ObjData
 import de.javagl.obj.ObjReader

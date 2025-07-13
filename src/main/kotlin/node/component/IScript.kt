@@ -1,4 +1,4 @@
-package me.johanrong.glare.type
+package me.johanrong.glare.node.component
 
 import me.johanrong.glare.node.Node
 

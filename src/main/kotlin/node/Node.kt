@@ -1,6 +1,6 @@
 package me.johanrong.glare.node
 
-import me.johanrong.glare.type.IScript
+import me.johanrong.glare.node.component.IScript
 import me.johanrong.glare.node.component.IComponent
 import me.johanrong.glare.node.component.ScriptsComponent
 import me.johanrong.glare.type.Component

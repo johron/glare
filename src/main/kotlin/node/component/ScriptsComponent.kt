@@ -1,6 +1,6 @@
 package me.johanrong.glare.node.component
 
-import me.johanrong.glare.type.IScript
+import me.johanrong.glare.node.component.IScript
 import me.johanrong.glare.type.Component
 
 class ScriptsComponent(var scripts: MutableList<IScript> = mutableListOf()) : IComponent {

@@ -1,13 +1,13 @@
 package me.johanrong.glare
 
 import me.johanrong.glare.core.GlareEngine
-import me.johanrong.glare.node.component.IScript
 import me.johanrong.glare.core.Window
+import me.johanrong.glare.node.ModelBuilder
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.NodeBuilder
 import me.johanrong.glare.node.component.CameraComponent
 import me.johanrong.glare.node.component.EngineRefComponent
-import me.johanrong.glare.node.ModelBuilder
+import me.johanrong.glare.node.component.IScript
 import me.johanrong.glare.node.component.ScriptsComponent
 import me.johanrong.glare.type.Component
 import me.johanrong.glare.type.DoubleString

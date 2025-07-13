@@ -4,7 +4,6 @@ import me.johanrong.glare.node.component.IComponent
 import me.johanrong.glare.render.Shader
 import me.johanrong.glare.type.Component
 import me.johanrong.glare.type.DoubleString
-import me.johanrong.glare.util.loadPlain
 import org.joml.Matrix4f
 import org.joml.Vector3f
 import org.joml.Vector4f

@@ -1,8 +1,8 @@
 package me.johanrong.glare.node
 
 import me.johanrong.glare.node.component.model.MeshComponent
-import me.johanrong.glare.node.component.model.TextureComponent
 import me.johanrong.glare.node.component.model.ShaderComponent
+import me.johanrong.glare.node.component.model.TextureComponent
 import me.johanrong.glare.type.DoubleString
 
 class ModelBuilder : NodeBuilder() {

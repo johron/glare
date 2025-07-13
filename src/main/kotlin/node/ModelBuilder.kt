@@ -15,7 +15,7 @@ class ModelBuilder : NodeBuilder() {
             throw Exception("Cannot build a node from a null parent")
         }
 
-        val node = Node(name, transform, parent, children, components, script)
+        val node = Node(name, transform, parent, children, components)
 
         mesh?.let {
             node.addComponent(MeshComponent(it))

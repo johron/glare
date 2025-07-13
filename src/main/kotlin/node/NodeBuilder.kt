@@ -1,6 +1,6 @@
 package me.johanrong.glare.node
 
-import me.johanrong.glare.core.IScript
+import me.johanrong.glare.type.IScript
 import me.johanrong.glare.node.component.IComponent
 import me.johanrong.glare.type.Transform
 
@@ -10,7 +10,6 @@ open class NodeBuilder {
     var parent: Node? = null
     var children: MutableList<Node> = mutableListOf()
     var components: MutableList<IComponent> = mutableListOf()
-    var script: IScript? = null
 
     //fun name(value: String) = apply { name = value }
     //fun transform(value: Transform) = apply { transform = value }
@@ -26,7 +25,7 @@ open class NodeBuilder {
             throw Exception("Cannot build a node from a null parent")
         }
 
-        return Node(name, transform, parent, children, components, script)
+        return Node(name, transform, parent, children, components)
     }
 
     companion object {

@@ -6,8 +6,7 @@ import me.johanrong.glare.type.io.MouseButton
 import org.joml.Vector2d
 import org.lwjgl.glfw.GLFW
 
-object Input {
-    lateinit var engine: GlareEngine
+class Input(val engine: GlareEngine) {
     var lastMousePosition: Vector2d = Vector2d()
 
     private val pressedKeys = mutableSetOf<Keycode>()

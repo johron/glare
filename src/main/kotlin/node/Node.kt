@@ -1,7 +1,8 @@
 package me.johanrong.glare.node
 
-import me.johanrong.glare.core.IScript
+import me.johanrong.glare.type.IScript
 import me.johanrong.glare.node.component.IComponent
+import me.johanrong.glare.node.component.ScriptsComponent
 import me.johanrong.glare.type.Component
 import me.johanrong.glare.type.Transform
 
@@ -11,10 +12,12 @@ open class Node (
     private var parent: Node? = null,
     private var children: MutableList<Node> = mutableListOf(),
     private var components: MutableList<IComponent> = mutableListOf(),
-    private var script: IScript? = null
 ) {
     init {
-        script?.init(this)
+        (getComponent(Component.SCRIPTS) as? ScriptsComponent)?.scripts?.forEach { script ->
+            script.init(this)
+        }
+
         parent?.addChild(this)
     }
 
@@ -45,19 +48,17 @@ open class Node (
         return parent
     }
 
-    fun getScript(): IScript? {
-        return script
-    }
-
     fun destroy() {
-        script?.cleanup()
+        (getComponent(Component.SCRIPTS) as? ScriptsComponent)?.clear()
         parent?.removeChild(this)
         parent = null
-        script = null
     }
 
     fun update(delta: Double) {
-        script?.update(delta)
+        (getComponent(Component.SCRIPTS) as? ScriptsComponent)?.scripts?.forEach { script ->
+            script.update(delta)
+        }
+
         for (child in children) {
             child.update(delta)
         }

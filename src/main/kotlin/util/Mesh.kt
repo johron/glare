@@ -1,9 +1,6 @@
 package me.johanrong.glare.util
 
-import org.lwjgl.opengl.GL11
-import org.lwjgl.opengl.GL15
-import org.lwjgl.opengl.GL20
-import org.lwjgl.opengl.GL30
+import org.lwjgl.opengl.GL46
 import org.lwjgl.system.MemoryUtil
 import java.nio.FloatBuffer
 import java.nio.IntBuffer
@@ -14,30 +11,30 @@ object Mesh {
     val textures = mutableListOf<Int>()
 
     fun createVAO(): Int {
-        val id = GL30.glGenVertexArrays()
+        val id = GL46.glGenVertexArrays()
         vaos.add(id)
-        GL30.glBindVertexArray(id)
+        GL46.glBindVertexArray(id)
         return id
     }
 
     fun storeIndiciesBuffer(indices: IntBuffer) {
-        val vbo = GL15.glGenBuffers()
+        val vbo = GL46.glGenBuffers()
         vbos.add(vbo)
-        GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, vbo)
-        GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, indices, GL15.GL_STATIC_DRAW)
+        GL46.glBindBuffer(GL46.GL_ELEMENT_ARRAY_BUFFER, vbo)
+        GL46.glBufferData(GL46.GL_ELEMENT_ARRAY_BUFFER, indices, GL46.GL_STATIC_DRAW)
     }
 
     fun storeDataInAttribList(attribNo: Int, vertexCount: Int, data: FloatBuffer) {
-        val vbo = GL15.glGenBuffers()
+        val vbo = GL46.glGenBuffers()
         vbos.add(vbo)
-        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vbo)
-        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, data, GL15.GL_STATIC_DRAW)
-        GL20.glVertexAttribPointer(attribNo, vertexCount, GL11.GL_FLOAT, false, 0, 0)
-        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0)
+        GL46.glBindBuffer(GL46.GL_ARRAY_BUFFER, vbo)
+        GL46.glBufferData(GL46.GL_ARRAY_BUFFER, data, GL46.GL_STATIC_DRAW)
+        GL46.glVertexAttribPointer(attribNo, vertexCount, GL46.GL_FLOAT, false, 0, 0)
+        GL46.glBindBuffer(GL46.GL_ARRAY_BUFFER, 0)
     }
 
     fun unbind() {
-        GL30.glBindVertexArray(0)
+        GL46.glBindVertexArray(0)
     }
 
     fun storeDataArrayInBuffer(data: FloatArray?): FloatBuffer {
@@ -54,15 +51,15 @@ object Mesh {
 
     fun cleanup() {
         for (vao in vaos) {
-            GL30.glDeleteVertexArrays(vao)
+            GL46.glDeleteVertexArrays(vao)
         }
 
         for (vbo in vbos) {
-            GL30.glDeleteBuffers(vbo)
+            GL46.glDeleteBuffers(vbo)
         }
 
         for (texture in textures) {
-            GL11.glDeleteTextures(texture)
+            GL46.glDeleteTextures(texture)
         }
     }
 }

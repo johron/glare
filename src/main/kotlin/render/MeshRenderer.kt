@@ -6,10 +6,7 @@ import me.johanrong.glare.node.component.model.MeshComponent
 import me.johanrong.glare.node.component.model.ShaderComponent
 import me.johanrong.glare.node.component.model.TextureComponent
 import me.johanrong.glare.type.Component
-import org.lwjgl.opengl.GL11
-import org.lwjgl.opengl.GL13
-import org.lwjgl.opengl.GL20
-import org.lwjgl.opengl.GL30
+import org.lwjgl.opengl.GL46
 
 class MeshRenderer (val engine: GlareEngine) : IRenderer {
     override fun render() {
@@ -33,14 +30,14 @@ class MeshRenderer (val engine: GlareEngine) : IRenderer {
                 shader.bind()
                 shader.setUniform("projectionMatrix", engine.window.updateProjectionMatrix())
 
-                GL30.glBindVertexArray(mesh.getId())
-                GL20.glEnableVertexAttribArray(0)
+                GL46.glBindVertexArray(mesh.getId())
+                GL46.glEnableVertexAttribArray(0)
 
                 if (child.hasComponent(Component.TEXTURE)) {
                     val texture = child.getComponent(Component.TEXTURE) as TextureComponent
-                    GL20.glEnableVertexAttribArray(1)
-                    GL20.glActiveTexture(GL13.GL_TEXTURE0)
-                    GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture.getId())
+                    GL46.glEnableVertexAttribArray(1)
+                    GL46.glActiveTexture(GL46.GL_TEXTURE0)
+                    GL46.glBindTexture(GL46.GL_TEXTURE_2D, texture.getId())
                     shader.setUniform("hasTexture", 1)
                 } else {
                     shader.setUniform("hasTexture", 0)
@@ -50,12 +47,12 @@ class MeshRenderer (val engine: GlareEngine) : IRenderer {
                 shader.setUniform("viewMatrix", camera.transform.getViewMatrix())
                 shader.setUniform("textureSampler", 0)
 
-                GL11.glDrawElements(GL11.GL_TRIANGLES, mesh.getVertexCount(), GL11.GL_UNSIGNED_INT, 0)
-                GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0)
-                GL20.glDisableVertexAttribArray(0)
-                GL20.glDisableVertexAttribArray(1)
+                GL46.glDrawElements(GL46.GL_TRIANGLES, mesh.getVertexCount(), GL46.GL_UNSIGNED_INT, 0)
+                GL46.glBindTexture(GL46.GL_TEXTURE_2D, 0)
+                GL46.glDisableVertexAttribArray(0)
+                GL46.glDisableVertexAttribArray(1)
 
-                GL30.glBindVertexArray(0)
+                GL46.glBindVertexArray(0)
                 shader.unbind()
             }
             renderChildren(child)

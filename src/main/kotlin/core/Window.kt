@@ -6,7 +6,7 @@ import org.joml.Matrix4f
 import org.lwjgl.glfw.GLFW
 import org.lwjgl.glfw.GLFWErrorCallback
 import org.lwjgl.opengl.GL
-import org.lwjgl.opengl.GL11
+import org.lwjgl.opengl.GL46
 import org.lwjgl.system.MemoryUtil
 
 class Window (
@@ -28,12 +28,12 @@ class Window (
         }
 
         GLFW.glfwDefaultWindowHints()
-        GLFW.glfwWindowHint(GLFW.GLFW_VISIBLE, GL11.GL_FALSE)
-        GLFW.glfwWindowHint(GLFW.GLFW_RESIZABLE, GL11.GL_TRUE)
+        GLFW.glfwWindowHint(GLFW.GLFW_VISIBLE, GL46.GL_FALSE)
+        GLFW.glfwWindowHint(GLFW.GLFW_RESIZABLE, GL46.GL_TRUE)
         GLFW.glfwWindowHint(GLFW.GLFW_CONTEXT_VERSION_MAJOR, 3)
         GLFW.glfwWindowHint(GLFW.GLFW_CONTEXT_VERSION_MINOR, 2)
         GLFW.glfwWindowHint(GLFW.GLFW_OPENGL_PROFILE, GLFW.GLFW_OPENGL_CORE_PROFILE)
-        GLFW.glfwWindowHint(GLFW.GLFW_OPENGL_FORWARD_COMPAT, GL11.GL_TRUE)
+        GLFW.glfwWindowHint(GLFW.GLFW_OPENGL_FORWARD_COMPAT, GL46.GL_TRUE)
 
         GLFW.glfwWindowHint(GLFW.GLFW_MAXIMIZED, if (maximized) GLFW.GLFW_TRUE else GLFW.GLFW_FALSE)
 
@@ -45,7 +45,7 @@ class Window (
         GLFW.glfwSetFramebufferSizeCallback(handle) { handle: Long, width: Int, height: Int ->
             this.width = width
             this.height = height
-            GL11.glViewport(0, 0, width, height)
+            GL46.glViewport(0, 0, width, height)
         }
 
         GLFW.glfwMakeContextCurrent(handle)
@@ -60,11 +60,11 @@ class Window (
 
         GL.createCapabilities();
 
-        GL11.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
-        GL11.glEnable(GL11.GL_DEPTH_TEST)
-        GL11.glEnable(GL11.GL_STENCIL_TEST)
-        GL11.glEnable(GL11.GL_CULL_FACE)
-        GL11.glCullFace(GL11.GL_BACK)
+        GL46.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
+        GL46.glEnable(GL46.GL_DEPTH_TEST)
+        GL46.glEnable(GL46.GL_STENCIL_TEST)
+        GL46.glEnable(GL46.GL_CULL_FACE)
+        GL46.glCullFace(GL46.GL_BACK)
     }
 
     fun shouldClose(): Boolean {

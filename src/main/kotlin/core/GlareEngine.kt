@@ -6,7 +6,6 @@ import me.johanrong.glare.node.component.EngineRefComponent
 import me.johanrong.glare.node.component.IScript
 import me.johanrong.glare.render.MeshRenderer
 import me.johanrong.glare.render.Renderer
-import me.johanrong.glare.render.Shader
 import me.johanrong.glare.type.Component
 import me.johanrong.glare.util.Constants
 import me.johanrong.glare.util.Mesh

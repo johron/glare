@@ -1,7 +1,7 @@
 package me.johanrong.glare.render
 
 import me.johanrong.glare.core.GlareEngine
-import org.lwjgl.opengl.GL11
+import org.lwjgl.opengl.GL46
 
 class Renderer (var engine: GlareEngine) : IRenderer {
     private val renderers = mutableListOf<IRenderer>()
@@ -15,7 +15,7 @@ class Renderer (var engine: GlareEngine) : IRenderer {
     }
 
     fun clear() {
-        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT or GL11.GL_DEPTH_BUFFER_BIT)
+        GL46.glClear(GL46.GL_COLOR_BUFFER_BIT or GL46.GL_DEPTH_BUFFER_BIT)
     }
 
     fun addRenderer(renderer: IRenderer) {

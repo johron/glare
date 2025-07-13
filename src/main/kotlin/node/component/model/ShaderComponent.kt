@@ -3,31 +3,51 @@ package me.johanrong.glare.node.component.model
 import me.johanrong.glare.node.component.IComponent
 import me.johanrong.glare.render.Shader
 import me.johanrong.glare.type.Component
-import me.johanrong.glare.type.DoubleString
 import org.joml.Matrix4f
 import org.joml.Vector3f
 import org.joml.Vector4f
 import org.lwjgl.opengl.GL46
 import org.lwjgl.system.MemoryStack
 
-class ShaderComponent(vertexPath: String, fragmentPath: String) : IComponent {
+class ShaderComponent(
+    vertexPath: String? = null,
+    fragmentPath: String? = null,
+    geometryPath: String? = null,
+    controlPath: String? = null,
+    evalPath: String? = null,
+    computePath: String? = null
+) : IComponent {
     override val type = Component.SHADER
 
     val programId: Int = GL46.glCreateProgram()
 
-    private val vertexShaderId: Int
-    private val fragmentShaderId: Int
+    private val shaderIds: MutableMap<Int, Int> = HashMap()
     private val uniforms: MutableMap<String, Int> = HashMap()
-
-    constructor(doubleString: DoubleString) : this(doubleString.x, doubleString.y)
 
     init {
         if (programId == 0) {
             throw Exception("Could not create shader program")
         }
 
-        vertexShaderId = createShader(Shader.makeVertex(vertexPath), GL46.GL_VERTEX_SHADER)
-        fragmentShaderId = createShader(Shader.makeFragment(fragmentPath), GL46.GL_FRAGMENT_SHADER)
+        if (vertexPath?.isEmpty() == false) {
+            shaderIds.put(GL46.GL_VERTEX_SHADER, createShader(Shader.makeVertex(vertexPath), GL46.GL_VERTEX_SHADER))
+        }
+        if (fragmentPath?.isEmpty() == false) {
+            shaderIds.put(GL46.GL_FRAGMENT_SHADER, createShader(Shader.makeFragment(fragmentPath), GL46.GL_FRAGMENT_SHADER))
+        }
+        if (geometryPath?.isEmpty() == false) {
+            shaderIds.put(GL46.GL_GEOMETRY_SHADER, createShader(Shader.makeGeometry(geometryPath), GL46.GL_GEOMETRY_SHADER))
+        }
+        if (controlPath?.isEmpty() == false) {
+            shaderIds.put(GL46.GL_TESS_CONTROL_SHADER, createShader(Shader.makeControl(controlPath), GL46.GL_TESS_CONTROL_SHADER))
+        }
+        if (evalPath?.isEmpty() == false) {
+            shaderIds.put(GL46.GL_TESS_EVALUATION_SHADER, createShader(Shader.makeEval(evalPath), GL46.GL_TESS_EVALUATION_SHADER))
+        }
+        if (computePath?.isEmpty() == false) {
+            shaderIds.put(GL46.GL_COMPUTE_SHADER, createShader(Shader.makeCompute(computePath), GL46.GL_COMPUTE_SHADER))
+        }
+
         link()
 
         createUniform("transformMatrix")
@@ -94,14 +114,10 @@ class ShaderComponent(vertexPath: String, fragmentPath: String) : IComponent {
             throw Exception("Could not link Shader Code: " + GL46.glGetProgramInfoLog(programId, 1024))
         }
 
-        if (vertexShaderId != 0) {
-            GL46.glDetachShader(programId, vertexShaderId)
-            GL46.glDeleteShader(vertexShaderId)
-        }
-
-        if (fragmentShaderId != 0) {
-            GL46.glDetachShader(programId, fragmentShaderId)
-            GL46.glDeleteShader(fragmentShaderId)
+        for ((_, shaderId) in shaderIds) {
+            if (shaderId == 0) continue
+            GL46.glDetachShader(programId, shaderId)
+            GL46.glDeleteShader(shaderId)
         }
 
         GL46.glValidateProgram(programId)

@@ -1,14 +1,14 @@
-package me.johanrong.glare.node
+package me.johanrong.glare.builder
 
+import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.component.model.MeshComponent
 import me.johanrong.glare.node.component.model.ShaderComponent
 import me.johanrong.glare.node.component.model.TextureComponent
-import me.johanrong.glare.type.DoubleString
 
 class ModelBuilder : NodeBuilder() {
     var mesh: String? = null
     var texture: String? = null
-    var shader: DoubleString? = null
+    var shader: ShaderComponent? = null
 
     override fun build(): Node {
         if (parent == null && name != "Root") {
@@ -26,7 +26,7 @@ class ModelBuilder : NodeBuilder() {
         }
 
         shader?.let {
-            node.addComponent(ShaderComponent(it))
+            node.addComponent(it)
         }
 
         return node

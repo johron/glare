@@ -1,5 +1,6 @@
-package me.johanrong.glare.node
+package me.johanrong.glare.builder
 
+import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.component.IComponent
 import me.johanrong.glare.type.Transform
 

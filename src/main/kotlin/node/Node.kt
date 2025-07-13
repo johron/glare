@@ -1,7 +1,7 @@
 package me.johanrong.glare.node
 
 import me.johanrong.glare.node.component.IComponent
-import me.johanrong.glare.node.component.ScriptsComponent
+import me.johanrong.glare.node.component.core.ScriptsComponent
 import me.johanrong.glare.type.Component
 import me.johanrong.glare.type.Transform
 

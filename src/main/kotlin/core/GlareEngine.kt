@@ -1,9 +1,9 @@
 package me.johanrong.glare.core
 
+import me.johanrong.glare.builder.NodeBuilder
 import me.johanrong.glare.node.Node
-import me.johanrong.glare.node.NodeBuilder
-import me.johanrong.glare.node.component.EngineRefComponent
-import me.johanrong.glare.node.component.IScript
+import me.johanrong.glare.node.component.core.EngineRefComponent
+import me.johanrong.glare.node.component.core.IScript
 import me.johanrong.glare.render.MeshRenderer
 import me.johanrong.glare.render.Renderer
 import me.johanrong.glare.type.Component

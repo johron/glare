@@ -1,16 +1,16 @@
 package me.johanrong.glare
 
+import me.johanrong.glare.builder.ModelBuilder
+import me.johanrong.glare.builder.NodeBuilder
+import me.johanrong.glare.builder.ShaderBuilder
 import me.johanrong.glare.core.GlareEngine
 import me.johanrong.glare.core.Window
-import me.johanrong.glare.node.ModelBuilder
 import me.johanrong.glare.node.Node
-import me.johanrong.glare.node.NodeBuilder
-import me.johanrong.glare.node.component.CameraComponent
-import me.johanrong.glare.node.component.EngineRefComponent
-import me.johanrong.glare.node.component.IScript
-import me.johanrong.glare.node.component.ScriptsComponent
+import me.johanrong.glare.node.component.core.CameraComponent
+import me.johanrong.glare.node.component.core.EngineRefComponent
+import me.johanrong.glare.node.component.core.IScript
+import me.johanrong.glare.node.component.core.ScriptsComponent
 import me.johanrong.glare.type.Component
-import me.johanrong.glare.type.DoubleString
 import me.johanrong.glare.type.Euler
 import me.johanrong.glare.type.Transform
 import me.johanrong.glare.type.io.Keycode
@@ -62,7 +62,10 @@ class TestGame : IScript {
             parent = root
             mesh = "/model/cube.obj"
             texture = "texture/map.png"
-            shader = DoubleString("/shader/mesh.vert", "/shader/mesh.frag")
+            shader = ShaderBuilder.go {
+                vertex = "/shader/mesh.vert"
+                fragment = "/shader/mesh.frag"
+            }
         }
     }
 
@@ -77,7 +80,10 @@ class TestGame : IScript {
                 transform = Transform(camera!!.transform.clone().position, Vector3f(0.1f))
                 parent = engine.root
                 mesh = "/model/cube.obj"
-                shader = DoubleString("/shader/mesh.vert", "/shader/mesh.frag")
+                shader = ShaderBuilder.go {
+                    vertex = "/shader/mesh.vert"
+                    fragment = "/shader/mesh.frag"
+                }
             }
         }
     }

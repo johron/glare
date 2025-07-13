@@ -64,7 +64,7 @@ dependencies {
     implementation "org.lwjgl:lwjgl-yoga"
     implementation "org.lwjgl:lwjgl-zstd"
 
-['natives-linux', 'natives-windows', 'natives-macos'].each { nativePlatform ->
+['natives-linux', 'natives-windows'].each { nativePlatform ->
     runtimeOnly "org.lwjgl:lwjgl::$nativePlatform"
     runtimeOnly "org.lwjgl:lwjgl-assimp::$nativePlatform"
     runtimeOnly "org.lwjgl:lwjgl-bgfx::$nativePlatform"

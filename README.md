@@ -2,7 +2,7 @@
 - A modular, cross-platform game engine built in Kotlin using LWJGL and OpenGL
 
 ## TODO
-- [x] Move old node types to the component system, including Mesh, material, texture, shader, ..
+- [ ] Add new shader system, with builtin lighting and stuff?!
 
 ## Dependencies and frameworks used
 - Java 22
@@ -36,28 +36,30 @@ class TestGame : IScript {
         lateinit var engine: GlareEngine
     }
 
+    lateinit var input: Input
+
     override fun init(root: Node) {
         engine = (root.getComponent(Component.ENGINE_REF) as EngineRefComponent).getEngine()
+        input = Input(engine)
 
         val camera = NodeBuilder.go {
-            name = "Freecam"
+            name = "Camera"
             transform = Transform(Euler(0.0, 0.0, -90.0))
             parent = root
-            components = mutableListOf(CameraComponent())
-            script = FreecamScript()
+            components = mutableListOf(
+                CameraComponent()
+            )
         }
 
         engine.setCamera(camera)
 
-        val shader = ShaderComponent("/shader/mesh.vert", "/shader/mesh.frag")
-        val texture = TextureComponent("texture/map.png")
-        val mesh = MeshComponent("/model/cube.obj")
-
-        NodeBuilder.go {
+        ModelNodeBuilder.go {
             name = "Node"
             transform = Transform(0.0, 0.0, -5.0)
             parent = root
-            components = mutableListOf(shader, texture, mesh)
+            mesh = "/model/cube.obj"
+            texture = "texture/map.png"
+            shader = DoubleString("/shader/mesh.vert", "/shader/mesh.frag")
         }
     }
 
@@ -68,7 +70,6 @@ class TestGame : IScript {
 
     override fun render() {}
     override fun cleanup() {}
-}
 }
 ```
 

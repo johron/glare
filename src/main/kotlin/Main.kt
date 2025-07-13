@@ -2,7 +2,7 @@ package me.johanrong.glare
 
 import me.johanrong.glare.core.GlareEngine
 import me.johanrong.glare.core.Window
-import me.johanrong.glare.node.ModelNodeBuilder
+import me.johanrong.glare.node.ModelBuilder
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.NodeBuilder
 import me.johanrong.glare.node.component.CameraComponent
@@ -56,7 +56,7 @@ class TestGame : IScript {
 
         engine.setCamera(camera)
 
-        ModelNodeBuilder.go {
+        ModelBuilder.go {
             name = "Node"
             transform = Transform(0.0, 0.0, -5.0)
             parent = root
@@ -72,7 +72,7 @@ class TestGame : IScript {
 
         if (input.hasPressedKey(Keycode.G)) {
             val camera = engine.getCamera()
-            ModelNodeBuilder.go {
+            ModelBuilder.go {
                 name = "test"
                 transform = Transform(camera!!.transform.clone().position, Vector3f(0.1f))
                 parent = engine.root

@@ -1,11 +1,8 @@
 package me.johanrong.glare.render
 
-import me.johanrong.glare.core.GlareEngine
 import me.johanrong.glare.util.loadPlain
 
 object Shader {
-    lateinit var engine: GlareEngine
-
     const val VERTEX_HEADER = """
         #version 400
     """

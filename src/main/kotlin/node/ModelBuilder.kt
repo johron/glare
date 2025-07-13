@@ -5,7 +5,7 @@ import me.johanrong.glare.node.component.model.ShaderComponent
 import me.johanrong.glare.node.component.model.TextureComponent
 import me.johanrong.glare.type.DoubleString
 
-class ModelNodeBuilder : NodeBuilder() {
+class ModelBuilder : NodeBuilder() {
     var mesh: String? = null
     var texture: String? = null
     var shader: DoubleString? = null
@@ -33,8 +33,8 @@ class ModelNodeBuilder : NodeBuilder() {
     }
 
     companion object {
-        fun go(block: ModelNodeBuilder.() -> Unit): Node {
-            val builder = ModelNodeBuilder()
+        fun go(block: ModelBuilder.() -> Unit): Node {
+            val builder = ModelBuilder()
             builder.block()
             return builder.build()
         }

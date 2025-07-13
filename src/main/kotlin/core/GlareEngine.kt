@@ -30,7 +30,6 @@ class GlareEngine (val window: Window, game: IScript) {
 
         renderer.addRenderer(MeshRenderer(this))
 
-        Shader.engine = this
         game.init(root)
 
         var frames = 0

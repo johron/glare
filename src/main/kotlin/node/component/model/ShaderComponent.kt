@@ -8,6 +8,9 @@ import org.joml.Matrix4f
 import org.joml.Vector3f
 import org.joml.Vector4f
 import org.lwjgl.opengl.GL20
+import org.lwjgl.opengl.GL30
+import org.lwjgl.opengl.GL40
+import org.lwjgl.opengl.GL46
 import org.lwjgl.system.MemoryStack
 
 class ShaderComponent(vertexPath: String, fragmentPath: String) : IComponent {
@@ -29,6 +32,8 @@ class ShaderComponent(vertexPath: String, fragmentPath: String) : IComponent {
         vertexShaderId = createShader(Shader.makeVertex(vertexPath), GL20.GL_VERTEX_SHADER)
         fragmentShaderId = createShader(Shader.makeFragment(fragmentPath), GL20.GL_FRAGMENT_SHADER)
         link()
+
+
 
         createUniform("transformMatrix")
         createUniform("projectionMatrix")

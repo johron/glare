@@ -1,7 +1,9 @@
 package me.johanrong.glare.util
 
+import me.johanrong.glare.core.Engine
+
 fun log(message: String) {
-    println("[${Constants.GLARE_ENGINE}] $message")
+    println("[${Engine.NAME}] $message")
 }
 
 fun loadPlain(path: String): String {

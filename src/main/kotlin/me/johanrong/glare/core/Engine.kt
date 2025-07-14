@@ -6,7 +6,7 @@ import me.johanrong.glare.node.component.core.IScript
 import me.johanrong.glare.render.MeshRenderer
 import me.johanrong.glare.render.Renderer
 import me.johanrong.glare.type.Component
-import me.johanrong.glare.util.Constants
+import me.johanrong.glare.util.GeneratedConstants
 import me.johanrong.glare.util.Mesh
 import me.johanrong.glare.util.log
 
@@ -23,8 +23,14 @@ class Engine (val window: Window, game: IScript) {
 
     private val renderer: Renderer = Renderer(this)
 
+    companion object {
+        const val NANOSECOND: Long = 1_000_000_000L
+        const val NAME: String = "Glare"
+        const val VERSION: String = GeneratedConstants.GLARE_VERSION
+    }
+
     init {
-        log("v${Constants.GLARE_VERSION} - Initialized")
+        log("v${VERSION} - Initialized")
 
         renderer.addRenderer(MeshRenderer(this))
 
@@ -44,7 +50,7 @@ class Engine (val window: Window, game: IScript) {
             renderer.render()
 
             val endTime = System.nanoTime()
-            delta = (endTime - startTime) / Constants.NANOSECOND.toDouble()
+            delta = (endTime - startTime) / NANOSECOND.toDouble()
 
             if (frames % 100 == 0 && delta > 0.0) {
                 window.setTitle("${window.getTitle()} - ${(1.0 / delta).toInt()} FPS")

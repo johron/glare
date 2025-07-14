@@ -1,7 +1,7 @@
 import me.johanrong.glare.builder.ModelBuilder
 import me.johanrong.glare.builder.NodeBuilder
 import me.johanrong.glare.builder.ShaderBuilder
-import me.johanrong.glare.core.GlareEngine
+import me.johanrong.glare.core.Engine
 import me.johanrong.glare.core.Window
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.component.core.CameraComponent
@@ -12,11 +12,7 @@ import me.johanrong.glare.type.Component
 import me.johanrong.glare.type.Euler
 import me.johanrong.glare.type.Transform
 import me.johanrong.glare.type.io.Keycode
-import me.johanrong.glare.type.io.MouseButton
-import me.johanrong.glare.util.Defaults
 import me.johanrong.glare.util.Input
-import org.joml.Math
-import org.joml.Vector3d
 import org.joml.Vector3f
 
 fun main() {
@@ -28,12 +24,12 @@ fun main() {
         vSync = true,
     )
 
-    GlareEngine(window, TestGame())
+    Engine(window, TestGame())
 }
 
 class TestGame : IScript {
     companion object {
-        lateinit var engine: GlareEngine
+        lateinit var engine: Engine
     }
 
     lateinit var input: Input

@@ -11,7 +11,7 @@ import me.johanrong.glare.util.Constants
 import me.johanrong.glare.util.Mesh
 import me.johanrong.glare.util.log
 
-class GlareEngine (val window: Window, game: IScript) {
+class Engine (val window: Window, game: IScript) {
     private var delta = 0.0
     private var isRunning = true
     private var camera: Node? = null
@@ -19,7 +19,7 @@ class GlareEngine (val window: Window, game: IScript) {
     var root = NodeBuilder.go {
         name = "Root"
         parent = null
-        components = mutableListOf(EngineRefComponent(this@GlareEngine))
+        components = mutableListOf(EngineRefComponent(this@Engine))
     }
 
     private val renderer: Renderer = Renderer(this)

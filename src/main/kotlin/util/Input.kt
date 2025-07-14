@@ -1,12 +1,12 @@
 package me.johanrong.glare.util
 
-import me.johanrong.glare.core.GlareEngine
+import me.johanrong.glare.core.Engine
 import me.johanrong.glare.type.io.Keycode
 import me.johanrong.glare.type.io.MouseButton
 import org.joml.Vector2d
 import org.lwjgl.glfw.GLFW
 
-class Input(val engine: GlareEngine) {
+class Input(val engine: Engine) {
     var lastMousePosition: Vector2d = Vector2d()
 
     private val pressedKeys = mutableSetOf<Keycode>()

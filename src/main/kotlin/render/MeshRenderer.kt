@@ -1,6 +1,6 @@
 package me.johanrong.glare.render
 
-import me.johanrong.glare.core.GlareEngine
+import me.johanrong.glare.core.Engine
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.component.model.MeshComponent
 import me.johanrong.glare.node.component.model.ShaderComponent
@@ -8,7 +8,7 @@ import me.johanrong.glare.node.component.model.TextureComponent
 import me.johanrong.glare.type.Component
 import org.lwjgl.opengl.GL46
 
-class MeshRenderer (val engine: GlareEngine) : IRenderer {
+class MeshRenderer (val engine: Engine) : IRenderer {
     override fun render() {
         if (engine.getCamera() == null) {
             return

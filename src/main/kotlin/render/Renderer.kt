@@ -1,9 +1,9 @@
 package me.johanrong.glare.render
 
-import me.johanrong.glare.core.GlareEngine
+import me.johanrong.glare.core.Engine
 import org.lwjgl.opengl.GL46
 
-class Renderer (var engine: GlareEngine) : IRenderer {
+class Renderer (var engine: Engine) : IRenderer {
     private val renderers = mutableListOf<IRenderer>()
 
     override fun render() {

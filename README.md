@@ -7,6 +7,7 @@
 ## Dependencies and frameworks used
 - Java 22
 - [LWJGL 3.3.3](https://www.lwjgl.org/)
+    - OpenGL 4.6
 - [JOML 1.10.8](https://github.com/JOML-CI/JOML)
 - [Obj 0.4.0](https://github.com/javagl/Obj)
 
@@ -53,7 +54,7 @@ class TestGame : IScript {
 
         engine.setCamera(camera)
 
-        ModelNodeBuilder.go {
+        ModelBuilder.go {
             name = "Node"
             transform = Transform(0.0, 0.0, -5.0)
             parent = root

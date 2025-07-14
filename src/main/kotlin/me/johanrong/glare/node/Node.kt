@@ -89,4 +89,33 @@ open class Node (
         return components
     }
 
+    companion object {
+        fun builder(block: Builder.() -> Unit) : Node {
+            val builder = Builder()
+            builder.block()
+            return builder.build()
+        }
+    }
+
+    class Builder {
+        var name: String = "Node"
+        var transform: Transform = Transform()
+        var parent: Node? = null
+        var children: MutableList<Node> = mutableListOf()
+        var components: MutableList<IComponent> = mutableListOf()
+
+        fun name(value: String) = apply { name = value }
+        fun transform(value: Transform) = apply { transform = value }
+        fun parent(value: Node?) = apply { parent = value }
+        fun addChild(child: Node) = apply { children.add(child) }
+        fun addComponent(component: IComponent) = apply { components.add(component) }
+
+        fun build() : Node {
+            if (parent == null && name != "Root") {
+                throw Exception("Cannot build a node from a null parent")
+            }
+
+            return Node(name, transform, parent, children, components)
+        }
+    }
 }

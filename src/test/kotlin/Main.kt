@@ -1,6 +1,3 @@
-import me.johanrong.glare.builder.ModelBuilder
-import me.johanrong.glare.builder.NodeBuilder
-import me.johanrong.glare.builder.ShaderBuilder
 import me.johanrong.glare.core.Engine
 import me.johanrong.glare.core.Window
 import me.johanrong.glare.node.Node
@@ -8,6 +5,9 @@ import me.johanrong.glare.node.component.core.CameraComponent
 import me.johanrong.glare.node.component.core.EngineRefComponent
 import me.johanrong.glare.node.component.core.IScript
 import me.johanrong.glare.node.component.core.ScriptsComponent
+import me.johanrong.glare.node.component.model.MeshComponent
+import me.johanrong.glare.node.component.model.ShaderComponent
+import me.johanrong.glare.node.component.model.TextureComponent
 import me.johanrong.glare.type.Component
 import me.johanrong.glare.type.Euler
 import me.johanrong.glare.type.Transform
@@ -38,7 +38,7 @@ class TestGame : IScript {
         engine = (root.getComponent(Component.ENGINE_REF) as EngineRefComponent).getEngine()
         input = Input(engine)
 
-        val camera = NodeBuilder.go {
+        val camera = Node.builder {
             name = "Freecam"
             transform = Transform(Euler(0.0, 0.0, -90.0))
             parent = root
@@ -50,16 +50,18 @@ class TestGame : IScript {
 
         engine.setCamera(camera)
 
-        ModelBuilder.go {
+        Node.builder {
             name = "Node"
             transform = Transform(0.0, 0.0, -5.0)
             parent = root
-            mesh = "/model/cube.obj"
-            texture = "texture/map.png"
-            shader = ShaderBuilder.go {
-                vertex = "/shader/mesh.vert"
-                fragment = "/shader/mesh.frag"
-            }
+            components = mutableListOf(
+                MeshComponent("/model/cube.obj"),
+                TextureComponent("texture/map.png"),
+                ShaderComponent.Builder()
+                    .vertex("/shader/mesh.vert")
+                    .fragment("/shader/mesh.frag")
+                    .build()
+            )
         }
     }
 
@@ -69,15 +71,17 @@ class TestGame : IScript {
 
         if (input.hasPressedKey(Keycode.G)) {
             val camera = engine.getCamera()
-            ModelBuilder.go {
+            Node.builder {
                 name = "test"
                 transform = Transform(camera!!.transform.clone().position, Vector3f(0.1f))
                 parent = engine.root
-                mesh = "/model/cube.obj"
-                shader = ShaderBuilder.go {
-                    vertex = "/shader/mesh.vert"
-                    fragment = "/shader/mesh.frag"
-                }
+                components = mutableListOf(
+                    MeshComponent("/model/cube.obj"),
+                    ShaderComponent.Builder()
+                        .vertex("/shader/mesh.vert")
+                        .fragment("/shader/mesh.frag")
+                        .build()
+                )
             }
         }
     }

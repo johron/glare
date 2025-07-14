@@ -1,6 +1,5 @@
 package me.johanrong.glare.core
 
-import me.johanrong.glare.builder.NodeBuilder
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.component.core.EngineRefComponent
 import me.johanrong.glare.node.component.core.IScript
@@ -16,7 +15,7 @@ class Engine (val window: Window, game: IScript) {
     private var isRunning = true
     private var camera: Node? = null
 
-    var root = NodeBuilder.go {
+    var root = Node.builder {
         name = "Root"
         parent = null
         components = mutableListOf(EngineRefComponent(this@Engine))

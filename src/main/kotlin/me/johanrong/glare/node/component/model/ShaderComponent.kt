@@ -140,4 +140,39 @@ class ShaderComponent(
             GL46.glDeleteProgram(programId)
         }
     }
+
+    companion object {
+        fun builder(block: Builder.() -> Unit): ShaderComponent {
+            val builder = Builder()
+            builder.block()
+            return builder.build()
+        }
+    }
+
+    class Builder {
+        var vertex: String? = null
+        var fragment: String? = null
+        var geometry: String? = null
+        var control: String? = null
+        var eval: String? = null
+        var compute: String? = null
+
+        fun vertex(value: String) = apply { vertex = value }
+        fun fragment(value: String) = apply { fragment = value }
+        fun geometry(value: String) = apply { geometry = value }
+        fun control(value: String) = apply { control = value }
+        fun eval(value: String) = apply { eval = value }
+        fun compute(value: String) = apply { compute = value }
+
+        fun build(): ShaderComponent {
+            return ShaderComponent(
+                vertexPath = vertex,
+                fragmentPath = fragment,
+                geometryPath = geometry,
+                controlPath = control,
+                evalPath = eval,
+                computePath = compute
+            )
+        }
+    }
 }

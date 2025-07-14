@@ -1,7 +1,6 @@
 package me.johanrong.glare.core
 
 import me.johanrong.glare.util.Constants
-import me.johanrong.glare.util.Defaults
 import org.joml.Matrix4f
 import org.lwjgl.glfw.GLFW
 import org.lwjgl.glfw.GLFWErrorCallback
@@ -15,7 +14,7 @@ class Window (
     var height: Int,
     var maximized: Boolean,
     var vSync: Boolean,
-    var fov: Double = Defaults.FOV,
+    var fov: Double = 70.0,
 ) {
     private var handle: Long
     private var projectionMatrix: Matrix4f = Matrix4f()

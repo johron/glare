@@ -2,12 +2,11 @@ import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.component.core.IScript
 import me.johanrong.glare.type.io.Keycode
 import me.johanrong.glare.type.io.MouseButton
-import me.johanrong.glare.util.Defaults
 import me.johanrong.glare.util.Input
 import org.joml.Math
 import org.joml.Vector3d
 
-class FreecamScript(var speed: Double = Defaults.FREECAM_SPEED) : IScript {
+class FreecamScript(var speed: Double = 5.0) : IScript {
     lateinit var node: Node
     val engine = TestGame.engine
 

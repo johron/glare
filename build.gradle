@@ -122,7 +122,7 @@ tasks.jar {
 
 task generateConstants {
     doLast {
-        def constantsFile = file("src/main/kotlin/util/GeneratedConstants.kt")
+        def constantsFile = file("src/main/kotlin/me/johanrong/glare/util/GeneratedConstants.kt")
         constantsFile.text = """
             package me.johanrong.glare.util
 

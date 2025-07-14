@@ -5,9 +5,9 @@ import me.johanrong.glare.node.component.core.CameraComponent
 import me.johanrong.glare.node.component.core.EngineRefComponent
 import me.johanrong.glare.node.component.core.IScript
 import me.johanrong.glare.node.component.core.ScriptsComponent
-import me.johanrong.glare.node.component.model.MeshComponent
-import me.johanrong.glare.node.component.model.ShaderComponent
-import me.johanrong.glare.node.component.model.TextureComponent
+import me.johanrong.glare.node.component.graphics.MeshComponent
+import me.johanrong.glare.node.component.graphics.ShaderComponent
+import me.johanrong.glare.node.component.graphics.TextureComponent
 import me.johanrong.glare.type.Component
 import me.johanrong.glare.type.Euler
 import me.johanrong.glare.type.Transform

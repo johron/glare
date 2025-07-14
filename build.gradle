@@ -11,7 +11,7 @@ project.ext.jomlPrimVersion = "1.10.0"
 project.ext.objVersion = "0.4.0"
 
 group = 'me.johanrong.glare'
-version = '0.0.5-alpha'
+version = '0.1.0-beta'
 
 repositories {
     mavenCentral()

@@ -1,4 +1,4 @@
-package me.johanrong.glare.node.component.model
+package me.johanrong.glare.node.component.graphics
 
 import de.javagl.obj.ObjData
 import de.javagl.obj.ObjReader

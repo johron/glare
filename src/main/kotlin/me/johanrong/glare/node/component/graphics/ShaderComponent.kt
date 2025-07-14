@@ -1,4 +1,4 @@
-package me.johanrong.glare.node.component.model
+package me.johanrong.glare.node.component.graphics
 
 import me.johanrong.glare.node.component.IComponent
 import me.johanrong.glare.render.Shader

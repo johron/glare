@@ -2,5 +2,5 @@
 package me.johanrong.glare.util
 
 object GeneratedConstants {
-    const val GLARE_VERSION: String = "0.0.5-alpha"
+    const val GLARE_VERSION: String = "0.1.0-beta"
 }

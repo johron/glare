@@ -133,4 +133,10 @@ task generateConstants {
     }
 }
 
+jar {
+    from('LICENSE') {
+        into('')
+    }
+}
+
 compileKotlin.dependsOn(generateConstants)

@@ -1,11 +1,16 @@
 package me.johanrong.glare.core
 
+import me.johanrong.glare.util.loadImage
 import org.joml.Matrix4f
 import org.lwjgl.glfw.GLFW
 import org.lwjgl.glfw.GLFWErrorCallback
+import org.lwjgl.glfw.GLFWImage
 import org.lwjgl.opengl.GL
 import org.lwjgl.opengl.GL46
+import org.lwjgl.stb.STBImage
+import org.lwjgl.system.MemoryStack
 import org.lwjgl.system.MemoryUtil
+import kotlin.use
 
 class Window (
     private var title: String,
@@ -14,6 +19,7 @@ class Window (
     var maximized: Boolean,
     var vSync: Boolean,
     var fov: Double = 70.0,
+    private var iconPaths: List<String>? = listOf("me/johanrong/glare/icon/glare_1024.png")
 ) {
     private var handle: Long
     private var projectionMatrix: Matrix4f = Matrix4f()
@@ -59,6 +65,10 @@ class Window (
             GLFW.glfwSwapInterval(0)
         }
 
+        if (!iconPaths.isNullOrEmpty()) {
+            setIcons(iconPaths!!)
+        }
+
         GLFW.glfwShowWindow(handle)
 
         GL.createCapabilities();
@@ -100,5 +110,41 @@ class Window (
     fun updateProjectionMatrix(): Matrix4f {
         val aspectRatio = width.toFloat() / height.toFloat()
         return projectionMatrix.setPerspective(Math.toRadians(fov).toFloat(), aspectRatio, Z_NEAR, Z_FAR)
+    }
+
+    private fun setIcons(paths: List<String>) {
+        MemoryStack.stackPush().use { stack ->
+            val icons = GLFWImage.mallocStack(paths.size, stack)
+
+            for (i in paths.indices) {
+                val iconBuffer = loadImage(paths[i], stack)
+                if (iconBuffer != null) {
+                    val w = stack.mallocInt(1)
+                    val h = stack.mallocInt(1)
+                    val c = stack.mallocInt(1)
+
+                    val buffer = STBImage.stbi_load_from_memory(iconBuffer, w, h, c, 4)
+                    if (buffer != null) {
+                        val width = w.get()
+                        val height = h.get()
+
+                        val image = GLFWImage.mallocStack(stack)
+                        image.set(width, height, buffer)
+                        icons.put(image)
+
+                        // Don't free buffer here, GLFW needs it until the program ends
+                    }
+                }
+            }
+
+            icons.flip()
+            GLFW.glfwSetWindowIcon(handle, icons)
+        }
+    }
+
+    fun setWindowIcons(paths: List<String>) {
+        if (paths.isNotEmpty()) {
+            setIcons(paths)
+        }
     }
 }

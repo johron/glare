@@ -19,7 +19,7 @@ class Window (
     var maximized: Boolean,
     var vSync: Boolean,
     var fov: Double = 70.0,
-    private var iconPaths: List<String>? = listOf("me/johanrong/glare/icon/glare_1024.png")
+    private var iconPaths: List<String>? = listOf("assets/glare/icon/glare_icon.png")
 ) {
     private var handle: Long
     private var projectionMatrix: Matrix4f = Matrix4f()

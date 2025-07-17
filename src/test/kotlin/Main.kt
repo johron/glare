@@ -1,14 +1,13 @@
 import me.johanrong.glare.core.Engine
+import me.johanrong.glare.core.IEntry
+import me.johanrong.glare.core.Scene
 import me.johanrong.glare.core.Window
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.component.core.CameraComponent
-import me.johanrong.glare.node.component.core.EngineRefComponent
-import me.johanrong.glare.node.component.core.IScript
 import me.johanrong.glare.node.component.core.ScriptsComponent
 import me.johanrong.glare.node.component.graphics.MeshComponent
 import me.johanrong.glare.node.component.graphics.ShaderComponent
 import me.johanrong.glare.node.component.graphics.TextureComponent
-import me.johanrong.glare.type.Component
 import me.johanrong.glare.type.Euler
 import me.johanrong.glare.type.Transform
 import me.johanrong.glare.type.io.Keycode
@@ -27,21 +26,18 @@ fun main() {
     Engine(window, TestGame())
 }
 
-class TestGame : IScript {
-    companion object {
-        lateinit var engine: Engine
-    }
-
+class TestGame() : IEntry {
+    lateinit var engine: Engine
     lateinit var input: Input
 
-    override fun init(root: Node) {
-        engine = (root.getComponent(Component.ENGINE_REF) as EngineRefComponent).getEngine()
+    override fun init(engine: Engine) {
+        this.engine = engine
         input = Input(engine)
 
         val camera = Node.builder {
             name = "Freecam"
             transform = Transform(Euler(0.0, 0.0, -90.0))
-            parent = root
+            parent = engine.root
             components = mutableListOf(
                 CameraComponent(),
                 ScriptsComponent(mutableListOf(FreecamScript()))
@@ -53,7 +49,7 @@ class TestGame : IScript {
         Node.builder {
             name = "Node"
             transform = Transform(0.0, 0.0, -5.0)
-            parent = root
+            parent = engine.root
             components = mutableListOf(
                 MeshComponent("/model/cube.obj"),
                 TextureComponent("texture/map.png"),
@@ -63,6 +59,10 @@ class TestGame : IScript {
                     .build()
             )
         }
+    }
+
+    override fun setScene(scene: Scene) {
+        TODO("Not yet implemented")
     }
 
     override fun update(delta: Double) {
@@ -86,6 +86,5 @@ class TestGame : IScript {
         }
     }
 
-    override fun render() {}
     override fun cleanup() {}
 }

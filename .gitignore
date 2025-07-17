@@ -4,4 +4,4 @@
 build/
 
 *.log
-src/main/kotlin/util/GeneratedConstants.kt
+src/main/kotlin/me/johanrong/glare/util/GeneratedConstants.kt

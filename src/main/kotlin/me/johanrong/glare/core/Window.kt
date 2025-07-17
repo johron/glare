@@ -10,7 +10,6 @@ import org.lwjgl.opengl.GL46
 import org.lwjgl.stb.STBImage
 import org.lwjgl.system.MemoryStack
 import org.lwjgl.system.MemoryUtil
-import kotlin.use
 
 class Window (
     private var title: String,

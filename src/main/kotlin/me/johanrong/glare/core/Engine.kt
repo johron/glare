@@ -21,7 +21,7 @@ class Engine (val window: Window, game: IScript) {
         components = mutableListOf(EngineRefComponent(this@Engine))
     }
 
-    private val renderer: Renderer = Renderer(this)
+    private val renderer: Renderer = Renderer()
 
     companion object {
         const val NANOSECOND: Long = 1_000_000_000L

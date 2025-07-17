@@ -4,7 +4,6 @@ import me.johanrong.glare.core.Engine
 import org.lwjgl.system.MemoryStack
 import org.lwjgl.system.MemoryUtil
 import java.nio.ByteBuffer
-import kotlin.jvm.javaClass
 
 fun log(message: String) {
     println("[${Engine.NAME}] $message")

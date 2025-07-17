@@ -2,6 +2,7 @@ package me.johanrong.glare.core
 
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.component.core.EngineRefComponent
+import me.johanrong.glare.node.component.core.IScript
 import me.johanrong.glare.render.MeshRenderer
 import me.johanrong.glare.render.Renderer
 import me.johanrong.glare.type.Component
@@ -9,7 +10,7 @@ import me.johanrong.glare.util.GeneratedConstants
 import me.johanrong.glare.util.Mesh
 import me.johanrong.glare.util.log
 
-class Engine (val window: Window, val entry: IEntry) {
+class Engine (val window: Window, game: IScript) {
     private var delta = 0.0
     private var isRunning = true
     private var camera: Node? = null
@@ -33,7 +34,7 @@ class Engine (val window: Window, val entry: IEntry) {
 
         renderer.addRenderer(MeshRenderer(this))
 
-        entry.init(this)
+        game.init(root)
 
         var frames = 0
         while (isRunning) {
@@ -43,7 +44,7 @@ class Engine (val window: Window, val entry: IEntry) {
                 isRunning = false
             }
 
-            entry.update(delta)
+            game.update(delta)
             root.update(delta)
             window.update()
             renderer.render()
@@ -64,7 +65,6 @@ class Engine (val window: Window, val entry: IEntry) {
 
     private fun cleanup() {
         Mesh.cleanup()
-        entry.cleanup()
         window.cleanup()
         renderer.cleanup()
     }

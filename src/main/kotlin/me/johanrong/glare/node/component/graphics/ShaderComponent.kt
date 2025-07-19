@@ -134,7 +134,7 @@ class ShaderComponent(
         GL46.glUseProgram(0)
     }
 
-    fun cleanup() {
+    override fun cleanup() {
         unbind()
         if (programId != 0) {
             GL46.glDeleteProgram(programId)

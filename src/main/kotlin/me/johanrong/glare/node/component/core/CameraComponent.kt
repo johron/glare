@@ -5,4 +5,6 @@ import me.johanrong.glare.type.Component
 
 class CameraComponent : IComponent {
     override val type = Component.CAMERA
+
+    override fun cleanup() {}
 }

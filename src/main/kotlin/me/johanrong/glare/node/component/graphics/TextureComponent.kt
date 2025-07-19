@@ -2,7 +2,6 @@ package me.johanrong.glare.node.component.graphics
 
 import me.johanrong.glare.node.component.IComponent
 import me.johanrong.glare.type.Component
-import me.johanrong.glare.util.Mesh.textures
 import org.lwjgl.BufferUtils
 import org.lwjgl.opengl.GL46
 import org.lwjgl.stb.STBImage
@@ -45,7 +44,6 @@ class TextureComponent(path: String) : IComponent {
             }
         }
 
-        textures.add(id)
         GL46.glBindTexture(GL46.GL_TEXTURE_2D, id)
         GL46.glPixelStorei(GL46.GL_UNPACK_ALIGNMENT, 1)
         GL46.glTexImage2D(
@@ -65,5 +63,9 @@ class TextureComponent(path: String) : IComponent {
 
     fun getId(): Int {
         return id
+    }
+
+    override fun cleanup() {
+        GL46.glDeleteTextures(id)
     }
 }

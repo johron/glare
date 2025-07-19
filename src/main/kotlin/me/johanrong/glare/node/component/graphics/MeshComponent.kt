@@ -5,16 +5,21 @@ import de.javagl.obj.ObjReader
 import de.javagl.obj.ObjUtils
 import me.johanrong.glare.node.component.IComponent
 import me.johanrong.glare.type.Component
-import me.johanrong.glare.util.Mesh
+import org.lwjgl.opengl.GL46
+import org.lwjgl.system.MemoryUtil
+import java.nio.FloatBuffer
+import java.nio.IntBuffer
 
 open class MeshComponent(isPrimary: Boolean = true) : IComponent {
     override val type = Component.MESH
 
-    private val id: Int = Mesh.createVAO()
+    private val id: Int = createVAO()
 
     private var indices: IntArray? = null
     private var vertices: FloatArray? = null
     private var texCoords: FloatArray? = null
+
+    private var vbos: MutableList<Int> = mutableListOf()
 
     constructor(indices: IntArray, vertices: FloatArray, texCoords: FloatArray) : this(false) {
         this.indices = indices
@@ -43,12 +48,12 @@ open class MeshComponent(isPrimary: Boolean = true) : IComponent {
     }
 
     private fun load() {
-        Mesh.storeIndiciesBuffer(Mesh.storeDataArrayInBuffer(indices))
-        Mesh.storeDataInAttribList(0, 3, Mesh.storeDataArrayInBuffer(vertices))
+        storeIndiciesBuffer(storeDataArrayInBuffer(indices))
+        storeDataInAttribList(0, 3, storeDataArrayInBuffer(vertices))
         if (!texCoords!!.isEmpty()) {
-            Mesh.storeDataInAttribList(1, 2, Mesh.storeDataArrayInBuffer(texCoords))
+            storeDataInAttribList(1, 2, storeDataArrayInBuffer(texCoords))
         }
-        Mesh.unbind()
+        unbind()
     }
 
     fun getId(): Int {
@@ -57,5 +62,51 @@ open class MeshComponent(isPrimary: Boolean = true) : IComponent {
 
     fun getVertexCount(): Int {
         return indices?.size ?: throw Exception("Indices not set for MeshComponent")
+    }
+
+    private fun createVAO(): Int {
+        val id = GL46.glGenVertexArrays()
+        GL46.glBindVertexArray(id)
+        return id
+    }
+
+    private fun storeIndiciesBuffer(indices: IntBuffer) {
+        val vbo = GL46.glGenBuffers()
+        vbos.add(vbo)
+        GL46.glBindBuffer(GL46.GL_ELEMENT_ARRAY_BUFFER, vbo)
+        GL46.glBufferData(GL46.GL_ELEMENT_ARRAY_BUFFER, indices, GL46.GL_STATIC_DRAW)
+    }
+
+    private fun storeDataInAttribList(attribNo: Int, vertexCount: Int, data: FloatBuffer) {
+        val vbo = GL46.glGenBuffers()
+        vbos.add(vbo)
+        GL46.glBindBuffer(GL46.GL_ARRAY_BUFFER, vbo)
+        GL46.glBufferData(GL46.GL_ARRAY_BUFFER, data, GL46.GL_STATIC_DRAW)
+        GL46.glVertexAttribPointer(attribNo, vertexCount, GL46.GL_FLOAT, false, 0, 0)
+        GL46.glBindBuffer(GL46.GL_ARRAY_BUFFER, 0)
+    }
+
+    private fun unbind() {
+        GL46.glBindVertexArray(0)
+    }
+
+    private fun storeDataArrayInBuffer(data: FloatArray?): FloatBuffer {
+        val buffer = MemoryUtil.memAllocFloat(data!!.size)
+        buffer.put(data).flip()
+        return buffer
+    }
+
+    private fun storeDataArrayInBuffer(data: IntArray?): IntBuffer {
+        val buffer = MemoryUtil.memAllocInt(data!!.size)
+        buffer.put(data).flip()
+        return buffer
+    }
+
+    override fun cleanup() {
+        GL46.glDeleteVertexArrays(id)
+
+        for (vbo in vbos) {
+            GL46.glDeleteBuffers(vbo)
+        }
     }
 }

@@ -10,4 +10,6 @@ class EngineRefComponent(private val engine: Engine) : IComponent {
     fun getEngine(): Engine {
         return engine
     }
+
+    override fun cleanup() {}
 }

@@ -7,8 +7,8 @@ import me.johanrong.glare.render.MeshRenderer
 import me.johanrong.glare.render.Renderer
 import me.johanrong.glare.type.Component
 import me.johanrong.glare.util.GeneratedConstants
-import me.johanrong.glare.util.Mesh
 import me.johanrong.glare.util.log
+import kotlin.system.exitProcess
 
 class Engine (val window: Window, game: IScript) {
     private var delta = 0.0
@@ -64,9 +64,17 @@ class Engine (val window: Window, game: IScript) {
     }
 
     private fun cleanup() {
-        Mesh.cleanup()
-        window.cleanup()
+        log("Cleaning up engine resources")
+
+        root.destroy()
+
         renderer.cleanup()
+        window.cleanup()
+    }
+
+    fun destroy() {
+        log("Destroying engine")
+        isRunning = false
     }
 
     fun getDelta(): Double {

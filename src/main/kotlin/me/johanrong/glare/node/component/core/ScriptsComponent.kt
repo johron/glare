@@ -17,4 +17,9 @@ class ScriptsComponent(var scripts: MutableList<IScript> = mutableListOf()) : IC
     fun clear() {
         scripts.clear()
     }
+
+    override fun cleanup() {
+        scripts.forEach { it.cleanup() }
+        scripts.clear()
+    }
 }

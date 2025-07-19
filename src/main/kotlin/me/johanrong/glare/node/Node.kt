@@ -48,7 +48,11 @@ open class Node (
     }
 
     fun destroy() {
-        (getComponent(Component.SCRIPTS) as? ScriptsComponent)?.clear()
+        components.forEach { it.cleanup() }
+        val childrenCopy = ArrayList(children)
+        for (child in childrenCopy) {
+            child.destroy()
+        }
         parent?.removeChild(this)
         parent = null
     }

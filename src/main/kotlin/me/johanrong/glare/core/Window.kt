@@ -92,6 +92,7 @@ class Window (
         GLFW.glfwDestroyWindow(handle)
         GLFW.glfwTerminate()
         GLFW.glfwSetErrorCallback(null)?.free()
+        GL.setCapabilities(null)
     }
 
     fun setTitle(title: String) {

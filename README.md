@@ -34,7 +34,7 @@ fun main() {
 
 class TestGame : IScript {
     companion object {
-        lateinit var engine: GlareEngine
+        lateinit var engine: Engine
     }
 
     lateinit var input: Input
@@ -43,34 +43,40 @@ class TestGame : IScript {
         engine = (root.getComponent(Component.ENGINE_REF) as EngineRefComponent).getEngine()
         input = Input(engine)
 
-        val camera = NodeBuilder.go {
-            name = "Camera"
+        val camera = Node.builder {
+            name = "Freecam"
             transform = Transform(Euler(0.0, 0.0, -90.0))
             parent = root
             components = mutableListOf(
-                CameraComponent()
+                CameraComponent(),
+                ScriptsComponent(mutableListOf(FreecamScript()))
             )
         }
 
         engine.setCamera(camera)
 
-        ModelBuilder.go {
+        Node.builder {
             name = "Node"
             transform = Transform(0.0, 0.0, -5.0)
             parent = root
-            mesh = "/model/cube.obj"
-            texture = "texture/map.png"
-            shader = DoubleString("/shader/mesh.vert", "/shader/mesh.frag")
+            components = mutableListOf(
+                MeshComponent("/model/cube.obj"),
+                TextureComponent("texture/map.png"),
+                ShaderComponent.Builder()
+                    .vertex("/shader/mesh.vert")
+                    .fragment("/shader/mesh.frag")
+                    .build()
+            )
         }
     }
 
     override fun update(delta: Double) {
         val node = engine.root.getFirstChild("Node")
         node!!.transform.rotation.addYaw(100.0 * delta)
-    }
+  }
 
-    override fun render() {}
-    override fun cleanup() {}
+  override fun render() {}
+  override fun cleanup() {}
 }
 ```
 

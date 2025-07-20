@@ -13,6 +13,7 @@ import me.johanrong.glare.type.Euler
 import me.johanrong.glare.type.Transform
 import me.johanrong.glare.type.io.Keycode
 import me.johanrong.glare.util.Input
+import org.joml.Vector3f
 
 fun main() {
     val window = Window(
@@ -55,7 +56,7 @@ class TestGame : IScript {
             parent = root
             components = mutableListOf(
                 MeshComponent("/model/cube.obj"),
-                TextureComponent("texture/map.png"),
+                TextureComponent("/texture/map.png"),
                 ShaderComponent.Builder()
                     .vertex("/shader/mesh.vert")
                     .fragment("/shader/mesh.frag")
@@ -69,7 +70,7 @@ class TestGame : IScript {
         node!!.transform.rotation.addYaw(100.0 * delta)
 
         if (input.hasPressedKey(Keycode.G)) {
-            /*val camera = engine.getCamera()
+            val camera = engine.getCamera()
             Node.builder {
                 name = "test"
                 transform = Transform(camera!!.transform.clone().position, Vector3f(0.1f))
@@ -81,9 +82,7 @@ class TestGame : IScript {
                         .fragment("/shader/mesh.frag")
                         .build()
                 )
-            }*/
-
-            engine.destroy()
+            }
         }
     }
 

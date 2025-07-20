@@ -18,39 +18,39 @@ class FreecamScript(var speed: Double = 5.0) : IScript {
 
     override fun update(delta: Double) {
         if (input.isKeyHeld(Keycode.W)) {
-            val yawRad = org.joml.Math.toRadians(node.transform.rotation.getYaw())
+            val yawRad = Math.toRadians(node.transform.rotation.getYaw())
             val forward = Vector3d(
-                org.joml.Math.cos(yawRad),
+                Math.cos(yawRad),
                 0.0,
-                org.joml.Math.sin(yawRad)
+                Math.sin(yawRad)
             )
             forward.normalize().mul(delta * speed)
             node.transform.position.add(forward)
         }
         if (input.isKeyHeld(Keycode.S)) {
-            val yawRad = org.joml.Math.toRadians(node.transform.rotation.getYaw())
+            val yawRad = Math.toRadians(node.transform.rotation.getYaw())
             val backward = Vector3d(
-                -org.joml.Math.cos(yawRad),
+                -Math.cos(yawRad),
                 0.0,
-                -org.joml.Math.sin(yawRad)
+                -Math.sin(yawRad)
             )
             backward.normalize().mul(delta * speed)
             node.transform.position.add(backward)
         }
         if (input.isKeyHeld(Keycode.A)) {
-            val yawRad = org.joml.Math.toRadians(node.transform.rotation.getYaw() - 90)
+            val yawRad = Math.toRadians(node.transform.rotation.getYaw() - 90)
             val left = Vector3d(
-                org.joml.Math.cos(yawRad),
+                Math.cos(yawRad),
                 0.0,
-                org.joml.Math.sin(yawRad)
+                Math.sin(yawRad)
             )
             left.normalize().mul(delta * speed)
             node.transform.position.add(left)
         }
         if (input.isKeyHeld(Keycode.D)) {
-            val yawRad = org.joml.Math.toRadians(node.transform.rotation.getYaw() + 90)
+            val yawRad = Math.toRadians(node.transform.rotation.getYaw() + 90)
             val right = Vector3d(
-                org.joml.Math.cos(yawRad),
+                Math.cos(yawRad),
                 0.0,
                 Math.sin(yawRad)
             )

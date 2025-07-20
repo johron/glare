@@ -70,6 +70,7 @@ class Engine (val window: Window, game: IScript) {
 
         renderer.cleanup()
         window.cleanup()
+
     }
 
     fun destroy() {

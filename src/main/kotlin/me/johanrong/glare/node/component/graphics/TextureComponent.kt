@@ -9,7 +9,7 @@ import org.lwjgl.system.MemoryStack
 import java.nio.ByteBuffer
 import kotlin.use
 
-class TextureComponent(path: String) : IComponent {
+class TextureComponent(var path: String) : IComponent {
     override val type = Component.TEXTURE
 
     private var id: Int = GL46.glGenTextures()
@@ -19,10 +19,12 @@ class TextureComponent(path: String) : IComponent {
         val height: Int
         val buffer: ByteBuffer
 
+        path = if (path.startsWith("/")) path.substring(1) else path
+
         MemoryStack.stackPush().use { stack ->
             object {}.javaClass.getClassLoader().getResourceAsStream(path).use { res ->
                 if (res == null) {
-                    throw java.lang.Exception("Resource not found: " + path)
+                    throw java.lang.Exception("Resource not found: ${"/$path"}")
                 }
                 val bytes: ByteArray = res.readAllBytes()
                 val imageBuffer = BufferUtils.createByteBuffer(bytes.size)

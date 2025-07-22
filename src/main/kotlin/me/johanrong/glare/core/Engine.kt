@@ -10,7 +10,7 @@ import me.johanrong.glare.util.GeneratedConstants
 import me.johanrong.glare.util.log
 import kotlin.system.exitProcess
 
-class Engine (val window: Window, game: IScript) {
+class Engine(val window: Window, val graphics: IGraphics, game: IScript) {
     private var delta = 0.0
     private var isRunning = true
     private var camera: Node? = null
@@ -70,7 +70,7 @@ class Engine (val window: Window, game: IScript) {
 
         renderer.cleanup()
         window.cleanup()
-
+        graphics.cleanup()
     }
 
     fun destroy() {

@@ -48,11 +48,20 @@ open class MeshComponent(isPrimary: Boolean = true) : IComponent {
     }
 
     private fun load() {
-        storeIndiciesBuffer(storeDataArrayInBuffer(indices))
-        storeDataInAttribList(0, 3, storeDataArrayInBuffer(vertices))
-        if (!texCoords!!.isEmpty()) {
-            storeDataInAttribList(1, 2, storeDataArrayInBuffer(texCoords))
+        val indicesBuffer = storeDataArrayInBuffer(indices)
+        storeIndiciesBuffer(indicesBuffer)
+        MemoryUtil.memFree(indicesBuffer)
+
+        val verticesBuffer = storeDataArrayInBuffer(vertices)
+        storeDataInAttribList(0, 3, verticesBuffer)
+        MemoryUtil.memFree(verticesBuffer)
+
+        if (texCoords != null && texCoords!!.isNotEmpty()) {
+            val texCoordsBuffer = storeDataArrayInBuffer(texCoords)
+            storeDataInAttribList(1, 2, texCoordsBuffer)
+            MemoryUtil.memFree(texCoordsBuffer)
         }
+
         unbind()
     }
 
@@ -108,5 +117,7 @@ open class MeshComponent(isPrimary: Boolean = true) : IComponent {
         for (vbo in vbos) {
             GL46.glDeleteBuffers(vbo)
         }
+
+        unbind()
     }
 }

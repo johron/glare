@@ -1,4 +1,5 @@
 import me.johanrong.glare.core.Engine
+import me.johanrong.glare.core.OpenGL
 import me.johanrong.glare.core.Window
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.component.core.CameraComponent
@@ -21,10 +22,10 @@ fun main() {
         1280,
         720,
         maximized = false,
-        vSync = true,
+        vSync = false,
     )
 
-    Engine(window, TestGame())
+    Engine(window, OpenGL(), TestGame())
 }
 
 class TestGame : IScript {
@@ -70,7 +71,9 @@ class TestGame : IScript {
         node!!.transform.rotation.addYaw(100.0 * delta)
 
         if (input.hasPressedKey(Keycode.G)) {
-            val camera = engine.getCamera()
+            engine.destroy()
+
+            /*val camera = engine.getCamera()
             Node.builder {
                 name = "test"
                 transform = Transform(camera!!.transform.clone().position, Vector3f(0.1f))
@@ -82,7 +85,7 @@ class TestGame : IScript {
                         .fragment("/shader/mesh.frag")
                         .build()
                 )
-            }
+            }*/
         }
     }
 

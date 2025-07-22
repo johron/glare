@@ -6,6 +6,8 @@ import me.johanrong.glare.node.component.graphics.MeshComponent
 import me.johanrong.glare.node.component.graphics.ShaderComponent
 import me.johanrong.glare.node.component.graphics.TextureComponent
 import me.johanrong.glare.type.Component
+import org.lwjgl.opengl.GL11.GL_NO_ERROR
+import org.lwjgl.opengl.GL11.glGetError
 import org.lwjgl.opengl.GL46
 
 class MeshRenderer (val engine: Engine) : IRenderer {
@@ -27,6 +29,8 @@ class MeshRenderer (val engine: Engine) : IRenderer {
                             "in the future shaders will be automatic and done differently"))
                         as ShaderComponent
 
+                glGetError()
+
                 shader.bind()
                 shader.setUniform("projectionMatrix", engine.window.updateProjectionMatrix())
 
@@ -47,7 +51,19 @@ class MeshRenderer (val engine: Engine) : IRenderer {
                 shader.setUniform("viewMatrix", camera.transform.getViewMatrix())
                 shader.setUniform("textureSampler", 0)
 
+                val error = glGetError()
+                if (error != GL_NO_ERROR) {
+                    println("1OpenGL error: $error")
+                    //continue
+                }
+
                 GL46.glDrawElements(GL46.GL_TRIANGLES, mesh.getVertexCount(), GL46.GL_UNSIGNED_INT, 0)
+
+                val error2 = glGetError()
+                if (error2 != GL_NO_ERROR) {
+                    println("2OpenGL error: $error2")
+                }
+
                 GL46.glBindTexture(GL46.GL_TEXTURE_2D, 0)
                 GL46.glDisableVertexAttribArray(0)
                 GL46.glDisableVertexAttribArray(1)

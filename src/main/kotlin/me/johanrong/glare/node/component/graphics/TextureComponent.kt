@@ -1,7 +1,7 @@
 package me.johanrong.glare.node.component.graphics
 
 import me.johanrong.glare.node.component.IComponent
-import me.johanrong.glare.type.Component
+import me.johanrong.glare.node.component.ComponentType
 import org.lwjgl.BufferUtils
 import org.lwjgl.opengl.GL46
 import org.lwjgl.stb.STBImage
@@ -10,7 +10,7 @@ import java.nio.ByteBuffer
 import kotlin.use
 
 class TextureComponent(var path: String) : IComponent {
-    override val type = Component.TEXTURE
+    override val type = ComponentType.TEXTURE
 
     private var id: Int = GL46.glGenTextures()
 

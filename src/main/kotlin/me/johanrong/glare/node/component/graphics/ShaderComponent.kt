@@ -2,7 +2,7 @@ package me.johanrong.glare.node.component.graphics
 
 import me.johanrong.glare.node.component.IComponent
 import me.johanrong.glare.render.Shader
-import me.johanrong.glare.type.Component
+import me.johanrong.glare.node.component.ComponentType
 import org.joml.Matrix4f
 import org.joml.Vector3f
 import org.joml.Vector4f
@@ -17,7 +17,7 @@ class ShaderComponent(
     evalPath: String? = null,
     computePath: String? = null
 ) : IComponent {
-    override val type = Component.SHADER
+    override val type = ComponentType.SHADER
 
     val programId: Int = GL46.glCreateProgram()
 

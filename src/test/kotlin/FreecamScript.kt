@@ -1,8 +1,8 @@
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.component.core.IScript
-import me.johanrong.glare.type.io.Keycode
-import me.johanrong.glare.type.io.MouseButton
-import me.johanrong.glare.util.Input
+import me.johanrong.glare.io.Keycode
+import me.johanrong.glare.io.MouseButton
+import me.johanrong.glare.io.Input
 import org.joml.Math
 import org.joml.Vector3d
 

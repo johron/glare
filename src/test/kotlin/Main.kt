@@ -9,12 +9,11 @@ import me.johanrong.glare.node.component.core.ScriptsComponent
 import me.johanrong.glare.node.component.graphics.MeshComponent
 import me.johanrong.glare.node.component.graphics.ShaderComponent
 import me.johanrong.glare.node.component.graphics.TextureComponent
-import me.johanrong.glare.type.Component
-import me.johanrong.glare.type.Euler
-import me.johanrong.glare.type.Transform
-import me.johanrong.glare.type.io.Keycode
-import me.johanrong.glare.util.Input
-import org.joml.Vector3f
+import me.johanrong.glare.node.component.ComponentType
+import me.johanrong.glare.node.Euler
+import me.johanrong.glare.node.Transform
+import me.johanrong.glare.io.Keycode
+import me.johanrong.glare.io.Input
 
 fun main() {
     val window = Window(
@@ -36,7 +35,7 @@ class TestGame : IScript {
     lateinit var input: Input
 
     override fun init(root: Node) {
-        engine = (root.getComponent(Component.ENGINE_REF) as EngineRefComponent).getEngine()
+        engine = (root.getComponent(ComponentType.ENGINE_REF) as EngineRefComponent).getEngine()
         input = Input(engine)
 
         val camera = Node.builder {

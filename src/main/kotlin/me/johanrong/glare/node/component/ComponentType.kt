@@ -1,6 +1,6 @@
-package me.johanrong.glare.type
+package me.johanrong.glare.node.component
 
-enum class Component {
+enum class ComponentType {
     MESH,
     SCRIPTS,
     CAMERA,

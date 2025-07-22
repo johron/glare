@@ -1,4 +1,4 @@
-package me.johanrong.glare.type
+package me.johanrong.glare.node
 
 import org.joml.Math
 import org.joml.Matrix4f

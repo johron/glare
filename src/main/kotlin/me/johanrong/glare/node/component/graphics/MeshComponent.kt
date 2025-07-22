@@ -4,14 +4,14 @@ import de.javagl.obj.ObjData
 import de.javagl.obj.ObjReader
 import de.javagl.obj.ObjUtils
 import me.johanrong.glare.node.component.IComponent
-import me.johanrong.glare.type.Component
+import me.johanrong.glare.node.component.ComponentType
 import org.lwjgl.opengl.GL46
 import org.lwjgl.system.MemoryUtil
 import java.nio.FloatBuffer
 import java.nio.IntBuffer
 
 open class MeshComponent(isPrimary: Boolean = true) : IComponent {
-    override val type = Component.MESH
+    override val type = ComponentType.MESH
 
     private val id: Int = createVAO()
 

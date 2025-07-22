@@ -2,8 +2,7 @@ package me.johanrong.glare.node
 
 import me.johanrong.glare.node.component.IComponent
 import me.johanrong.glare.node.component.core.ScriptsComponent
-import me.johanrong.glare.type.Component
-import me.johanrong.glare.type.Transform
+import me.johanrong.glare.node.component.ComponentType
 
 open class Node (
     var name: String = "Node",
@@ -13,7 +12,7 @@ open class Node (
     private var components: MutableList<IComponent> = mutableListOf(),
 ) {
     init {
-        (getComponent(Component.SCRIPTS) as? ScriptsComponent)?.scripts?.forEach { script ->
+        (getComponent(ComponentType.SCRIPTS) as? ScriptsComponent)?.scripts?.forEach { script ->
             script.init(this)
         }
 
@@ -58,7 +57,7 @@ open class Node (
     }
 
     fun update(delta: Double) {
-        (getComponent(Component.SCRIPTS) as? ScriptsComponent)?.scripts?.forEach { script ->
+        (getComponent(ComponentType.SCRIPTS) as? ScriptsComponent)?.scripts?.forEach { script ->
             script.update(delta)
         }
 
@@ -81,11 +80,11 @@ open class Node (
         components.remove(component)
     }
 
-    fun getComponent(type: Component): IComponent? {
+    fun getComponent(type: ComponentType): IComponent? {
         return components.firstOrNull { it.type == type }
     }
 
-    fun hasComponent(type: Component): Boolean {
+    fun hasComponent(type: ComponentType): Boolean {
         return components.any { it.type == type }
     }
 

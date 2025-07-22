@@ -5,10 +5,9 @@ import me.johanrong.glare.node.component.core.EngineRefComponent
 import me.johanrong.glare.node.component.core.IScript
 import me.johanrong.glare.render.MeshRenderer
 import me.johanrong.glare.render.Renderer
-import me.johanrong.glare.type.Component
+import me.johanrong.glare.node.component.ComponentType
 import me.johanrong.glare.util.GeneratedConstants
 import me.johanrong.glare.util.log
-import kotlin.system.exitProcess
 
 class Engine(val window: Window, val graphics: IGraphics, game: IScript) {
     private var delta = 0.0
@@ -90,7 +89,7 @@ class Engine(val window: Window, val graphics: IGraphics, game: IScript) {
     }
 
     fun setCamera(camera: Node) {
-        if (camera.hasComponent(Component.CAMERA)) {
+        if (camera.hasComponent(ComponentType.CAMERA)) {
             this.camera = camera
             log("Camera set to ${camera.name}")
         } else {

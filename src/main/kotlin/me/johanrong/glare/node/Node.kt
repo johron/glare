@@ -2,7 +2,9 @@ package me.johanrong.glare.node
 
 import me.johanrong.glare.node.component.IComponent
 import me.johanrong.glare.node.component.core.ScriptsComponent
-import me.johanrong.glare.node.component.ComponentType
+import me.johanrong.glare.node.component.Component
+import me.johanrong.glare.math.Transform
+import me.johanrong.glare.node.component.lighting.LightComponent
 
 open class Node (
     var name: String = "Node",
@@ -12,9 +14,10 @@ open class Node (
     private var components: MutableList<IComponent> = mutableListOf(),
 ) {
     init {
-        (getComponent(ComponentType.SCRIPTS) as? ScriptsComponent)?.scripts?.forEach { script ->
+        (getComponent(Component.SCRIPTS) as? ScriptsComponent)?.scripts?.forEach { script ->
             script.init(this)
         }
+        (getComponent(Component.LIGHT) as? LightComponent)?.init(this)
 
         parent?.addChild(this)
     }
@@ -57,7 +60,7 @@ open class Node (
     }
 
     fun update(delta: Double) {
-        (getComponent(ComponentType.SCRIPTS) as? ScriptsComponent)?.scripts?.forEach { script ->
+        (getComponent(Component.SCRIPTS) as? ScriptsComponent)?.scripts?.forEach { script ->
             script.update(delta)
         }
 
@@ -70,6 +73,11 @@ open class Node (
         if (hasComponent(component.type)) {
             throw Exception("Component of type ${component.type} already exists in this node.")
         }
+
+        if (component is LightComponent) {
+            component.init(this)
+        }
+
         components.add(component)
     }
 
@@ -80,11 +88,11 @@ open class Node (
         components.remove(component)
     }
 
-    fun getComponent(type: ComponentType): IComponent? {
+    fun getComponent(type: Component): IComponent? {
         return components.firstOrNull { it.type == type }
     }
 
-    fun hasComponent(type: ComponentType): Boolean {
+    fun hasComponent(type: Component): Boolean {
         return components.any { it.type == type }
     }
 

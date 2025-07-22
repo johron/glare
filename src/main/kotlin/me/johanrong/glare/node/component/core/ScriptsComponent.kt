@@ -1,10 +1,11 @@
 package me.johanrong.glare.node.component.core
 
 import me.johanrong.glare.node.component.IComponent
-import me.johanrong.glare.node.component.ComponentType
+import me.johanrong.glare.node.component.Component
+import me.johanrong.glare.node.component.core.IScript
 
 class ScriptsComponent(var scripts: MutableList<IScript> = mutableListOf()) : IComponent {
-    override val type = ComponentType.SCRIPTS
+    override val type = Component.SCRIPTS
 
     fun addScript(script: IScript) {
         scripts.add(script)

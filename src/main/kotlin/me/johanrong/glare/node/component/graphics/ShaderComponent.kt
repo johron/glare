@@ -2,7 +2,8 @@ package me.johanrong.glare.node.component.graphics
 
 import me.johanrong.glare.node.component.IComponent
 import me.johanrong.glare.render.Shader
-import me.johanrong.glare.node.component.ComponentType
+import me.johanrong.glare.node.component.Component
+import me.johanrong.glare.util.loadPlain
 import org.joml.Matrix4f
 import org.joml.Vector3f
 import org.joml.Vector4f
@@ -17,7 +18,7 @@ class ShaderComponent(
     evalPath: String? = null,
     computePath: String? = null
 ) : IComponent {
-    override val type = ComponentType.SHADER
+    override val type = Component.SHADER
 
     val programId: Int = GL46.glCreateProgram()
 
@@ -30,10 +31,10 @@ class ShaderComponent(
         }
 
         if (vertexPath?.isEmpty() == false) {
-            shaderIds.put(GL46.GL_VERTEX_SHADER, createShader(Shader.makeVertex(vertexPath), GL46.GL_VERTEX_SHADER))
+            shaderIds.put(GL46.GL_VERTEX_SHADER, createShader(loadPlain(vertexPath), GL46.GL_VERTEX_SHADER))
         }
         if (fragmentPath?.isEmpty() == false) {
-            shaderIds.put(GL46.GL_FRAGMENT_SHADER, createShader(Shader.makeFragment(fragmentPath), GL46.GL_FRAGMENT_SHADER))
+            shaderIds.put(GL46.GL_FRAGMENT_SHADER, createShader(loadPlain(fragmentPath), GL46.GL_FRAGMENT_SHADER))
         }
         if (geometryPath?.isEmpty() == false) {
             shaderIds.put(GL46.GL_GEOMETRY_SHADER, createShader(Shader.makeGeometry(geometryPath), GL46.GL_GEOMETRY_SHADER))
@@ -57,30 +58,45 @@ class ShaderComponent(
         createUniform("hasTexture")
     }
 
+
+    fun getUniformLocation(name: String): Int {
+        return uniforms.getOrPut(name) {
+            val location = GL46.glGetUniformLocation(programId, name)
+            if (location == -1) {
+                println("Warning: Uniform '$name' not found")
+            }
+            location
+        }
+    }
+
     fun createUniform(name: String) {
         val location = GL46.glGetUniformLocation(programId, name)
-        if (location < 0) {
-            throw Exception("Could not find uniform: $name")
-        }
+        //if (location < 0) {
+        //    throw Exception("Could not find uniform: $name")
+        //}
         uniforms.put(name, location)
     }
 
-    fun setUniform(uniformName: String?, value: Vector4f) {
-        GL46.glUniform4f(uniforms[uniformName]!!, value.x, value.y, value.z, value.w)
+    fun setUniform(uniformName: String, value: Vector4f) {
+        GL46.glUniform4f(getUniformLocation(uniformName), value.x, value.y, value.z, value.w)
     }
 
-    fun setUniform(uniformName: String?, value: Vector3f) {
-        GL46.glUniform3f(uniforms[uniformName]!!, value.x, value.y, value.z)
+    fun setUniform(uniformName: String, value: Vector3f) {
+        GL46.glUniform3f(getUniformLocation(uniformName), value.x, value.y, value.z)
     }
 
-    fun setUniform(uniformName: String?, value: Int) {
-        GL46.glUniform1i(uniforms[uniformName]!!, value)
+    fun setUniform(uniformName: String, value: Int) {
+        GL46.glUniform1i(getUniformLocation(uniformName), value)
+    }
+
+    fun setUniform(uniformName: String, value: Float) {
+        GL46.glUniform1f(getUniformLocation(uniformName), value)
     }
 
     fun setUniform(uniformName: String, value: Matrix4f) {
         MemoryStack.stackPush().use { stack ->
             GL46.glUniformMatrix4fv(
-                uniforms[uniformName]!!, false,
+                getUniformLocation(uniformName), false,
                 value.get(stack.mallocFloat(16))
             )
         }

@@ -1,5 +1,5 @@
 import me.johanrong.glare.core.Engine
-import me.johanrong.glare.core.OpenGL
+import me.johanrong.glare.core.graphics.OpenGL
 import me.johanrong.glare.core.Window
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.component.core.CameraComponent
@@ -9,11 +9,13 @@ import me.johanrong.glare.node.component.core.ScriptsComponent
 import me.johanrong.glare.node.component.graphics.MeshComponent
 import me.johanrong.glare.node.component.graphics.ShaderComponent
 import me.johanrong.glare.node.component.graphics.TextureComponent
-import me.johanrong.glare.node.component.ComponentType
-import me.johanrong.glare.node.Euler
-import me.johanrong.glare.node.Transform
+import me.johanrong.glare.node.component.Component
+import me.johanrong.glare.math.Euler
+import me.johanrong.glare.math.Transform
 import me.johanrong.glare.io.Keycode
 import me.johanrong.glare.io.Input
+import me.johanrong.glare.node.component.graphics.MaterialComponent
+import me.johanrong.glare.node.component.lighting.PointLightComponent
 
 fun main() {
     val window = Window(
@@ -35,7 +37,7 @@ class TestGame : IScript {
     lateinit var input: Input
 
     override fun init(root: Node) {
-        engine = (root.getComponent(ComponentType.ENGINE_REF) as EngineRefComponent).getEngine()
+        engine = (root.getComponent(Component.ENGINE_REF) as EngineRefComponent).getEngine()
         input = Input(engine)
 
         val camera = Node.builder {
@@ -44,11 +46,25 @@ class TestGame : IScript {
             parent = root
             components = mutableListOf(
                 CameraComponent(),
-                ScriptsComponent(mutableListOf(FreecamScript()))
+                ScriptsComponent(mutableListOf(FreecamScript())),
             )
         }
 
         engine.setCamera(camera)
+
+        Node.builder {
+            name = "Light"
+            transform = Transform(0.0, 5.0, -5.0)
+            parent = root
+            components = mutableListOf(
+                PointLightComponent(),
+                MeshComponent("/model/cube.obj"),
+                ShaderComponent.Builder()
+                    .vertex("/shader/mesh.vert")
+                    .fragment("/shader/mesh.frag")
+                    .build(),
+            )
+        }
 
         Node.builder {
             name = "Node"
@@ -60,7 +76,8 @@ class TestGame : IScript {
                 ShaderComponent.Builder()
                     .vertex("/shader/mesh.vert")
                     .fragment("/shader/mesh.frag")
-                    .build()
+                    .build(),
+                //MaterialComponent(),
             )
         }
     }

@@ -1,4 +1,4 @@
-package me.johanrong.glare.core
+package me.johanrong.glare.core.graphics
 
 import org.lwjgl.opengl.GL
 import org.lwjgl.opengl.GL46

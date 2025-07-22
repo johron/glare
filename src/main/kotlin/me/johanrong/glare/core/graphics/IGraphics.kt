@@ -1,4 +1,4 @@
-package me.johanrong.glare.core
+package me.johanrong.glare.core.graphics
 
 interface IGraphics {
     fun cleanup()

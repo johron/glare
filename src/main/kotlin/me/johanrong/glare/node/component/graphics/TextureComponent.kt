@@ -1,7 +1,7 @@
 package me.johanrong.glare.node.component.graphics
 
 import me.johanrong.glare.node.component.IComponent
-import me.johanrong.glare.node.component.ComponentType
+import me.johanrong.glare.node.component.Component
 import org.lwjgl.BufferUtils
 import org.lwjgl.opengl.GL46
 import org.lwjgl.stb.STBImage
@@ -10,7 +10,7 @@ import java.nio.ByteBuffer
 import kotlin.use
 
 class TextureComponent(var path: String) : IComponent {
-    override val type = ComponentType.TEXTURE
+    override val type = Component.TEXTURE
 
     private var id: Int = GL46.glGenTextures()
 
@@ -61,6 +61,11 @@ class TextureComponent(var path: String) : IComponent {
         )
         GL46.glGenerateMipmap(GL46.GL_TEXTURE_2D)
         STBImage.stbi_image_free(buffer)
+    }
+
+    fun bind(unit: Int) {
+        GL46.glActiveTexture(GL46.GL_TEXTURE0 + unit)
+        GL46.glBindTexture(GL46.GL_TEXTURE_2D, id)
     }
 
     fun getId(): Int {

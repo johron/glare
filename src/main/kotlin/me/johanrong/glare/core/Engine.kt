@@ -1,11 +1,12 @@
 package me.johanrong.glare.core
 
+import me.johanrong.glare.core.graphics.IGraphics
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.component.core.EngineRefComponent
 import me.johanrong.glare.node.component.core.IScript
 import me.johanrong.glare.render.MeshRenderer
 import me.johanrong.glare.render.Renderer
-import me.johanrong.glare.node.component.ComponentType
+import me.johanrong.glare.node.component.Component
 import me.johanrong.glare.util.GeneratedConstants
 import me.johanrong.glare.util.log
 
@@ -89,7 +90,7 @@ class Engine(val window: Window, val graphics: IGraphics, game: IScript) {
     }
 
     fun setCamera(camera: Node) {
-        if (camera.hasComponent(ComponentType.CAMERA)) {
+        if (camera.hasComponent(Component.CAMERA)) {
             this.camera = camera
             log("Camera set to ${camera.name}")
         } else {

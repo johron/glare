@@ -4,14 +4,14 @@ import de.javagl.obj.ObjData
 import de.javagl.obj.ObjReader
 import de.javagl.obj.ObjUtils
 import me.johanrong.glare.node.component.IComponent
-import me.johanrong.glare.node.component.ComponentType
+import me.johanrong.glare.node.component.Component
 import org.lwjgl.opengl.GL46
 import org.lwjgl.system.MemoryUtil
 import java.nio.FloatBuffer
 import java.nio.IntBuffer
 
 open class MeshComponent(isPrimary: Boolean = true) : IComponent {
-    override val type = ComponentType.MESH
+    override val type = Component.MESH
 
     private val id: Int = createVAO()
 
@@ -49,7 +49,7 @@ open class MeshComponent(isPrimary: Boolean = true) : IComponent {
 
     private fun load() {
         val indicesBuffer = storeDataArrayInBuffer(indices)
-        storeIndiciesBuffer(indicesBuffer)
+        storeIndicesBuffer(indicesBuffer)
         MemoryUtil.memFree(indicesBuffer)
 
         val verticesBuffer = storeDataArrayInBuffer(vertices)
@@ -79,7 +79,7 @@ open class MeshComponent(isPrimary: Boolean = true) : IComponent {
         return id
     }
 
-    private fun storeIndiciesBuffer(indices: IntBuffer) {
+    private fun storeIndicesBuffer(indices: IntBuffer) {
         val vbo = GL46.glGenBuffers()
         vbos.add(vbo)
         GL46.glBindBuffer(GL46.GL_ELEMENT_ARRAY_BUFFER, vbo)

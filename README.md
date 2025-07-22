@@ -3,6 +3,7 @@
 
 ## TODO
 - [ ] Add new shader system, with builtin lighting and stuff?!
+  - [ ] Have to change Renderer so that it loops over all nodes and then gives each node to a sub-renderer. Then implement a Light Renderer sub-renderer
 
 ## Dependencies and frameworks used
 - Java 22

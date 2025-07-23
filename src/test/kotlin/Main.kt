@@ -16,6 +16,7 @@ import me.johanrong.glare.io.Keycode
 import me.johanrong.glare.io.Input
 import me.johanrong.glare.node.component.graphics.MaterialComponent
 import me.johanrong.glare.node.component.lighting.PointLightComponent
+import org.joml.Vector3f
 
 fun main() {
     val window = Window(
@@ -58,11 +59,6 @@ class TestGame : IScript {
             parent = root
             components = mutableListOf(
                 PointLightComponent(),
-                MeshComponent("/model/cube.obj"),
-                ShaderComponent.Builder()
-                    .vertex("/shader/mesh.vert")
-                    .fragment("/shader/mesh.frag")
-                    .build(),
             )
         }
 
@@ -87,9 +83,9 @@ class TestGame : IScript {
         node!!.transform.rotation.addYaw(100.0 * delta)
 
         if (input.hasPressedKey(Keycode.G)) {
-            engine.destroy()
+            //engine.destroy()
 
-            /*val camera = engine.getCamera()
+            val camera = engine.getCamera()
             Node.builder {
                 name = "test"
                 transform = Transform(camera!!.transform.clone().position, Vector3f(0.1f))
@@ -101,7 +97,7 @@ class TestGame : IScript {
                         .fragment("/shader/mesh.frag")
                         .build()
                 )
-            }*/
+            }
         }
     }
 

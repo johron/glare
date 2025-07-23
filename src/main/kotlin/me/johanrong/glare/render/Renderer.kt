@@ -1,15 +1,32 @@
 package me.johanrong.glare.render
 
+import me.johanrong.glare.core.Engine
+import me.johanrong.glare.node.component.graphics.ShaderComponent
 import org.lwjgl.opengl.GL46
 
-class Renderer() : IRenderer {
+class Renderer(val engine: Engine) {
     private val renderers = mutableListOf<IRenderer>()
 
-    override fun render() {
+    var currentShader: ShaderComponent? = null
+
+    fun render() {
         clear()
 
+        if (engine.getCamera() == null) {
+            return
+        }
+
+        currentShader = null
+
         for (renderer in renderers) {
-            renderer.render()
+            renderer.init()
+        }
+
+        for (node in engine.root.getChildren()) {
+            val sortedRenderers = renderers.sortedBy { it.rpriority }
+            for (renderer in sortedRenderers) {
+                renderer.render(node)
+            }
         }
     }
 
@@ -21,7 +38,7 @@ class Renderer() : IRenderer {
         renderers.add(renderer)
     }
 
-    override fun cleanup() {
+    fun cleanup() {
         for (renderer in renderers) {
             renderer.cleanup()
         }

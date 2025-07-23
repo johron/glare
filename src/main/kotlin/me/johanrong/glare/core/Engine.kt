@@ -7,6 +7,7 @@ import me.johanrong.glare.node.component.core.IScript
 import me.johanrong.glare.render.MeshRenderer
 import me.johanrong.glare.render.Renderer
 import me.johanrong.glare.node.component.Component
+import me.johanrong.glare.render.LightRenderer
 import me.johanrong.glare.util.GeneratedConstants
 import me.johanrong.glare.util.log
 
@@ -21,7 +22,7 @@ class Engine(val window: Window, val graphics: IGraphics, game: IScript) {
         components = mutableListOf(EngineRefComponent(this@Engine))
     }
 
-    private val renderer: Renderer = Renderer()
+    private val renderer: Renderer = Renderer(this)
 
     companion object {
         const val NANOSECOND: Long = 1_000_000_000L
@@ -33,6 +34,7 @@ class Engine(val window: Window, val graphics: IGraphics, game: IScript) {
         log("v${VERSION} - Initialized")
 
         renderer.addRenderer(MeshRenderer(this))
+        renderer.addRenderer(LightRenderer(this))
 
         game.init(root)
 

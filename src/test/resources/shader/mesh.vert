@@ -12,8 +12,6 @@ out vec3 FragPos;
 out vec2 TexCoords;
 out vec3 Normal;
 
-out vec2 fragTexCoord;
-
 uniform mat4 transformMatrix;
 uniform mat4 projectionMatrix;
 uniform mat4 viewMatrix;
@@ -21,5 +19,6 @@ uniform mat4 viewMatrix;
 void main() {
     vec4 worldPosition = transformMatrix * vec4(position, 1.0);
     gl_Position = projectionMatrix * viewMatrix * worldPosition;
-    fragTexCoord = texCoord;
+    TexCoords = texCoord;
+    Normal = normal;
 }

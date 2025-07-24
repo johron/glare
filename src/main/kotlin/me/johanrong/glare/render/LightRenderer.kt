@@ -7,7 +7,7 @@ import me.johanrong.glare.node.component.graphics.ShaderComponent
 import me.johanrong.glare.node.component.lighting.LightComponent
 
 class LightRenderer(val engine: Engine) : IRenderer {
-    override val rpriority: Int = 1
+    override val priority: Int = 0
     private var lights = mutableListOf<LightComponent>()
 
     override fun init() {
@@ -15,15 +15,17 @@ class LightRenderer(val engine: Engine) : IRenderer {
     }
 
     override fun render(node: Node) {
-        if (!node.hasComponent(Component.LIGHT)) return
+        val shader = engine.getRenderer().currentShader
 
-        val lightComponent = node.getComponent(Component.LIGHT) as LightComponent
-
-        if (engine.getRenderer().currentShader != null) {
-            val shader = engine.getRenderer().currentShader!!
+        if (node.hasComponent(Component.LIGHT)) {
+            val lightComponent = node.getComponent(Component.LIGHT) as LightComponent
             lights.add(lightComponent)
+        }
 
-            lightComponent.applyToShader(shader, lights.size)
+        if (shader != null) {
+            for (light in lights) {
+                light.applyToShader(shader, lights.indexOf(light))
+            }
         }
     }
 

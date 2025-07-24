@@ -14,23 +14,17 @@ import org.lwjgl.opengl.GL11.glGetError
 import org.lwjgl.opengl.GL46
 
 class MeshRenderer(val engine: Engine) : IRenderer {
-    override val rpriority: Int = 0
+    override val priority: Int = 1
 
     override fun render(node: Node) {
         if (!node.hasComponent(Component.MESH)) return
 
         val mesh = node.getComponent(Component.MESH) as MeshComponent
         val camera = engine.getCamera()!!
-        val shader = (node.getComponent(Component.SHADER) ?:
-        throw Exception("For now MeshRenderer requires a ShaderComponent to render meshes, " +
-                "in the future shaders will be automatic and done differently"))
-                as ShaderComponent
-
-        engine.getRenderer().currentShader = shader
+        val shader = engine.getRenderer().currentShader ?: throw IllegalStateException("No shader set for MeshRenderer")
 
         glGetError()
 
-        shader.bind()
         shader.setUniform("projectionMatrix", engine.window.updateProjectionMatrix())
 
         GL46.glBindVertexArray(mesh.getId())
@@ -73,7 +67,6 @@ class MeshRenderer(val engine: Engine) : IRenderer {
         GL46.glDisableVertexAttribArray(1)
 
         GL46.glBindVertexArray(0)
-        shader.unbind()
     }
 
     override fun cleanup() {}

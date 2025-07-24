@@ -3,7 +3,7 @@ package me.johanrong.glare.render
 import me.johanrong.glare.node.Node
 
 interface IRenderer {
-    val rpriority: Int
+    val priority: Int
 
     fun init()
     fun render(node: Node)

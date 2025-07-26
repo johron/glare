@@ -55,7 +55,7 @@ class TestGame : IScript {
 
         Node.builder {
             name = "Light"
-            transform = Transform(0.0, 5.0, -5.0)
+            transform = Transform(0.0, 0.0, -10.0)
             parent = root
             components = mutableListOf(
                 PointLightComponent(),
@@ -73,7 +73,7 @@ class TestGame : IScript {
                     .vertex("/shader/mesh.vert")
                     .fragment("/shader/mesh.frag")
                     .build(),
-                //MaterialComponent(),
+                MaterialComponent(),
             )
         }
     }

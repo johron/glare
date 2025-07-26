@@ -20,6 +20,8 @@ class LightRenderer(val engine: Engine) : IRenderer {
         if (node.hasComponent(Component.LIGHT)) {
             val lightComponent = node.getComponent(Component.LIGHT) as LightComponent
             lights.add(lightComponent)
+            shader?.setUniform("uNumPointLights", lights.size)
+            println(lights.size)
         }
 
         if (shader != null) {

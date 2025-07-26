@@ -13,8 +13,8 @@ uniform vec3 uViewPos;
 
 // Material properties
 struct Material {
-    sampler2D diffuse;
-    sampler2D specular;
+    vec3 diffuse;
+    vec3 specular;
     float shininess;
 };
 uniform Material material;
@@ -45,7 +45,7 @@ uniform int uNumPointLights;
 uniform DirLight uDirLights[MAX_DIR_LIGHTS];
 uniform PointLight uPointLights[MAX_POINT_LIGHTS];
 
-vec3 calculateDirectionalLight(DirLight light, vec3 normal, vec3 viewDir) {
+/*vec3 calculateDirectionalLight(DirLight light, vec3 normal, vec3 viewDir) {
     vec3 lightDir = normalize(-light.direction);
 
     // Diffuse
@@ -62,7 +62,7 @@ vec3 calculateDirectionalLight(DirLight light, vec3 normal, vec3 viewDir) {
 
     return (ambient + diffuse) * texture(material.diffuse, TexCoords).rgb +
     specular * texture(material.specular, TexCoords).rgb;
-}
+}*/
 
 vec3 calculatePointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir) {
     vec3 lightDir = normalize(light.position - fragPos);
@@ -74,21 +74,21 @@ vec3 calculatePointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewD
 
     // Specular
     vec3 reflectDir = reflect(-lightDir, normal);
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 1);//material.shininess);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
 
     // Combine
     vec3 ambient = light.color * light.intensity * 0.1;
     vec3 diffuse = light.color * light.intensity * diff * attenuation;
     vec3 specular = light.color * light.intensity * spec * attenuation;
 
-    return (ambient + diffuse) /* * texture(material.diffuse, TexCoords).rgb */ +
-    specular /* * texture(material.specular, TexCoords).rgb*/;
+    return (ambient + diffuse) * material.diffuse +
+    specular * material.specular;
 }
 
-void light() {
+void glare_light() {
     vec3 normal = normalize(Normal);
     vec3 viewDir = normalize(uViewPos - FragPos);
-    vec3 result = vec3(0.0);
+    vec3 result = vec3(0.1);
 
     // Calculate directional lights
     //for (int i = 0; i < uNumDirLights; i++) {
@@ -100,14 +100,18 @@ void light() {
         result += calculatePointLight(uPointLights[i], normal, FragPos, viewDir);
     }
 
+    FragColor = vec4(result, 1.0) * texture(textureSampler/*material.diffuse*/, TexCoords);
+}
+
+void glare_texture() {
     if (hasTexture == 1) {
-        FragColor = vec4(result, 1.0) * texture(textureSampler/*material.diffuse*/, TexCoords);
+        FragColor *= texture(textureSampler, TexCoords);
     } else {
-        FragColor = vec4(result, 1.0);
+        FragColor *= vec4(1.0, 1.0, 1.0, 1.0); // Default color if no texture
     }
-    //FragColor = vec4(1.0, 1.0, 1.0, 1.0);
 }
 
 void main() {
-    light();
+    glare_light();
+    glare_texture();
 }

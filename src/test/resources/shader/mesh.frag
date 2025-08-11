@@ -81,14 +81,13 @@ vec3 calculatePointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewD
     vec3 diffuse = light.color * light.intensity * diff * attenuation;
     vec3 specular = light.color * light.intensity * spec * attenuation;
 
-    return (ambient + diffuse) * material.diffuse +
-    specular * material.specular;
+    return (ambient + diffuse) * material.diffuse + specular * material.specular;
 }
 
 void glare_light() {
     vec3 normal = normalize(Normal);
     vec3 viewDir = normalize(uViewPos - FragPos);
-    vec3 result = vec3(0.1);
+    vec3 result = vec3(0.0);
 
     // Calculate directional lights
     //for (int i = 0; i < uNumDirLights; i++) {
@@ -100,10 +99,14 @@ void glare_light() {
         result += calculatePointLight(uPointLights[i], normal, FragPos, viewDir);
     }
 
-    FragColor = vec4(result, 1.0) * texture(textureSampler/*material.diffuse*/, TexCoords);
+    FragColor = vec4(result, 1.0) * vec4(material.diffuse, 1.0);
 }
 
 void glare_texture() {
+    if (FragColor == vec4(0.0)) {
+        FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+    }
+
     if (hasTexture == 1) {
         FragColor *= texture(textureSampler, TexCoords);
     } else {

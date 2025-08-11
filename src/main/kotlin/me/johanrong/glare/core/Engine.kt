@@ -31,7 +31,7 @@ class Engine(val window: Window, val graphics: IGraphics, game: IScript) {
     }
 
     init {
-        log("v${VERSION} - Initialized")
+        log("$VERSION - Initialized")
 
         renderer.addRenderer(MeshRenderer(this))
         renderer.addRenderer(LightRenderer(this))

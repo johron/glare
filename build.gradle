@@ -3,7 +3,6 @@ plugins {
 }
 
 project.ext.lwjglVersion = "3.3.3"
-project.ext.lwjglNatives = "natives-linux"
 
 project.ext.jomlVersion = "1.10.8"
 project.ext.jomlPrimVersion = "1.10.0"

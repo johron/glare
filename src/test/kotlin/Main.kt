@@ -55,32 +55,34 @@ class TestGame : IScript {
 
         Node.builder {
             name = "Light"
-            transform = Transform(0.0, 0.0, -10.0)
+            transform = Transform(0.0, 0.0, 0.0)
             parent = root
             components = mutableListOf(
                 PointLightComponent(),
             )
         }
 
-        Node.builder {
-            name = "Node"
-            transform = Transform(0.0, 0.0, -5.0)
-            parent = root
-            components = mutableListOf(
-                MeshComponent("/model/cube.obj"),
-                TextureComponent("/texture/map.png"),
-                ShaderComponent.Builder()
-                    .vertex("/shader/mesh.vert")
-                    .fragment("/shader/mesh.frag")
-                    .build(),
-                MaterialComponent(),
-            )
+        for (i in 1 until 20) {
+            Node.builder {
+                name = "Node"
+                transform = Transform(0.0, 0.0, -5.0 * i)
+                parent = root
+                components = mutableListOf(
+                    MeshComponent("/model/cube.obj"),
+                    TextureComponent("/texture/map.png"),
+                    ShaderComponent.Builder()
+                        .vertex("/shader/mesh.vert")
+                        .fragment("/shader/mesh.frag")
+                        .build(),
+                    MaterialComponent(),
+                )
+            }
         }
     }
 
     override fun update(delta: Double) {
-        val node = engine.root.getFirstChild("Node")
-        node!!.transform.rotation.addYaw(100.0 * delta)
+        //val node = engine.root.getFirstChild("Node")
+        //node!!.transform.rotation.addYaw(100.0 * delta)
 
         if (input.hasPressedKey(Keycode.G)) {
             //engine.destroy()

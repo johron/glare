@@ -1,7 +1,7 @@
 package me.johanrong.glare.node.component.graphics
 
-import me.johanrong.glare.node.component.IComponent
 import me.johanrong.glare.node.component.Component
+import me.johanrong.glare.node.component.IComponent
 import org.lwjgl.BufferUtils
 import org.lwjgl.opengl.GL46
 import org.lwjgl.stb.STBImage

@@ -1,8 +1,7 @@
 package me.johanrong.glare.node.component.core
 
-import me.johanrong.glare.node.component.IComponent
 import me.johanrong.glare.node.component.Component
-import me.johanrong.glare.node.component.core.IScript
+import me.johanrong.glare.node.component.IComponent
 
 class ScriptsComponent(var scripts: MutableList<IScript> = mutableListOf()) : IComponent {
     override val type = Component.SCRIPTS

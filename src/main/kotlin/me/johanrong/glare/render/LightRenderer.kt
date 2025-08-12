@@ -3,7 +3,6 @@ package me.johanrong.glare.render
 import me.johanrong.glare.core.Engine
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.component.Component
-import me.johanrong.glare.node.component.graphics.ShaderComponent
 import me.johanrong.glare.node.component.lighting.LightComponent
 
 class LightRenderer(val engine: Engine) : IRenderer {

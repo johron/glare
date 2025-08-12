@@ -4,7 +4,6 @@ import me.johanrong.glare.common.Text
 import me.johanrong.glare.core.Engine
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.component.Component
-import me.johanrong.glare.node.component.core.CameraComponent
 import me.johanrong.glare.node.component.graphics.BillboardTextComponent
 import org.joml.Matrix4f
 import org.joml.Vector3f

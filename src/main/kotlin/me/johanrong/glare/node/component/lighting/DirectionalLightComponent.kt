@@ -1,8 +1,6 @@
 package me.johanrong.glare.node.component.lighting
 
-import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.component.graphics.ShaderComponent
-import me.johanrong.glare.node.component.lighting.Light
 import org.joml.Vector3f
 
 class DirectionalLightComponent: LightComponent() {

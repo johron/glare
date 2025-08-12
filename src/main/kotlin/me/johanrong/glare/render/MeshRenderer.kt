@@ -2,13 +2,10 @@ package me.johanrong.glare.render
 
 import me.johanrong.glare.core.Engine
 import me.johanrong.glare.node.Node
-import me.johanrong.glare.node.component.graphics.MeshComponent
-import me.johanrong.glare.node.component.graphics.ShaderComponent
-import me.johanrong.glare.node.component.graphics.TextureComponent
 import me.johanrong.glare.node.component.Component
 import me.johanrong.glare.node.component.graphics.MaterialComponent
-import me.johanrong.glare.node.component.lighting.Light
-import me.johanrong.glare.node.component.lighting.LightComponent
+import me.johanrong.glare.node.component.graphics.MeshComponent
+import me.johanrong.glare.node.component.graphics.TextureComponent
 import org.lwjgl.opengl.GL11.GL_NO_ERROR
 import org.lwjgl.opengl.GL11.glGetError
 import org.lwjgl.opengl.GL46

@@ -10,10 +10,6 @@ object Shader {
         layout(location = 1) in vec2 texCoord;
         layout(location = 2) in vec3 normal;
         
-        uniform mat4 uModelMatrix;
-        uniform mat4 uViewMatrix;
-        uniform mat4 uProjectionMatrix;
-        
         out vec3 FragPos;
         out vec2 TexCoords;
         out vec3 Normal;
@@ -23,16 +19,15 @@ object Shader {
         uniform mat4 viewMatrix;
     """
 
-    const val FRAGMENT_HEADER = """
-        uniform sampler2D textureSampler;
-        uniform int hasTexture;
-        
+    const val FRAGMENT_HEADER = """ 
         in vec3 FragPos;
         in vec2 TexCoords;
         in vec3 Normal;
         
         out vec4 FragColor;
         
+        uniform sampler2D textureSampler;
+        uniform int hasTexture;
         uniform vec3 uViewPos;
         
         // Material properties

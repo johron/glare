@@ -3,8 +3,8 @@ package me.johanrong.glare.node.component.graphics
 import de.javagl.obj.ObjData
 import de.javagl.obj.ObjReader
 import de.javagl.obj.ObjUtils
-import me.johanrong.glare.node.component.IComponent
 import me.johanrong.glare.node.component.Component
+import me.johanrong.glare.node.component.IComponent
 import org.lwjgl.opengl.GL46
 import org.lwjgl.system.MemoryUtil
 import java.nio.FloatBuffer

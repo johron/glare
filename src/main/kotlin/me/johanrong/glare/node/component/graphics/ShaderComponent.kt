@@ -31,10 +31,10 @@ class ShaderComponent(
         }
 
         if (vertexPath?.isEmpty() == false) {
-            shaderIds.put(GL46.GL_VERTEX_SHADER, createShader(loadPlain(vertexPath), GL46.GL_VERTEX_SHADER))
+            shaderIds.put(GL46.GL_VERTEX_SHADER, createShader(Shader.makeVertex(vertexPath), GL46.GL_VERTEX_SHADER))
         }
         if (fragmentPath?.isEmpty() == false) {
-            shaderIds.put(GL46.GL_FRAGMENT_SHADER, createShader(loadPlain(fragmentPath), GL46.GL_FRAGMENT_SHADER))
+            shaderIds.put(GL46.GL_FRAGMENT_SHADER, createShader(Shader.makeFragment(fragmentPath), GL46.GL_FRAGMENT_SHADER))
         }
         if (geometryPath?.isEmpty() == false) {
             shaderIds.put(GL46.GL_GEOMETRY_SHADER, createShader(Shader.makeGeometry(geometryPath), GL46.GL_GEOMETRY_SHADER))

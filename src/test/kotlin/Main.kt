@@ -67,21 +67,19 @@ class TestGame : IScript {
             )
         }
 
-        for (i in 1 until 20) {
-            Node.builder {
-                name = "Node"
-                transform = Transform(0.0, 0.0, -5.0 * i)
-                parent = root
-                components = mutableListOf(
-                    MeshComponent("/model/cube.obj"),
-                    TextureComponent("/texture/map.png"),
-                    ShaderComponent.Builder()
-                        .vertex("/shader/mesh.vert")
-                        .fragment("/shader/mesh.frag")
-                        .build(),
-                    MaterialComponent(),
-                )
-            }
+        Node.builder {
+            name = "Node"
+            transform = Transform(0.0, 0.0, -5.0)
+            parent = root
+            components = mutableListOf(
+                MeshComponent("/model/cube.obj"),
+                TextureComponent("/texture/map.png"),
+                ShaderComponent.Builder()
+                    .vertex("/shader/mesh.vert")
+                    .fragment("/shader/mesh.frag")
+                    .build(),
+                MaterialComponent(),
+            )
         }
     }
 

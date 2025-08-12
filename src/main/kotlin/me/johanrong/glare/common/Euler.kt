@@ -1,4 +1,4 @@
-package me.johanrong.glare.math
+package me.johanrong.glare.common
 
 import org.joml.Vector3f
 

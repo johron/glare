@@ -1,11 +1,10 @@
-package me.johanrong.glare.math
+package me.johanrong.glare.common
 
 import org.joml.Math
 import org.joml.Matrix4f
 import org.joml.Vector3d
 import org.joml.Vector3f
 import org.joml.plus
-import org.joml.times
 
 data class Transform (
     var position: Vector3d,
@@ -65,6 +64,22 @@ data class Transform (
 
     fun getPosition(): Vector3f {
         return Vector3f(position.x.toFloat(), position.y.toFloat(), position.z.toFloat())
+    }
+
+    fun getRight(): Vector3f {
+        return Vector3f(
+            Math.cos(rotation.toRadians().y) * Math.cos(rotation.toRadians().x),
+            Math.sin(rotation.toRadians().x),
+            Math.sin(rotation.toRadians().y) * Math.cos(rotation.toRadians().x)
+        )
+    }
+
+    fun getUp(): Vector3f {
+        return Vector3f(
+            Math.cos(rotation.toRadians().y) * Math.sin(rotation.toRadians().x),
+            -Math.cos(rotation.toRadians().x),
+            Math.sin(rotation.toRadians().y) * Math.sin(rotation.toRadians().x)
+        )
     }
 
     fun getTransformMatrix(): Matrix4f {

@@ -1,6 +1,6 @@
 package me.johanrong.glare.node.component.graphics
 
-import me.johanrong.glare.math.Color
+import me.johanrong.glare.common.Color
 import me.johanrong.glare.node.component.Component
 import me.johanrong.glare.node.component.IComponent
 

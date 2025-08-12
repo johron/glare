@@ -7,6 +7,7 @@ import me.johanrong.glare.node.component.core.IScript
 import me.johanrong.glare.render.MeshRenderer
 import me.johanrong.glare.render.Renderer
 import me.johanrong.glare.node.component.Component
+import me.johanrong.glare.render.BillboardTextRenderer
 import me.johanrong.glare.render.LightRenderer
 import me.johanrong.glare.util.GeneratedConstants
 import me.johanrong.glare.util.log
@@ -35,6 +36,7 @@ class Engine(val window: Window, val graphics: IGraphics, game: IScript) {
 
         renderer.addRenderer(MeshRenderer(this))
         renderer.addRenderer(LightRenderer(this))
+        //renderer.addRenderer(BillboardTextRenderer(this)) do this later
 
         game.init(root)
 

@@ -1,8 +1,8 @@
-package me.johanrong.glare.math
+package me.johanrong.glare.common
 
 import org.joml.Vector3f
 
-class Color(val red: Float, val green: Float, val blue: Float) {
+data class Color(val red: Float, val green: Float, val blue: Float) {
     constructor(color: Float) : this(color, color, color)
 
     fun toVector3f(): Vector3f {

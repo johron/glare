@@ -3,8 +3,9 @@ package me.johanrong.glare.node
 import me.johanrong.glare.node.component.IComponent
 import me.johanrong.glare.node.component.core.ScriptsComponent
 import me.johanrong.glare.node.component.Component
-import me.johanrong.glare.math.Transform
+import me.johanrong.glare.common.Transform
 import me.johanrong.glare.node.component.lighting.LightComponent
+import org.joml.Vector3f
 
 open class Node (
     var name: String = "Node",

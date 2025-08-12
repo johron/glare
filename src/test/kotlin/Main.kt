@@ -10,10 +10,12 @@ import me.johanrong.glare.node.component.graphics.MeshComponent
 import me.johanrong.glare.node.component.graphics.ShaderComponent
 import me.johanrong.glare.node.component.graphics.TextureComponent
 import me.johanrong.glare.node.component.Component
-import me.johanrong.glare.math.Euler
-import me.johanrong.glare.math.Transform
+import me.johanrong.glare.common.Euler
+import me.johanrong.glare.common.Text
+import me.johanrong.glare.common.Transform
 import me.johanrong.glare.io.Keycode
 import me.johanrong.glare.io.Input
+import me.johanrong.glare.node.component.graphics.BillboardTextComponent
 import me.johanrong.glare.node.component.graphics.MaterialComponent
 import me.johanrong.glare.node.component.lighting.PointLightComponent
 import org.joml.Vector3f
@@ -59,6 +61,9 @@ class TestGame : IScript {
             parent = root
             components = mutableListOf(
                 PointLightComponent(),
+                BillboardTextComponent(
+                    Text("Light"),
+                ),
             )
         }
 

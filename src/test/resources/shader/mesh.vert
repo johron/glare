@@ -21,4 +21,5 @@ void main() {
     gl_Position = projectionMatrix * viewMatrix * worldPosition;
     TexCoords = texCoord;
     Normal = normal;
+    FragPos = vec3(worldPosition);
 }

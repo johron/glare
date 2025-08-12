@@ -4,6 +4,8 @@ import org.joml.Math
 import org.joml.Matrix4f
 import org.joml.Vector3d
 import org.joml.Vector3f
+import org.joml.plus
+import org.joml.times
 
 data class Transform (
     var position: Vector3d,
@@ -82,6 +84,16 @@ data class Transform (
             Vector3d(position),
             Euler(rotation),
             Vector3f(scale.x, scale.y, scale.z)
+        )
+    }
+
+    fun combine(other: Transform): Transform {
+        return Transform(
+            position + other.position,
+            Euler(rotation.getPitch() + other.rotation.getPitch(),
+                  rotation.getYaw() + other.rotation.getYaw(),
+                  rotation.getRoll() + other.rotation.getRoll()),
+            Vector3f(scale.x * other.scale.x, scale.y * other.scale.y, scale.z * other.scale.z)
         )
     }
 

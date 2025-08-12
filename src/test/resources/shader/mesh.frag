@@ -45,8 +45,10 @@ uniform int uNumPointLights;
 uniform DirLight uDirLights[MAX_DIR_LIGHTS];
 uniform PointLight uPointLights[MAX_POINT_LIGHTS];
 
-/*vec3 calculateDirectionalLight(DirLight light, vec3 normal, vec3 viewDir) {
-    vec3 lightDir = normalize(-light.direction);
+vec3 calculatePointLight(PointLight light, vec3 normal, vec3 viewDir) {
+    vec3 lightDir = normalize(light.position - FragPos);
+    float dist = distance(light.position, FragPos);
+    float attenuation = 1.0 / ((light.constant + light.linear * dist + light.quadratic * (dist * dist)));
 
     // Diffuse
     float diff = max(dot(normal, lightDir), 0.0);
@@ -55,29 +57,7 @@ uniform PointLight uPointLights[MAX_POINT_LIGHTS];
     vec3 reflectDir = reflect(-lightDir, normal);
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
 
-    // Combine
-    vec3 ambient = light.color * light.intensity * 0.1;
-    vec3 diffuse = light.color * light.intensity * diff;
-    vec3 specular = light.color * light.intensity * spec;
-
-    return (ambient + diffuse) * texture(material.diffuse, TexCoords).rgb +
-    specular * texture(material.specular, TexCoords).rgb;
-}*/
-
-vec3 calculatePointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir) {
-    vec3 lightDir = normalize(light.position - fragPos);
-    float distance = length(light.position - fragPos);
-    float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * (distance * distance));
-
-    // Diffuse
-    float diff = max(dot(normal, lightDir), 0.0);
-
-    // Specular
-    vec3 reflectDir = reflect(-lightDir, normal);
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
-
-    // Combine
-    vec3 ambient = light.color * light.intensity * 0.1;
+    vec3 ambient = light.color * light.intensity * 0.01 * attenuation; // Adding attenuation here is not the solution
     vec3 diffuse = light.color * light.intensity * diff * attenuation;
     vec3 specular = light.color * light.intensity * spec * attenuation;
 
@@ -96,21 +76,21 @@ void glare_light() {
 
     // Calculate point lights
     for (int i = 0; i < uNumPointLights; i++) {
-        result += calculatePointLight(uPointLights[i], normal, FragPos, viewDir);
+        result += calculatePointLight(uPointLights[i], normal, viewDir);
     }
 
-    FragColor = vec4(result, 1.0) * vec4(material.diffuse, 1.0);
+    FragColor = vec4(result, 1.0);//* vec4(material.diffuse, 1.0);
 }
 
 void glare_texture() {
-    if (FragColor == vec4(0.0)) {
-        FragColor = vec4(1.0, 1.0, 1.0, 1.0);
-    }
+    //if (FragColor == vec4(0.0, 0.0, 0.0, 0.0)) {
+    //    FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+    //}
 
     if (hasTexture == 1) {
         FragColor *= texture(textureSampler, TexCoords);
-    } else {
-        FragColor *= vec4(1.0, 1.0, 1.0, 1.0); // Default color if no texture
+    //} else {
+    //    FragColor *= vec4(1.0, 1.0, 1.0, 1.0); // Default color if no texture
     }
 }
 

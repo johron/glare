@@ -100,6 +100,14 @@ open class Node (
         return components
     }
 
+    fun getGlobalTransform(): Transform {
+        return if (parent == null) {
+            transform
+        } else {
+            parent!!.getGlobalTransform().combine(transform)
+        }
+    }
+
     companion object {
         fun builder(block: Builder.() -> Unit) : Node {
             val builder = Builder()

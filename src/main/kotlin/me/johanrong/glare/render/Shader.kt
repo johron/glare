@@ -110,7 +110,7 @@ object Shader {
         void glare_light() {
             vec3 normal = normalize(Normal);
             vec3 viewDir = normalize(uViewPos - FragPos);
-            vec3 result = vec3(0.0);
+            vec3 result = vec3(0.05);
         
             // Calculate directional lights
             //for (int i = 0; i < uNumDirLights; i++) {

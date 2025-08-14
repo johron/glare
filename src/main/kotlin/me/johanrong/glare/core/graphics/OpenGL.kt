@@ -3,6 +3,7 @@ package me.johanrong.glare.core.graphics
 import org.lwjgl.opengl.GL
 import org.lwjgl.opengl.GL46
 import org.lwjgl.opengl.GLDebugMessageCallback
+import org.lwjgl.opengl.GLUtil
 
 class OpenGL : IGraphics {
     init {
@@ -14,11 +15,11 @@ class OpenGL : IGraphics {
         GL46.glEnable(GL46.GL_CULL_FACE)
         GL46.glCullFace(GL46.GL_BACK)
 
-        GL46.glEnable(GL46.GL_DEBUG_OUTPUT)
-        GL46.glDebugMessageCallback({ source, type, id, severity, length, message, userParam ->
-            val msg = GLDebugMessageCallback.getMessage(length, message)
-            println("OpenGL Error: $msg")
-        }, 0)
+        //GL46.glEnable(GL46.GL_DEBUG_OUTPUT)
+        //GL46.glDebugMessageCallback({ source, type, id, severity, length, message, userParam ->
+        //    val msg = GLDebugMessageCallback.getMessage(length, message)
+        //    println("OpenGL: $msg")
+        //}, 0)
     }
 
     override fun cleanup() {

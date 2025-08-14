@@ -8,6 +8,6 @@ enum class Component {
     TEXTURE,
     SHADER,
     MATERIAL,
-    ENGINE_REF,
     RIGIDBODY,
+    COLLIDER,
 }

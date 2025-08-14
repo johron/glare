@@ -1,5 +1,6 @@
 package me.johanrong.glare.node.component.graphics
 
+import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.component.Component
 import me.johanrong.glare.node.component.IComponent
 import me.johanrong.glare.render.Shader
@@ -18,6 +19,7 @@ class ShaderComponent(
     computePath: String? = null
 ) : IComponent {
     override val type = Component.SHADER
+    override var node: Node? = null
 
     val programId: Int = GL46.glCreateProgram()
 
@@ -56,7 +58,6 @@ class ShaderComponent(
         createUniform("textureSampler")
         createUniform("hasTexture")
     }
-
 
     fun getUniformLocation(name: String): Int {
         return uniforms.getOrPut(name) {

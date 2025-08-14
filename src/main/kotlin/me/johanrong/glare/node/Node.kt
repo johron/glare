@@ -1,8 +1,10 @@
 package me.johanrong.glare.node
 
 import me.johanrong.glare.common.Transform
+import me.johanrong.glare.core.Engine
 import me.johanrong.glare.node.component.Component
 import me.johanrong.glare.node.component.IComponent
+import me.johanrong.glare.node.component.core.EngineRefComponent
 import me.johanrong.glare.node.component.core.ScriptsComponent
 import me.johanrong.glare.node.component.lighting.LightComponent
 
@@ -13,11 +15,18 @@ open class Node (
     private var children: MutableList<Node> = mutableListOf(),
     private var components: MutableList<IComponent> = mutableListOf(),
 ) {
+    var engine: Engine
+
     init {
-        (getComponent(Component.SCRIPTS) as? ScriptsComponent)?.scripts?.forEach { script ->
-            script.init(this)
+        for (component in components) {
+            component.onAttach(this)
         }
-        (getComponent(Component.LIGHT) as? LightComponent)?.init(this)
+
+        if (parent != null) {
+            engine = parent!!.engine
+        } else {
+            engine = ((getComponent(Component.ENGINE_REF)) as EngineRefComponent).getEngine()
+        }
 
         parent?.addChild(this)
     }
@@ -69,15 +78,18 @@ open class Node (
         }
     }
 
+    fun fixedUpdate() {
+        (getComponent(Component.SCRIPTS) as? ScriptsComponent)?.scripts?.forEach { script ->
+            script.fixedUpdate()
+        }
+
+        for (child in children) {
+            child.fixedUpdate()
+        }
+    }
+
     fun addComponent(component: IComponent) {
-        if (hasComponent(component.type)) {
-            throw Exception("Component of type ${component.type} already exists in this node.")
-        }
-
-        if (component is LightComponent) {
-            component.init(this)
-        }
-
+        component.onAttach(this)
         components.add(component)
     }
 

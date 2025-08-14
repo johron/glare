@@ -15,6 +15,7 @@ class Engine(val window: Window, val graphics: IGraphics, game: IScript) {
     private var delta = 0.0
     private var isRunning = true
     private var camera: Node? = null
+    private var physicsAccumulator = 0.0
 
     var root = Node.builder {
         name = "Root"
@@ -22,6 +23,7 @@ class Engine(val window: Window, val graphics: IGraphics, game: IScript) {
         components = mutableListOf(EngineRefComponent(this@Engine))
     }
 
+    val physics: Physics = Physics(this)
     private val renderer: Renderer = Renderer(this)
 
     companion object {
@@ -47,18 +49,22 @@ class Engine(val window: Window, val graphics: IGraphics, game: IScript) {
                 isRunning = false
             }
 
-            game.update(delta)
             root.update(delta)
+            game.update(delta)
             window.update()
             renderer.render()
 
+
+            val fixedTimeStep = 1.0 / 60.0
+            physicsAccumulator += delta
+            while (physicsAccumulator >= fixedTimeStep) {
+                physics.update()
+                root.fixedUpdate()
+                physicsAccumulator -= fixedTimeStep
+            }
+
             val endTime = System.nanoTime()
             delta = (endTime - startTime) / NANOSECOND.toDouble()
-
-            if (frames % 100 == 0 && delta > 0.0) {
-                window.setTitle("${window.getTitle()} - ${(1.0 / delta).toInt()} FPS")
-                frames = 0
-            }
 
             frames++
         }

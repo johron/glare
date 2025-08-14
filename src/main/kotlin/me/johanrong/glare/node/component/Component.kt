@@ -9,5 +9,5 @@ enum class Component {
     SHADER,
     MATERIAL,
     ENGINE_REF,
-    BILLBOARD,
+    RIGIDBODY,
 }

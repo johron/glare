@@ -1,11 +1,13 @@
 package me.johanrong.glare.node.component.graphics
 
 import me.johanrong.glare.common.Color
+import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.component.Component
 import me.johanrong.glare.node.component.IComponent
 
 class MaterialComponent : IComponent {
     override val type = Component.MATERIAL
+    override var node: Node? = null
 
     // Material properties
     var diffuse: Color = Color(1f)  // Diffuse color (base color of the material)

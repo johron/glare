@@ -138,38 +138,38 @@ object Shader {
         }
     """
 
-    fun makeVertex(path: String): String {
-        var shader = loadPlain(path)
+    fun makeVertex(str: String): String {
+        var shader = loadPlain(str)
         shader = VERSION + VERTEX_HEADER + VERTEX_FUNCTIONS + shader
         return shader
     }
 
-    fun makeFragment(path: String): String {
-        var shader = loadPlain(path)
+    fun makeFragment(str: String): String {
+        var shader = loadPlain(str)
         shader = VERSION + FRAGMENT_HEADER + FRAGMENT_FUNCTIONS + shader
         return shader
     }
 
-    fun makeGeometry(path: String): String {
-        var shader = loadPlain(path)
+    fun makeGeometry(str: String): String {
+        var shader = loadPlain(str)
         shader = VERSION + GEOMETRY_HEADER + shader
         return shader
     }
 
-    fun makeControl(path: String): String {
-        var shader = loadPlain(path)
+    fun makeControl(str: String): String {
+        var shader = loadPlain(str)
         shader = VERSION + CONTROL_HEADER + shader
         return shader
     }
 
-    fun makeEval(path: String): String {
-        var shader = loadPlain(path)
+    fun makeEval(str: String): String {
+        var shader = loadPlain(str)
         shader = VERSION + EVAL_HEADER + shader
         return shader
     }
 
-    fun makeCompute(path: String): String {
-        var shader = loadPlain(path)
+    fun makeCompute(str: String): String {
+        var shader = loadPlain(str)
         shader = VERSION + COMPUTE_HEADER + shader
         return shader
     }

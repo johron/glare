@@ -3,6 +3,7 @@ package me.johanrong.glare.node.component.graphics
 import de.javagl.obj.ObjData
 import de.javagl.obj.ObjReader
 import de.javagl.obj.ObjUtils
+import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.component.Component
 import me.johanrong.glare.node.component.IComponent
 import org.lwjgl.opengl.GL46
@@ -12,6 +13,7 @@ import java.nio.IntBuffer
 
 open class MeshComponent(isPrimary: Boolean = true) : IComponent {
     override val type = Component.MESH
+    override var node: Node? = null
 
     private val id: Int = createVAO()
 

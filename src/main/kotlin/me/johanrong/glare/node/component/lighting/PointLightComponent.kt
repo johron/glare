@@ -7,7 +7,7 @@ class PointLightComponent(var constant: Float = 0.01f, var linear: Float = 0.02f
     override val lightType = Light.POINT
 
     override fun applyToShader(shader: ShaderComponent, index: Int) {
-        shader.setUniform("uPointLights[$index].position", node.transform.getPosition())
+        shader.setUniform("uPointLights[$index].position", node!!.transform.getPosition())
         shader.setUniform("uPointLights[$index].color", color.toVector3f())
         shader.setUniform("uPointLights[$index].intensity", intensity)
         shader.setUniform("uPointLights[$index].constant", constant)

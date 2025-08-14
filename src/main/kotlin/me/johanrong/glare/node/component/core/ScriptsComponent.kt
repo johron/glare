@@ -1,10 +1,12 @@
 package me.johanrong.glare.node.component.core
 
+import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.component.Component
 import me.johanrong.glare.node.component.IComponent
 
 class ScriptsComponent(var scripts: MutableList<IScript> = mutableListOf()) : IComponent {
     override val type = Component.SCRIPTS
+    override var node: Node? = null
 
     fun addScript(script: IScript) {
         scripts.add(script)
@@ -16,6 +18,11 @@ class ScriptsComponent(var scripts: MutableList<IScript> = mutableListOf()) : IC
 
     fun clear() {
         scripts.clear()
+    }
+
+    override fun onAttach(node: Node) {
+        this.node = node
+        scripts.forEach { it.init(node) }
     }
 
     override fun cleanup() {

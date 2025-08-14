@@ -15,7 +15,6 @@ import me.johanrong.glare.common.Text
 import me.johanrong.glare.common.Transform
 import me.johanrong.glare.io.Keycode
 import me.johanrong.glare.io.Input
-import me.johanrong.glare.node.component.graphics.BillboardTextComponent
 import me.johanrong.glare.node.component.graphics.MaterialComponent
 import me.johanrong.glare.node.component.lighting.PointLightComponent
 import org.joml.Vector3f
@@ -61,15 +60,27 @@ class TestGame : IScript {
             parent = root
             components = mutableListOf(
                 PointLightComponent(),
-                BillboardTextComponent(
-                    Text("Light"),
-                ),
             )
         }
 
         Node.builder {
             name = "Node"
             transform = Transform(0.0, 0.0, -5.0)
+            parent = root
+            components = mutableListOf(
+                MeshComponent("/model/cube.obj"),
+                TextureComponent("/texture/map.png"),
+                ShaderComponent.Builder()
+                    .vertex("/shader/mesh.vert")
+                    .fragment("/shader/mesh.frag")
+                    .build(),
+                MaterialComponent(),
+            )
+        }
+
+        Node.builder {
+            name = "Node"
+            transform = Transform(0.0, 0.0, -10.0)
             parent = root
             components = mutableListOf(
                 MeshComponent("/model/cube.obj"),

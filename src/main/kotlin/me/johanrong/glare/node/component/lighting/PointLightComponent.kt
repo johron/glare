@@ -3,7 +3,7 @@ package me.johanrong.glare.node.component.lighting
 import me.johanrong.glare.common.Color
 import me.johanrong.glare.node.component.graphics.ShaderComponent
 
-class PointLightComponent(var constant: Float = 0.01f, var linear: Float = 0.02f, var quadratic: Float = 0.002f, intensity: Float = 23.0f, color: Color = Color(0.988f,0.729f,0.012f)): LightComponent(intensity, color) {
+class PointLightComponent(var constant: Float = 0.001f, var linear: Float = 0.002f, var quadratic: Float = 0.0005f, intensity: Float = 10.0f, color: Color = Color(1f)): LightComponent(intensity, color) {
     override val lightType = Light.POINT
 
     override fun applyToShader(shader: ShaderComponent, index: Int) {

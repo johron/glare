@@ -42,6 +42,18 @@ data class Euler (
         yaw = value % 360
     }
 
+    fun rotateXYZ(roll: Double, pitch: Double, yaw: Double) {
+        this.roll = (this.roll + roll) % 360
+        this.pitch = (this.pitch + pitch) % 360
+        this.yaw = (this.yaw + yaw) % 360
+    }
+
+    fun rotateXYZ(roll: Float, pitch: Float, yaw: Float) {
+        this.roll = (this.roll + roll.toDouble()) % 360
+        this.pitch = (this.pitch + pitch.toDouble()) % 360
+        this.yaw = (this.yaw + yaw.toDouble()) % 360
+    }
+
     fun toRadians(): Vector3f {
         return Vector3f(
             Math.toRadians(pitch).toFloat(),

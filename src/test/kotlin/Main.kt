@@ -16,6 +16,8 @@ import me.johanrong.glare.io.Keycode
 import me.johanrong.glare.io.Input
 import me.johanrong.glare.node.component.graphics.MaterialComponent
 import me.johanrong.glare.node.component.lighting.PointLightComponent
+import me.johanrong.glare.node.component.physics.RigidbodyComponent
+import org.joml.Vector3d
 import org.joml.Vector3f
 
 fun main() {
@@ -38,7 +40,7 @@ class TestGame : IScript {
 
         val camera = Node.builder {
             name = "Freecam"
-            transform = Transform(Euler(0.0, 0.0, -90.0))
+            transform = Transform(Vector3d(0.0, 5.0, 5.0), Euler(0.0, 0.0, -90.0))
             parent = root
             components = mutableListOf(
                 CameraComponent(),
@@ -49,17 +51,17 @@ class TestGame : IScript {
         engine.setCamera(camera)
 
         Node.builder {
-            name = "Light"
-            transform = Transform(0.0, 0.0, 0.0)
+            name = "Sun"
+            transform = Transform(50.0, 100.0, 0.0)
             parent = root
             components = mutableListOf(
-                PointLightComponent(),
+                PointLightComponent(intensity = 1000f),
             )
         }
 
         Node.builder {
             name = "Node"
-            transform = Transform(0.0, 0.0, -5.0)
+            transform = Transform(Vector3d(0.0, 4.0, 0.0), Euler(0.0), Vector3f(0.25f))
             parent = root
             components = mutableListOf(
                 MeshComponent("/model/cube.obj"),
@@ -69,16 +71,17 @@ class TestGame : IScript {
                     .fragment("/shader/mesh.frag")
                     .build(),
                 MaterialComponent(),
+                RigidbodyComponent(),
             )
         }
 
         Node.builder {
             name = "Node"
-            transform = Transform(0.0, 0.0, -10.0)
+            transform = Transform(Vector3d(0.0, 0.0, 0.0), Euler(0.0), Vector3f(5.0f, 0.5f, 5.0f))
             parent = root
             components = mutableListOf(
                 MeshComponent("/model/cube.obj"),
-                TextureComponent("/texture/map.png"),
+                TextureComponent("/texture/blue.png"),
                 ShaderComponent.Builder()
                     .vertex("/shader/mesh.vert")
                     .fragment("/shader/mesh.frag")
@@ -89,26 +92,6 @@ class TestGame : IScript {
     }
 
     override fun update(delta: Double) {
-        //val node = engine.root.getFirstChild("Node")
-        //node!!.transform.rotation.addYaw(100.0 * delta)
-
-        if (engine.input.hasPressedKey(Keycode.G)) {
-            //engine.destroy()
-
-            val camera = engine.getCamera()
-            Node.builder {
-                name = "test"
-                transform = Transform(camera!!.transform.clone().position, Vector3f(0.1f))
-                parent = engine.root
-                components = mutableListOf(
-                    MeshComponent("/model/cube.obj"),
-                    ShaderComponent.Builder()
-                        .vertex("/shader/mesh.vert")
-                        .fragment("/shader/mesh.frag")
-                        .build()
-                )
-            }
-        }
     }
 
     override fun render() {}

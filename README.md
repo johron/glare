@@ -34,15 +34,10 @@ fun main() {
 }
 
 class TestGame : IScript {
-    companion object {
-        lateinit var engine: Engine
-    }
-
-    lateinit var input: Input
-
+    lateinit var engine: Engine
+  
     override fun init(root: Node) {
-        engine = (root.getComponent(Component.ENGINE_REF) as EngineRefComponent).getEngine()
-        input = Input(engine)
+        engine = root.engine
 
         val camera = Node.builder {
             name = "Freecam"
@@ -63,6 +58,7 @@ class TestGame : IScript {
             components = mutableListOf(
                 MeshComponent("/model/cube.obj"),
                 TextureComponent("texture/map.png"),
+                MaterialComponent(),
                 ShaderComponent.Builder()
                     .vertex("/shader/mesh.vert")
                     .fragment("/shader/mesh.frag")
@@ -76,6 +72,7 @@ class TestGame : IScript {
         node!!.transform.rotation.addYaw(100.0 * delta)
   }
 
+  override fun fixedUpdate() {}
   override fun render() {}
   override fun cleanup() {}
 }

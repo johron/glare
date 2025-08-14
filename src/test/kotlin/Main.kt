@@ -33,10 +33,8 @@ fun main() {
 }
 
 class TestGame : IScript {
-    lateinit var engine: Engine
-
     override fun init(root: Node) {
-        engine = root.engine
+        val engine: Engine = root.engine
 
         val camera = Node.builder {
             name = "Freecam"

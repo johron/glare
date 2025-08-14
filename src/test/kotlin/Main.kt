@@ -3,7 +3,6 @@ import me.johanrong.glare.core.graphics.OpenGL
 import me.johanrong.glare.core.Window
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.component.core.CameraComponent
-import me.johanrong.glare.node.component.core.EngineRefComponent
 import me.johanrong.glare.node.component.core.IScript
 import me.johanrong.glare.node.component.core.ScriptsComponent
 import me.johanrong.glare.node.component.graphics.MeshComponent
@@ -32,15 +31,10 @@ fun main() {
 }
 
 class TestGame : IScript {
-    companion object {
-        lateinit var engine: Engine
-    }
-
-    lateinit var input: Input
+    lateinit var engine: Engine
 
     override fun init(root: Node) {
-        engine = (root.getComponent(Component.ENGINE_REF) as EngineRefComponent).getEngine()
-        input = Input(engine)
+        engine = root.engine
 
         val camera = Node.builder {
             name = "Freecam"
@@ -98,7 +92,7 @@ class TestGame : IScript {
         //val node = engine.root.getFirstChild("Node")
         //node!!.transform.rotation.addYaw(100.0 * delta)
 
-        if (input.hasPressedKey(Keycode.G)) {
+        if (engine.input.hasPressedKey(Keycode.G)) {
             //engine.destroy()
 
             val camera = engine.getCamera()

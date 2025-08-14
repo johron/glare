@@ -1,9 +1,9 @@
 package me.johanrong.glare.core
 
 import me.johanrong.glare.core.graphics.IGraphics
+import me.johanrong.glare.io.Input
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.component.Component
-import me.johanrong.glare.node.component.core.EngineRefComponent
 import me.johanrong.glare.node.component.core.IScript
 import me.johanrong.glare.render.LightRenderer
 import me.johanrong.glare.render.MeshRenderer
@@ -20,9 +20,9 @@ class Engine(val window: Window, val graphics: IGraphics, game: IScript) {
     var root = Node.builder {
         name = "Root"
         parent = null
-        components = mutableListOf(EngineRefComponent(this@Engine))
     }
 
+    val input: Input = Input(this)
     val physics: Physics = Physics(this)
     private val renderer: Renderer = Renderer(this)
 
@@ -39,6 +39,7 @@ class Engine(val window: Window, val graphics: IGraphics, game: IScript) {
         renderer.addRenderer(LightRenderer(this))
         //renderer.addRenderer(BillboardTextRenderer(this)) do this later
 
+        root.engine = this
         game.init(root)
 
         var frames = 0

@@ -4,7 +4,6 @@ import me.johanrong.glare.common.Transform
 import me.johanrong.glare.core.Engine
 import me.johanrong.glare.node.component.Component
 import me.johanrong.glare.node.component.IComponent
-import me.johanrong.glare.node.component.core.EngineRefComponent
 import me.johanrong.glare.node.component.core.ScriptsComponent
 import me.johanrong.glare.node.component.lighting.LightComponent
 
@@ -15,17 +14,15 @@ open class Node (
     private var children: MutableList<Node> = mutableListOf(),
     private var components: MutableList<IComponent> = mutableListOf(),
 ) {
-    var engine: Engine
+    lateinit var engine: Engine
 
     init {
-        for (component in components) {
-            component.onAttach(this)
-        }
-
         if (parent != null) {
             engine = parent!!.engine
-        } else {
-            engine = ((getComponent(Component.ENGINE_REF)) as EngineRefComponent).getEngine()
+        }
+
+        for (component in components) {
+            component.onAttach(this)
         }
 
         parent?.addChild(this)

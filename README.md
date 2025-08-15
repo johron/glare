@@ -1,4 +1,4 @@
-# Glare <img src="https://github.com/johron/glare/blob/master/src/main/resources/assets/glare/icon/glare_icon.png?raw=true" alt="icon" width="28" height="28" style="vertical-align:middle;">
+# Glare <img src="src/main/resources/me/johanrong/glare/assets/glare_icon.png" alt="icon" width="28" height="28" style="vertical-align:middle;">
 - A modular, cross-platform 3D game engine built in Kotlin using LWJGL and OpenGL
 
 ## TODO

@@ -9,7 +9,7 @@ project.ext.jomlPrimVersion = "1.10.0"
 
 project.ext.objVersion = "0.4.0"
 
-group = 'me.johanrong.glare'
+group = 'me.johanrong.glare.engine'
 version = '25w33a'
 
 repositories {
@@ -110,7 +110,6 @@ tasks.jar {
         attributes(
                 'Implementation-Title': 'Glare',
                 'Implementation-Version': version,
-                'Main-Class': 'me.johanrong.glare.Main'
         )
     }
     from {
@@ -121,9 +120,9 @@ tasks.jar {
 
 task generateConstants {
     doLast {
-        def constantsFile = file("src/main/kotlin/me/johanrong/glare/util/GeneratedConstants.kt")
+        def constantsFile = file("src/main/kotlin/me/johanrong/glare/engine/util/GeneratedConstants.kt")
         constantsFile.text = """
-            package me.johanrong.glare.util
+            package me.johanrong.glare.engine.util
 
             object GeneratedConstants {
                 const val GLARE_VERSION: String = "${version}"
@@ -134,7 +133,7 @@ task generateConstants {
 
 jar {
     from('LICENSE') {
-        into('')
+        into('me/johanrong/glare')
     }
 }
 

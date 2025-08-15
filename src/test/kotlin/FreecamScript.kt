@@ -1,9 +1,9 @@
-import me.johanrong.glare.core.Engine
-import me.johanrong.glare.node.Node
-import me.johanrong.glare.node.component.core.IScript
-import me.johanrong.glare.io.Keycode
-import me.johanrong.glare.io.MouseButton
-import me.johanrong.glare.io.Input
+import me.johanrong.glare.engine.core.Engine
+import me.johanrong.glare.engine.node.Node
+import me.johanrong.glare.engine.node.component.core.IScript
+import me.johanrong.glare.engine.io.Keycode
+import me.johanrong.glare.engine.io.MouseButton
+import me.johanrong.glare.engine.io.Input
 import org.joml.Math
 import org.joml.Vector3d
 

@@ -1,6 +1,5 @@
 package me.johanrong.glare.node.component.physics
 
-import me.johanrong.glare.common.Force
 import me.johanrong.glare.node.Node
 import me.johanrong.glare.node.component.Component
 import me.johanrong.glare.node.component.IComponent
@@ -10,39 +9,39 @@ class RigidbodyComponent : IComponent {
     override val type = Component.RIGIDBODY
     override var node: Node? = null
 
-    private var velocity = Force(0.0f)
-    private var angularVelocity = Force(0.0f)
+    private var velocity = Vector3f(0.0f)
+    private var angularVelocity = Vector3f(0.0f)
 
     var mass: Float = 1f
     var inertia = 0f
     var centerMass = Vector3f(0.0f)
 
-    var constantForce = Force(0.0f, -0.0001f, 0.0f)
-    var constantTorque = Force(0.0f)
+    var constantForce = Vector3f(0.0f, -1f, 0.0f)
+    var constantTorque = Vector3f(0.0f)
 
     var freeze: Boolean = false
 
-    fun applyForce(force: Force) {
+    fun applyForce(force: Vector3f) {
         velocity.add(force)
     }
 
-    fun applyTorque(torque: Force) {
+    fun applyTorque(torque: Vector3f) {
         angularVelocity.add(torque)
     }
 
-    fun getVelocity(): Force {
+    fun getVelocity(): Vector3f {
         return velocity
     }
 
-    fun getAngularVelocity(): Force {
+    fun getAngularVelocity(): Vector3f {
         return angularVelocity
     }
 
-    fun setVelocity(velocity: Force) {
+    fun setVelocity(velocity: Vector3f) {
         this.velocity = velocity
     }
 
-    fun setAngularVelocity(angularVelocity: Force) {
+    fun setAngularVelocity(angularVelocity: Vector3f) {
         this.angularVelocity = angularVelocity
     }
 

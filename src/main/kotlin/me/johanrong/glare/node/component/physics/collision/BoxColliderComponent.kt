@@ -12,6 +12,6 @@ class BoxColliderComponent : ColliderComponent() {
      */
 
     override fun colliding(other: ColliderComponent): Boolean {
-
+        return false
     }
 }

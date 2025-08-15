@@ -20,11 +20,11 @@ class Physics(engine: Engine) {
                 rigidbody.applyTorque(rigidbody.constantTorque)
 
                 // Update position and rotation based on velocity and angular velocity
-                node.transform.position.add(rigidbody.getVelocity())
+                node.transform.position.add(rigidbody.getVelocity() / 60.0f)
                 node.transform.rotation.rotateXYZ(
-                    rigidbody.getAngularVelocity().x,
-                    rigidbody.getAngularVelocity().y,
-                    rigidbody.getAngularVelocity().z
+                    rigidbody.getAngularVelocity().x / 60.0f,
+                    rigidbody.getAngularVelocity().y / 60.0f,
+                    rigidbody.getAngularVelocity().z / 60.0f
                 )
             }
         }

@@ -16,13 +16,13 @@ class RigidbodyComponent : IComponent {
     var inertia = 0f
     var centerMass = Vector3f(0.0f)
 
-    var constantForce = Vector3f(0.0f, -1f, 0.0f)
+    var constantForce = Vector3f(0.0f, 0.0f, 0.0f)
     var constantTorque = Vector3f(0.0f)
 
     var freeze: Boolean = false
 
     fun applyForce(force: Vector3f) {
-        velocity.add(force)
+        constantForce.add(force)
     }
 
     fun applyTorque(torque: Vector3f) {

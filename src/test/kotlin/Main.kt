@@ -17,6 +17,7 @@ import me.johanrong.glare.engine.io.Input
 import me.johanrong.glare.engine.node.component.graphics.MaterialComponent
 import me.johanrong.glare.engine.node.component.lighting.PointLightComponent
 import me.johanrong.glare.engine.node.component.physics.RigidbodyComponent
+import me.johanrong.glare.engine.node.component.physics.collision.BoxColliderComponent
 import org.joml.Vector3d
 import org.joml.Vector3f
 
@@ -59,7 +60,7 @@ class TestGame : IScript {
 
         Node.builder {
             name = "Node"
-            transform = Transform(Vector3d(0.0, 4.0, 0.0), Euler(0.0), Vector3f(0.25f))
+            transform = Transform(Vector3d(0.0, 4.0, 0.0), Euler(0.0), Vector3f(1f))
             parent = root
             components = mutableListOf(
                 MeshComponent("/model/cube.obj"),
@@ -70,6 +71,7 @@ class TestGame : IScript {
                     .build(),
                 MaterialComponent(),
                 RigidbodyComponent(),
+                BoxColliderComponent(),
             )
         }
 
@@ -85,6 +87,7 @@ class TestGame : IScript {
                     .fragment("/shader/mesh.frag")
                     .build(),
                 MaterialComponent(),
+                BoxColliderComponent(Transform(Vector3d(0.0), Euler(0.0), Vector3f(5.0f, 0.5f, 5.0f))),
             )
         }
     }

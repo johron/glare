@@ -30,7 +30,7 @@ fun main() {
         vSync = true,
     )
 
-    GlareEngine(window, TestGame())
+    Engine(window, OpenGL(), TestGame())
 }
 
 class TestGame : IScript {
@@ -45,7 +45,6 @@ class TestGame : IScript {
             parent = root
             components = mutableListOf(
                 CameraComponent(),
-                ScriptsComponent(mutableListOf(FreecamScript()))
             )
         }
 

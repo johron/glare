@@ -11,6 +11,10 @@ class Input(val engine: Engine) {
     private val pressedKeys = mutableSetOf<Keycode>()
 
     fun isKeyHeld(key: Keycode): Boolean {
+        if (ImGui.isAnyItemActive()) {
+            return false
+        }
+
         return GLFW.glfwGetKey(engine.window.getHandle(), key.code) == GLFW.GLFW_PRESS
     }
 

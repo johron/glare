@@ -6,6 +6,7 @@ import imgui.gl3.ImGuiImplGl3
 import imgui.glfw.ImGuiImplGlfw
 import me.johanrong.glare.engine.core.Engine
 import me.johanrong.glare.engine.node.Node
+import me.johanrong.glare.engine.ui.Panel
 
 
 class ImGuiRenderer(val engine: Engine) : IRenderer {
@@ -31,13 +32,15 @@ class ImGuiRenderer(val engine: Engine) : IRenderer {
         imGuiGlfw.newFrame();
         ImGui.newFrame();
 
-        ImGui.begin("Glare Engine")
-        ImGui.text("Version - ${Engine.VERSION}")
-        ImGui.text("FPS - ${String.format("%.2f", 1000.0/delta)}")
+        Panel("Glare Engine")
+            .text("Version - ${Engine.VERSION}")
+            .text("FPS - ${String.format("%.2f", 1000.0/delta)}")
+            .separator()
+            .inputText("Search", "", callback = { searchText ->
+                // Handle search text input
+            })
+            .build()
 
-        ImGui.separator()
-
-        ImGui.end()
 
         ImGui.render()
         imGuiGl3.renderDrawData(ImGui.getDrawData())

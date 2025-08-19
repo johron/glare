@@ -1,25 +1,26 @@
+import imgui.ImGui
+import imgui.gl3.ImGuiImplGl3
+import imgui.glfw.ImGuiImplGlfw
+import me.johanrong.glare.engine.common.Euler
+import me.johanrong.glare.engine.common.Transform
 import me.johanrong.glare.engine.core.Engine
-import me.johanrong.glare.engine.core.graphics.OpenGL
 import me.johanrong.glare.engine.core.Window
+import me.johanrong.glare.engine.core.graphics.OpenGL
 import me.johanrong.glare.engine.node.Node
 import me.johanrong.glare.engine.node.component.core.CameraComponent
 import me.johanrong.glare.engine.node.component.core.IScript
 import me.johanrong.glare.engine.node.component.core.ScriptsComponent
+import me.johanrong.glare.engine.node.component.graphics.MaterialComponent
 import me.johanrong.glare.engine.node.component.graphics.MeshComponent
 import me.johanrong.glare.engine.node.component.graphics.ShaderComponent
 import me.johanrong.glare.engine.node.component.graphics.TextureComponent
-import me.johanrong.glare.engine.node.component.Component
-import me.johanrong.glare.engine.common.Euler
-import me.johanrong.glare.engine.common.Text
-import me.johanrong.glare.engine.common.Transform
-import me.johanrong.glare.engine.io.Keycode
-import me.johanrong.glare.engine.io.Input
-import me.johanrong.glare.engine.node.component.graphics.MaterialComponent
 import me.johanrong.glare.engine.node.component.lighting.PointLightComponent
 import me.johanrong.glare.engine.node.component.physics.RigidbodyComponent
+import me.johanrong.glare.engine.node.component.physics.StaticbodyComponent
 import me.johanrong.glare.engine.node.component.physics.collision.BoxColliderComponent
 import org.joml.Vector3d
 import org.joml.Vector3f
+
 
 fun main() {
     val window = Window(
@@ -58,7 +59,7 @@ class TestGame : IScript {
             )
         }
 
-        Node.builder {
+        /*Node.builder {
             name = "Node"
             transform = Transform(Vector3d(0.0, 4.0, 0.0), Euler(0.0), Vector3f(1f))
             parent = root
@@ -73,7 +74,7 @@ class TestGame : IScript {
                 RigidbodyComponent(),
                 BoxColliderComponent(),
             )
-        }
+        }*/
 
         Node.builder {
             name = "Node"
@@ -87,6 +88,7 @@ class TestGame : IScript {
                     .fragment("/shader/mesh.frag")
                     .build(),
                 MaterialComponent(),
+                StaticbodyComponent(),
                 BoxColliderComponent(Transform(Vector3d(0.0), Euler(0.0), Vector3f(5.0f, 0.5f, 5.0f))),
             )
         }

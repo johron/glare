@@ -1,5 +1,6 @@
 package me.johanrong.glare.engine.io
 
+import imgui.ImGui
 import me.johanrong.glare.engine.core.Engine
 import org.joml.Vector2d
 import org.lwjgl.glfw.GLFW

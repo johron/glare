@@ -6,7 +6,6 @@ import me.johanrong.glare.engine.node.component.Component
 import me.johanrong.glare.engine.node.component.lighting.LightComponent
 
 class LightRenderer(val engine: Engine) : IRenderer {
-    override val priority: Int = 0
     private var lights = mutableListOf<LightComponent>()
 
     override fun init() {

@@ -1,10 +1,15 @@
 package me.johanrong.glare.engine.core
 
+import imgui.ImGui
+import imgui.flag.ImGuiConfigFlags
+import imgui.gl3.ImGuiImplGl3
+import imgui.glfw.ImGuiImplGlfw
 import me.johanrong.glare.engine.core.graphics.IGraphics
 import me.johanrong.glare.engine.io.Input
 import me.johanrong.glare.engine.node.Node
 import me.johanrong.glare.engine.node.component.Component
 import me.johanrong.glare.engine.node.component.core.IScript
+import me.johanrong.glare.engine.render.ImGuiRenderer
 import me.johanrong.glare.engine.render.LightRenderer
 import me.johanrong.glare.engine.render.MeshRenderer
 import me.johanrong.glare.engine.render.Renderer
@@ -35,8 +40,11 @@ class Engine(val window: Window, val graphics: IGraphics, game: IScript) {
     init {
         log("$VERSION - Initialized")
 
-        renderer.addRenderer(MeshRenderer(this))
+        ImGui.createContext()
+
         renderer.addRenderer(LightRenderer(this))
+        renderer.addRenderer(MeshRenderer(this))
+        renderer.addRenderer(ImGuiRenderer(this))
         //renderer.addRenderer(BillboardTextRenderer(this)) do this later
 
         root.engine = this
@@ -54,7 +62,6 @@ class Engine(val window: Window, val graphics: IGraphics, game: IScript) {
             game.update(delta)
             window.update()
             renderer.render()
-
 
             val fixedTimeStep = 1.0 / 60.0
             physicsAccumulator += delta

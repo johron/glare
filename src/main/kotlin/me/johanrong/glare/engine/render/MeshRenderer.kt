@@ -11,8 +11,6 @@ import org.lwjgl.opengl.GL11.glGetError
 import org.lwjgl.opengl.GL46
 
 class MeshRenderer(val engine: Engine) : IRenderer {
-    override val priority: Int = 1
-
     override fun render(node: Node) {
         if (!node.hasComponent(Component.MESH)) return
 

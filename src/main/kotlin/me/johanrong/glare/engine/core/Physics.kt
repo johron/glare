@@ -3,39 +3,48 @@ package me.johanrong.glare.engine.core
 import me.johanrong.glare.engine.node.Node
 import me.johanrong.glare.engine.node.component.Component
 import me.johanrong.glare.engine.node.component.physics.RigidbodyComponent
+import me.johanrong.glare.engine.node.component.physics.collision.BoxColliderComponent
+import me.johanrong.glare.engine.node.component.physics.collision.ColliderComponent
 import org.joml.Vector3f
 
 class Physics(engine: Engine) {
-    private var nodes = mutableListOf<Node>()
+    private val rigidbodies = mutableListOf<RigidbodyComponent>()
+    private val colliders = mutableListOf<ColliderComponent>()
 
     fun add(node: Node) {
-        nodes.add(node)
+        node.getComponent(Component.RIGIDBODY)?.let { rigidbodies.add(it as RigidbodyComponent) }
+        node.getComponent(Component.COLLIDER)?.let { colliders.add(it as ColliderComponent) }
     }
 
     fun update() {
-        for (node in nodes) {
-            val rigidbody = node.getComponent(Component.RIGIDBODY) as RigidbodyComponent?
-            if (rigidbody != null && !rigidbody.freeze) {
-                // Apply constant force and torque
-                val acceleration = rigidbody.constantForce.div(rigidbody.mass)
-                acceleration.add(Vector3f(0f, -9.81f, 0f)) // Gravity
-                rigidbody.setVelocity(rigidbody.getVelocity().add(acceleration))
+        return
+        // Gravity
+        for (rb in rigidbodies) {
+            if (!rb.freeze) {
+                rb.applyForce(Vector3f(0f, -9.81f, 0f))
+            }
+        }
 
-                val dragCoefficient = 0.05f // Can be adjusted based on object properties
-                val velocityMagnitude = rigidbody.getVelocity().length()
-                val dragDirection = Vector3f(rigidbody.getVelocity()).normalize().negate()
-                val dragForce = dragDirection.mul(dragCoefficient * velocityMagnitude * velocityMagnitude)
-                rigidbody.applyForce(dragForce)
+        // Integrate motion
+        for (rb in rigidbodies) {
+            rb.integrate()
+        }
 
-                // Update position and rotation based on velocity and angular velocity
-                node.transform.position.add(rigidbody.getVelocity() / 60f)
-                node.transform.rotation.rotateXYZ(
-                    rigidbody.getAngularVelocity().x / 60.0f,
-                    rigidbody.getAngularVelocity().y / 60.0f,
-                    rigidbody.getAngularVelocity().z / 60.0f
-                )
+        println(colliders)
 
-                println("Node: ${node.name}, Position: ${node.transform.position}, Velocity: ${rigidbody.getVelocity()}, Acceleration: ${rigidbody.constantForce.div(rigidbody.mass)}")
+        // Collision detection and response
+        for (i in colliders.indices) {
+            for (j in i + 1 until colliders.size) {
+                val a = colliders[i] as BoxColliderComponent
+                val b = colliders[j] as BoxColliderComponent
+                if (a.intersects(b)) {
+                    println("Collision detected between ${a.node?.name} and ${b.node?.name}")
+                    // Simple collision response: separate objects
+                    val rbA = a.node?.getComponent(Component.RIGIDBODY) as RigidbodyComponent
+                    val rbB = b.node?.getComponent(Component.RIGIDBODY) as RigidbodyComponent
+                    rbA.velocity.negate()
+                    rbB.velocity.negate()
+                }
             }
         }
     }

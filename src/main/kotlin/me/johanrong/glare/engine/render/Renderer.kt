@@ -30,8 +30,7 @@ class Renderer(val engine: Engine) {
                 currentShader = null
             }
 
-            val sortedRenderers = renderers.sortedBy { it.priority }
-            for (renderer in sortedRenderers) {
+            for (renderer in renderers) {
                 renderer.render(node)
             }
         }

@@ -5,44 +5,25 @@ import me.johanrong.glare.engine.node.component.Component
 import me.johanrong.glare.engine.node.component.IComponent
 import org.joml.Vector3f
 
-class RigidbodyComponent : IComponent {
+open class RigidbodyComponent : IComponent {
     override val type = Component.RIGIDBODY
     override var node: Node? = null
 
-    private var velocity = Vector3f(0.0f)
-    private var angularVelocity = Vector3f(0.0f)
-
+    var velocity = Vector3f(0f, 0f, 0f)
     var mass: Float = 1f
-    var inertia = 0f
-    var centerMass = Vector3f(0.0f)
+    var force = Vector3f(0f, 0f, 0f)
+    open var freeze = false
 
-    var constantForce = Vector3f(0.0f, 0.0f, 0.0f)
-    var constantTorque = Vector3f(0.0f)
-
-    var freeze: Boolean = false
-
-    fun applyForce(force: Vector3f) {
-        constantForce.add(force)
+    fun applyForce(f: Vector3f) {
+        force.add(f)
     }
 
-    fun applyTorque(torque: Vector3f) {
-        angularVelocity.add(torque)
-    }
-
-    fun getVelocity(): Vector3f {
-        return velocity
-    }
-
-    fun getAngularVelocity(): Vector3f {
-        return angularVelocity
-    }
-
-    fun setVelocity(velocity: Vector3f) {
-        this.velocity = velocity
-    }
-
-    fun setAngularVelocity(angularVelocity: Vector3f) {
-        this.angularVelocity = angularVelocity
+    fun integrate() {
+        if (freeze) return
+        val acceleration = Vector3f(force).div(mass)
+        velocity.add(Vector3f(acceleration).mul(1/60f))
+        node?.transform?.position?.add(Vector3f(velocity).mul(1/60f))
+        force.zero()
     }
 
     override fun onAttach(node: Node) {

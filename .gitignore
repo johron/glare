@@ -5,3 +5,4 @@ build/
 
 *.log
 src/main/kotlin/me/johanrong/glare/engine/util/GeneratedConstants.kt
+imgui.ini

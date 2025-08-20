@@ -8,6 +8,7 @@ import org.joml.Vector3f
 open class RigidbodyComponent : IComponent {
     override val type = Component.RIGIDBODY
     override var node: Node? = null
+    override var enabled: Boolean = true
 
     var velocity = Vector3f(0f, 0f, 0f)
     var mass: Float = 1f

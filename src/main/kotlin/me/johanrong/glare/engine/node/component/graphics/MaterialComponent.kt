@@ -8,6 +8,7 @@ import me.johanrong.glare.engine.node.component.IComponent
 class MaterialComponent : IComponent {
     override val type = Component.MATERIAL
     override var node: Node? = null
+    override var enabled: Boolean = true
 
     // Material properties
     var diffuse: Color = Color(1f)  // Diffuse color (base color of the material)

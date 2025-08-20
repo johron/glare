@@ -1,12 +1,13 @@
 package me.johanrong.glare.engine.node.component.physics.collision
 
 import me.johanrong.glare.engine.common.Transform
+import me.johanrong.glare.engine.node.component.Component
 import org.joml.Vector3d
 import org.joml.Vector3f
 import org.joml.Vector4f
 
 class BoxColliderComponent(transform: Transform = Transform()) : ColliderComponent(transform) {
-    override val colliderType = Collider.BOX
+    override val type = Component.BOX_COLLIDER
 
     fun getCorners(): Array<Vector3f> {
         val halfExtents = Vector3f(transform.scale).mul(0.5f)

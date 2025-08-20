@@ -20,6 +20,7 @@ class ShaderComponent(
 ) : IComponent {
     override val type = Component.SHADER
     override var node: Node? = null
+    override var enabled: Boolean = true
 
     val programId: Int = GL46.glCreateProgram()
 

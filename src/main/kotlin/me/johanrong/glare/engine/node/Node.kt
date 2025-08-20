@@ -67,6 +67,7 @@ open class Node (
 
     fun update(delta: Double) {
         (getComponent(Component.SCRIPTS) as? ScriptsComponent)?.scripts?.forEach { script ->
+            if ()
             script.update(delta)
         }
 

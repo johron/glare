@@ -7,6 +7,7 @@ import me.johanrong.glare.engine.node.component.IComponent
 class ScriptsComponent(var scripts: MutableList<IScript> = mutableListOf()) : IComponent {
     override val type = Component.SCRIPTS
     override var node: Node? = null
+    override var enabled: Boolean = true
 
     fun addScript(script: IScript) {
         scripts.add(script)

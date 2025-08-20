@@ -1,4 +1,4 @@
-package editor
+package me.johanrong.glare.editor
 
 import me.johanrong.glare.engine.common.Euler
 import me.johanrong.glare.engine.common.Transform
@@ -8,31 +8,26 @@ import me.johanrong.glare.engine.core.graphics.OpenGL
 import me.johanrong.glare.engine.node.Node
 import me.johanrong.glare.engine.node.component.core.CameraComponent
 import me.johanrong.glare.engine.node.component.core.IScript
-import me.johanrong.glare.engine.node.component.core.ScriptsComponent
-import me.johanrong.glare.engine.node.component.graphics.MaterialComponent
-import me.johanrong.glare.engine.node.component.graphics.MeshComponent
-import me.johanrong.glare.engine.node.component.graphics.ShaderComponent
-import me.johanrong.glare.engine.node.component.graphics.TextureComponent
-import me.johanrong.glare.engine.node.component.lighting.PointLightComponent
-import me.johanrong.glare.engine.node.component.physics.StaticbodyComponent
-import me.johanrong.glare.engine.node.component.physics.collision.BoxColliderComponent
-import me.johanrong.glare.engine.ui.ExplorerPanel
+import me.johanrong.glare.editor.ui.ExplorerPanel
+import me.johanrong.glare.engine.core.EngineConfig
 import org.joml.Vector3d
-import org.joml.Vector3f
 
 fun main() {
-    val window = Window(
-        "Glare Editor",
-        1280,
-        720,
+    val config = EngineConfig(
+        title = "Glare Editor",
+        windowWidth = 1280,
+        windowHeight = 720,
         maximized = false,
         vSync = false,
+        fov = 70.0f,
+        iconPaths = listOf("me/johanrong/glare/assets/glare_icon.png"),
+        graphics = OpenGL(),
     )
 
-    Engine(window, OpenGL(), TestGame())
+    Engine(config, Editor())
 }
 
-class TestGame : IScript {
+class Editor : IScript {
     override fun init(root: Node) {
         val engine: Engine = root.engine
 
@@ -46,6 +41,8 @@ class TestGame : IScript {
         }
 
         engine.setCamera(camera)
+
+        engine.panels.add(ExplorerPanel())
 
     }
 

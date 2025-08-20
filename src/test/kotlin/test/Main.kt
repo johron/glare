@@ -3,6 +3,7 @@ package test
 import me.johanrong.glare.engine.common.Euler
 import me.johanrong.glare.engine.common.Transform
 import me.johanrong.glare.engine.core.Engine
+import me.johanrong.glare.engine.core.EngineConfig
 import me.johanrong.glare.engine.core.Window
 import me.johanrong.glare.engine.core.graphics.OpenGL
 import me.johanrong.glare.engine.node.Node
@@ -21,15 +22,18 @@ import org.joml.Vector3f
 
 
 fun main() {
-    val window = Window(
-        "Glare GE",
-        1280,
-        720,
+    val config = EngineConfig(
+        title = "Glare GE",
+        windowWidth = 1280,
+        windowHeight = 720,
         maximized = false,
         vSync = false,
+        fov = 70.0f,
+        iconPaths = listOf("me/johanrong/glare/assets/glare_icon.png"),
+        graphics = OpenGL(),
     )
 
-    Engine(window, OpenGL(), TestGame())
+    Engine(config, TestGame())
 }
 
 class TestGame : IScript {

@@ -10,10 +10,12 @@ import me.johanrong.glare.engine.render.ImGuiRenderer
 import me.johanrong.glare.engine.render.LightRenderer
 import me.johanrong.glare.engine.render.MeshRenderer
 import me.johanrong.glare.engine.render.Renderer
+import me.johanrong.glare.editor.ui.ExplorerPanel
+import me.johanrong.glare.engine.ui.IPanel
 import me.johanrong.glare.engine.util.GeneratedConstants
 import me.johanrong.glare.engine.util.log
 
-class Engine(val window: Window, val graphics: IGraphics, game: IScript) {
+class Engine(var config: EngineConfig, game: IScript) {
     private var delta = 0.0
     private var isRunning = true
     private var camera: Node? = null
@@ -27,6 +29,16 @@ class Engine(val window: Window, val graphics: IGraphics, game: IScript) {
     val input: Input = Input(this)
     val physics: Physics = Physics(this)
     private val renderer: Renderer = Renderer(this)
+
+    var panels: MutableList<IPanel> = mutableListOf()
+
+    val window = Window(
+        title = config.title,
+        width = config.windowWidth,
+        height = config.windowHeight,
+        maximized = config.maximized,
+        vSync = config.vSync,
+    )
 
     companion object {
         const val NANOSECOND: Long = 1_000_000_000L
@@ -84,7 +96,7 @@ class Engine(val window: Window, val graphics: IGraphics, game: IScript) {
 
         renderer.cleanup()
         window.cleanup()
-        graphics.cleanup()
+        config.graphics.cleanup()
     }
 
     fun destroy() {

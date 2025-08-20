@@ -6,5 +6,4 @@ import me.johanrong.glare.engine.node.component.IComponent
 
 abstract class ColliderComponent(var transform: Transform) : IComponent {
     override var node: Node? = null
-    override var enabled: Boolean = true
-}
+    }

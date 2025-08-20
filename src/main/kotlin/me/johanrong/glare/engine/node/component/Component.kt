@@ -25,13 +25,24 @@ enum class Component {
 
     DIRECTIONAL_LIGHT,
     POINT_LIGHT,
-    SPOT_LIGHT,
 
-    BOX_COLLIDER,
-    SPHERE_COLLIDER,
-    CAPSULE_COLLIDER;
+    BOX_COLLIDER;
+
+    val category: Category
+        get() = when (this) {
+            DIRECTIONAL_LIGHT, POINT_LIGHT -> Category.LIGHT
+            BOX_COLLIDER -> Category.COLLIDER
+
+            else -> Category.MISC
+        }
 
     companion object  {
+        enum class Category {
+            COLLIDER,
+            LIGHT,
+            MISC,
+        }
+
         fun asArray(): Array<String> {
             return entries
                 .filter { it != SCRIPTS }
@@ -58,6 +69,10 @@ enum class Component {
 
                 else -> null
             }
+        }
+
+        fun fromStringEnum(name: String): Component? {
+            return entries.firstOrNull { it.name.equals(name, ignoreCase = true) }
         }
     }
 }

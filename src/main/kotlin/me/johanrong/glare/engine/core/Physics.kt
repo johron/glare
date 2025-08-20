@@ -13,7 +13,10 @@ class Physics(engine: Engine) {
 
     fun add(node: Node) {
         node.getComponent(Component.RIGIDBODY)?.let { rigidbodies.add(it as RigidbodyComponent) }
-        node.getComponent(Component.COLLIDER)?.let { colliders.add(it as ColliderComponent) }
+        val colliders = node.getComponentsFromCategory(Component.Companion.Category.COLLIDER)
+        for (collider in colliders) {
+            this.colliders.add(collider as ColliderComponent)
+        }
     }
 
     fun update() {

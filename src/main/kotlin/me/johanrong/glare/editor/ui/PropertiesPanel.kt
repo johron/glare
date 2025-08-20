@@ -55,19 +55,33 @@ class PropertiesPanel : IPanel {
         }
 
         treeNode("Components") {
-            for (component in node!!.getComponents()) {
+            val comps = node!!.getComponents()
+            for (component in comps) {
                 if (component is ScriptsComponent) continue
 
                 text(component.getComponentName())
                 sameLine()
                 button("X") {
+                    println("Removing component: ${component.getComponentName()} from node: ${node!!.name}")
                     node!!.removeComponent(component)
                 }
                 separator()
             }
-            combo("+", 0, Component.asArray()) { selected ->
-                val comp = Component.fromString(Component.asArray()[selected])
+
+            val components = Component.asArray()
+            val list: MutableList<String> = mutableListOf()
+            for (component in components) {
+                val c = Component.fromStringEnum(component)
+                if (c == null) continue
+                if (node!!.hasComponent(c)) continue
+                if (c == Component.SCRIPTS) continue
+                list.add(c.toString())
+            }
+
+            combo("+", 0, list.toTypedArray()) { selected ->
+                val comp = Component.fromString(list[selected])
                 if (comp != null) {
+                    println("Adding component: ${comp.getComponentName()} to node: ${node!!.name}")
                     node!!.addComponent(comp)
                 }
             }

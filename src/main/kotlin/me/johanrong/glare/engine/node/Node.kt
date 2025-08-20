@@ -24,6 +24,9 @@ open class Node (
             component.onAttach(this)
         }
 
+        if (!hasComponent(Component.SCRIPTS) && parent != null) {
+            addComponent(ScriptsComponent())
+        }
         parent?.addChild(this)
     }
 
@@ -66,7 +69,6 @@ open class Node (
 
     fun update(delta: Double) {
         (getComponent(Component.SCRIPTS) as? ScriptsComponent)?.scripts?.forEach { script ->
-            if ()
             script.update(delta)
         }
 
@@ -88,6 +90,7 @@ open class Node (
     fun addComponent(component: IComponent) {
         component.onAttach(this)
         components.add(component)
+        validateComponents(this)
     }
 
     fun removeComponent(component: IComponent) {
@@ -95,14 +98,23 @@ open class Node (
             throw Exception("Component of type ${component.type} does not exist in this node.")
         }
         components.remove(component)
+        validateComponents(this)
     }
 
     fun getComponent(type: Component): IComponent? {
         return components.firstOrNull { it.type == type }
     }
 
+    fun getComponentsFromCategory(category: Component.Companion.Category): Array<IComponent> {
+        return components.filter { it.type.category == category }.toTypedArray()
+    }
+
     fun hasComponent(type: Component): Boolean {
         return components.any { it.type == type }
+    }
+
+    fun hasComponentsFromCategory(category: Component.Companion.Category): Boolean {
+        return components.any { it.type.category == category }
     }
 
     fun getComponents(): List<IComponent> {
@@ -121,7 +133,20 @@ open class Node (
         fun builder(block: Builder.() -> Unit) : Node {
             val builder = Builder()
             builder.block()
-            return builder.build()
+            val node = builder.build()
+            validateComponents(node)
+            return node
+        }
+
+        fun validateComponents(node: Node) {
+            val colliderComponents = node.components.filter {
+                it.type.name.contains("COLLIDER")
+            }
+
+            if (colliderComponents.size > 1) {
+                println("exception")
+                throw Exception("Node '${node.name}' cannot have more than one collider component")
+            }
         }
     }
 

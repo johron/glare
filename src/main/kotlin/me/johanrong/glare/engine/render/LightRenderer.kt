@@ -15,9 +15,12 @@ class LightRenderer(val engine: Engine) : IRenderer {
     override fun render(node: Node) {
         val shader = engine.getRenderer().currentShader
 
-        if (node.hasComponent(Component.LIGHT)) {
-            val lightComponent = node.getComponent(Component.LIGHT) as LightComponent
-            lights.add(lightComponent)
+        if (node.hasComponentsFromCategory(Component.Companion.Category.LIGHT)) {
+            val lightComponents = node.getComponentsFromCategory(Component.Companion.Category.LIGHT)
+
+            for (component in lightComponents) {
+                lights.add(component as LightComponent)
+            }
         }
 
         if (shader != null) {

@@ -7,7 +7,6 @@ import me.johanrong.glare.engine.node.component.IComponent
 class CameraComponent : IComponent {
     override val type = Component.CAMERA
     override var node: Node? = null
-    override var enabled: Boolean = true
-
+    
     override fun cleanup() {}
 }

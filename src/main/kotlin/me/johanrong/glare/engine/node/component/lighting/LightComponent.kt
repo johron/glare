@@ -7,7 +7,6 @@ import me.johanrong.glare.engine.node.component.graphics.ShaderComponent
 
 abstract class LightComponent(var intensity: Float = 1.0f, var color: Color = Color(1f)) : IComponent {
     override var node: Node? = null
-    override var enabled: Boolean = true
-
+    
     abstract fun applyToShader(shader: ShaderComponent, index: Int)
 }

@@ -1,27 +1,16 @@
 package me.johanrong.glare.editor
 
+import me.johanrong.glare.editor.ui.ExplorerPanel
+import me.johanrong.glare.editor.ui.PropertiesPanel
 import me.johanrong.glare.engine.common.Euler
 import me.johanrong.glare.engine.common.Transform
 import me.johanrong.glare.engine.core.Engine
-import me.johanrong.glare.engine.core.Window
-import me.johanrong.glare.engine.core.OpenGL
+import me.johanrong.glare.engine.core.EngineConfig
 import me.johanrong.glare.engine.node.Node
 import me.johanrong.glare.engine.node.component.core.CameraComponent
 import me.johanrong.glare.engine.node.component.core.IScript
-import me.johanrong.glare.editor.ui.ExplorerPanel
-import me.johanrong.glare.editor.ui.PropertiesPanel
-import me.johanrong.glare.engine.core.EngineConfig
 import me.johanrong.glare.engine.node.component.core.ScriptsComponent
-import me.johanrong.glare.engine.node.component.graphics.MaterialComponent
-import me.johanrong.glare.engine.node.component.graphics.MeshComponent
-import me.johanrong.glare.engine.node.component.graphics.ShaderComponent
-import me.johanrong.glare.engine.node.component.graphics.TextureComponent
-import me.johanrong.glare.engine.node.component.lighting.PointLightComponent
-import me.johanrong.glare.engine.node.component.physics.RigidbodyComponent
-import me.johanrong.glare.engine.node.component.physics.StaticbodyComponent
-import me.johanrong.glare.engine.node.component.physics.collision.BoxColliderComponent
 import org.joml.Vector3d
-import org.joml.Vector3f
 
 fun main() {
     val config = EngineConfig(

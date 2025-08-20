@@ -4,7 +4,6 @@ import me.johanrong.glare.engine.event.EventBus
 import me.johanrong.glare.engine.event.NodeSelectedEvent
 import me.johanrong.glare.engine.node.Node
 import me.johanrong.glare.engine.node.component.Component
-import me.johanrong.glare.engine.node.component.IComponent
 import me.johanrong.glare.engine.node.component.core.ScriptsComponent
 import me.johanrong.glare.engine.ui.IPanel
 

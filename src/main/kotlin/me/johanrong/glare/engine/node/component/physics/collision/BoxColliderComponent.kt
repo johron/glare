@@ -2,7 +2,6 @@ package me.johanrong.glare.engine.node.component.physics.collision
 
 import me.johanrong.glare.engine.common.Transform
 import me.johanrong.glare.engine.node.component.Component
-import org.joml.Vector3d
 import org.joml.Vector3f
 import org.joml.Vector4f
 

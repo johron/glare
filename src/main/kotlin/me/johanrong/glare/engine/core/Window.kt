@@ -1,6 +1,5 @@
 package me.johanrong.glare.engine.core
 
-import imgui.ImGui
 import me.johanrong.glare.engine.util.loadImage
 import org.joml.Matrix4f
 import org.lwjgl.glfw.GLFW

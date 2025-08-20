@@ -5,7 +5,6 @@ import me.johanrong.glare.engine.core.Engine
 import me.johanrong.glare.engine.node.component.Component
 import me.johanrong.glare.engine.node.component.IComponent
 import me.johanrong.glare.engine.node.component.core.ScriptsComponent
-import me.johanrong.glare.engine.node.component.lighting.LightComponent
 
 open class Node (
     var name: String = "Node",

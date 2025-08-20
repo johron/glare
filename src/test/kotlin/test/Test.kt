@@ -4,7 +4,6 @@ import me.johanrong.glare.engine.common.Euler
 import me.johanrong.glare.engine.common.Transform
 import me.johanrong.glare.engine.core.Engine
 import me.johanrong.glare.engine.core.EngineConfig
-import me.johanrong.glare.engine.core.OpenGL
 import me.johanrong.glare.engine.node.Node
 import me.johanrong.glare.engine.node.component.core.CameraComponent
 import me.johanrong.glare.engine.node.component.core.IScript

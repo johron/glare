@@ -2,7 +2,6 @@ package me.johanrong.glare.engine.node.component.lighting
 
 import me.johanrong.glare.engine.common.Color
 import me.johanrong.glare.engine.node.Node
-import me.johanrong.glare.engine.node.component.Component
 import me.johanrong.glare.engine.node.component.IComponent
 import me.johanrong.glare.engine.node.component.graphics.ShaderComponent
 

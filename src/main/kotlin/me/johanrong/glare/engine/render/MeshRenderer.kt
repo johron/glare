@@ -6,8 +6,6 @@ import me.johanrong.glare.engine.node.component.Component
 import me.johanrong.glare.engine.node.component.graphics.MaterialComponent
 import me.johanrong.glare.engine.node.component.graphics.MeshComponent
 import me.johanrong.glare.engine.node.component.graphics.TextureComponent
-import org.lwjgl.opengl.GL11.GL_NO_ERROR
-import org.lwjgl.opengl.GL11.glGetError
 import org.lwjgl.opengl.GL46
 
 class MeshRenderer(val engine: Engine) : IRenderer {

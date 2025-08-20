@@ -1,6 +1,5 @@
-import imgui.ImGui
-import imgui.gl3.ImGuiImplGl3
-import imgui.glfw.ImGuiImplGlfw
+package test
+
 import me.johanrong.glare.engine.common.Euler
 import me.johanrong.glare.engine.common.Transform
 import me.johanrong.glare.engine.core.Engine
@@ -15,7 +14,6 @@ import me.johanrong.glare.engine.node.component.graphics.MeshComponent
 import me.johanrong.glare.engine.node.component.graphics.ShaderComponent
 import me.johanrong.glare.engine.node.component.graphics.TextureComponent
 import me.johanrong.glare.engine.node.component.lighting.PointLightComponent
-import me.johanrong.glare.engine.node.component.physics.RigidbodyComponent
 import me.johanrong.glare.engine.node.component.physics.StaticbodyComponent
 import me.johanrong.glare.engine.node.component.physics.collision.BoxColliderComponent
 import org.joml.Vector3d

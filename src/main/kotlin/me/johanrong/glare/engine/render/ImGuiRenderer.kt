@@ -6,6 +6,8 @@ import imgui.gl3.ImGuiImplGl3
 import imgui.glfw.ImGuiImplGlfw
 import me.johanrong.glare.engine.core.Engine
 import me.johanrong.glare.engine.node.Node
+import me.johanrong.glare.engine.ui.ExplorerPanel
+import me.johanrong.glare.engine.ui.IPanel
 import me.johanrong.glare.engine.ui.Panel
 
 
@@ -15,6 +17,8 @@ class ImGuiRenderer(val engine: Engine) : IRenderer {
 
     private var time = System.nanoTime()
     private var delta = 0.0
+
+    var panels: MutableList<IPanel> = mutableListOf(ExplorerPanel())
 
     override fun init() {
         val io = ImGui.getIO()
@@ -32,15 +36,9 @@ class ImGuiRenderer(val engine: Engine) : IRenderer {
         imGuiGlfw.newFrame();
         ImGui.newFrame();
 
-        Panel("Glare Engine")
-            .text("Version - ${Engine.VERSION}")
-            .text("FPS - ${String.format("%.2f", 1000.0/delta)}")
-            .separator()
-            .inputText("Search", "", callback = { searchText ->
-                // Handle search text input
-            })
-            .build()
-
+        for (panel in panels) {
+            panel.build()
+        }
 
         ImGui.render()
         imGuiGl3.renderDrawData(ImGui.getDrawData())

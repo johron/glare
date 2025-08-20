@@ -1,9 +1,6 @@
 package me.johanrong.glare.engine.core
 
 import imgui.ImGui
-import imgui.flag.ImGuiConfigFlags
-import imgui.gl3.ImGuiImplGl3
-import imgui.glfw.ImGuiImplGlfw
 import me.johanrong.glare.engine.core.graphics.IGraphics
 import me.johanrong.glare.engine.io.Input
 import me.johanrong.glare.engine.node.Node

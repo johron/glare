@@ -3,7 +3,7 @@ package me.johanrong.glare.engine.ui
 import imgui.ImGui
 import imgui.type.ImString
 
-class Panel(val name: String) {
+open class Panel(val name: String) {
     fun text(text: String) = apply {
         ImGui.text(text)
     }
@@ -60,7 +60,6 @@ class Panel(val name: String) {
             callback(imString.get())
         }
     }
-
 
     init {
         ImGui.begin(name)

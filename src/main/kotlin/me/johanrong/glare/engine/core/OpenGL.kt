@@ -1,11 +1,9 @@
-package me.johanrong.glare.engine.core.graphics
+package me.johanrong.glare.engine.core
 
 import org.lwjgl.opengl.GL
 import org.lwjgl.opengl.GL46
-import org.lwjgl.opengl.GLDebugMessageCallback
-import org.lwjgl.opengl.GLUtil
 
-class OpenGL : IGraphics {
+class OpenGL {
     init {
         GL.createCapabilities();
 
@@ -22,7 +20,7 @@ class OpenGL : IGraphics {
         //}, 0)
     }
 
-    override fun cleanup() {
+    fun cleanup() {
         GL46.glClear(GL46.GL_COLOR_BUFFER_BIT or GL46.GL_DEPTH_BUFFER_BIT)
         GL46.glDisable(GL46.GL_DEPTH_TEST)
         GL46.glDisable(GL46.GL_STENCIL_TEST)

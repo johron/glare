@@ -1,7 +1,6 @@
 package me.johanrong.glare.engine.core
 
 import imgui.ImGui
-import me.johanrong.glare.engine.core.graphics.IGraphics
 import me.johanrong.glare.engine.io.Input
 import me.johanrong.glare.engine.node.Node
 import me.johanrong.glare.engine.node.component.Component
@@ -10,7 +9,6 @@ import me.johanrong.glare.engine.render.ImGuiRenderer
 import me.johanrong.glare.engine.render.LightRenderer
 import me.johanrong.glare.engine.render.MeshRenderer
 import me.johanrong.glare.engine.render.Renderer
-import me.johanrong.glare.editor.ui.ExplorerPanel
 import me.johanrong.glare.engine.ui.IPanel
 import me.johanrong.glare.engine.util.GeneratedConstants
 import me.johanrong.glare.engine.util.log
@@ -67,7 +65,9 @@ class Engine(var config: EngineConfig, game: IScript) {
                 isRunning = false
             }
 
-            root.update(delta)
+            if (!config.disableScripts) {
+                root.update(delta)
+            }
             game.update(delta)
             window.update()
             renderer.render()
@@ -96,7 +96,6 @@ class Engine(var config: EngineConfig, game: IScript) {
 
         renderer.cleanup()
         window.cleanup()
-        config.graphics.cleanup()
     }
 
     fun destroy() {

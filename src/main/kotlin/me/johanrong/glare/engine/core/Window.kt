@@ -23,6 +23,8 @@ class Window (
     private var handle: Long
     private var projectionMatrix: Matrix4f = Matrix4f()
 
+    private var opengl: OpenGL? = null
+
     companion object {
         const val Z_NEAR: Float = 0.01f;
         const val Z_FAR: Float = 1000.0f;
@@ -58,6 +60,8 @@ class Window (
 
         GLFW.glfwMakeContextCurrent(handle)
 
+        opengl = OpenGL()
+
         if (vSync) {
             GLFW.glfwSwapInterval(1)
         } else {
@@ -78,19 +82,13 @@ class Window (
     fun update() {
         GLFW.glfwSwapBuffers(handle)
         GLFW.glfwPollEvents()
-
-        if (ImGui.isAnyItemActive()) {
-
-
-        } else {
-            // Allow GLFW to process input normally
-        }
     }
 
     fun cleanup() {
         GLFW.glfwDestroyWindow(handle)
         GLFW.glfwTerminate()
         GLFW.glfwSetErrorCallback(null)?.free()
+        opengl!!.cleanup()
     }
 
     fun setTitle(title: String) {

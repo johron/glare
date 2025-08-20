@@ -6,10 +6,6 @@ import imgui.gl3.ImGuiImplGl3
 import imgui.glfw.ImGuiImplGlfw
 import me.johanrong.glare.engine.core.Engine
 import me.johanrong.glare.engine.node.Node
-import me.johanrong.glare.editor.ui.ExplorerPanel
-import me.johanrong.glare.engine.ui.IPanel
-import me.johanrong.glare.engine.ui.Panel
-
 
 class ImGuiRenderer(val engine: Engine) : IRenderer {
     private val imGuiGlfw = ImGuiImplGlfw()
@@ -35,7 +31,10 @@ class ImGuiRenderer(val engine: Engine) : IRenderer {
         ImGui.newFrame();
 
         for (panel in engine.panels) {
-            panel.build()
+            if (panel.engine == null) panel.engine = engine
+            panel.begin()
+            panel.render()
+            panel.end()
         }
 
         ImGui.render()

@@ -4,12 +4,13 @@ import me.johanrong.glare.engine.common.Euler
 import me.johanrong.glare.engine.common.Transform
 import me.johanrong.glare.engine.core.Engine
 import me.johanrong.glare.engine.core.Window
-import me.johanrong.glare.engine.core.graphics.OpenGL
+import me.johanrong.glare.engine.core.OpenGL
 import me.johanrong.glare.engine.node.Node
 import me.johanrong.glare.engine.node.component.core.CameraComponent
 import me.johanrong.glare.engine.node.component.core.IScript
 import me.johanrong.glare.editor.ui.ExplorerPanel
 import me.johanrong.glare.engine.core.EngineConfig
+import me.johanrong.glare.engine.node.component.core.ScriptsComponent
 import org.joml.Vector3d
 
 fun main() {
@@ -20,8 +21,7 @@ fun main() {
         maximized = false,
         vSync = false,
         fov = 70.0f,
-        iconPaths = listOf("me/johanrong/glare/assets/glare_icon.png"),
-        graphics = OpenGL(),
+        disableScripts = true
     )
 
     Engine(config, Editor())

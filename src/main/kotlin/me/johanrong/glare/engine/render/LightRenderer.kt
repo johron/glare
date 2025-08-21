@@ -2,7 +2,7 @@ package me.johanrong.glare.engine.render
 
 import me.johanrong.glare.engine.core.Engine
 import me.johanrong.glare.engine.node.Node
-import me.johanrong.glare.engine.node.component.Component
+import me.johanrong.glare.engine.node.component.CCategory
 import me.johanrong.glare.engine.node.component.lighting.LightComponent
 
 class LightRenderer(val engine: Engine) : IRenderer {
@@ -15,8 +15,8 @@ class LightRenderer(val engine: Engine) : IRenderer {
     override fun render(node: Node) {
         val shader = engine.getRenderer().currentShader
 
-        if (node.hasComponentsFromCategory(Component.Companion.Category.LIGHT)) {
-            val lightComponents = node.getComponentsFromCategory(Component.Companion.Category.LIGHT)
+        if (node.hasComponentsFromCategory(CCategory.LIGHT)) {
+            val lightComponents = node.getComponentsFromCategory(CCategory.LIGHT)
 
             for (component in lightComponents) {
                 lights.add(component as LightComponent)

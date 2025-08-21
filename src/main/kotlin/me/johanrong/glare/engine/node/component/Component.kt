@@ -28,23 +28,16 @@ enum class Component {
 
     BOX_COLLIDER;
 
-    val category: Category
+    val category: CCategory
         get() = when (this) {
-            DIRECTIONAL_LIGHT, POINT_LIGHT -> Category.LIGHT
-            STATICBODY, RIGIDBODY -> Category.BODY
-            BOX_COLLIDER -> Category.COLLIDER
+            DIRECTIONAL_LIGHT, POINT_LIGHT -> CCategory.LIGHT
+            STATICBODY, RIGIDBODY -> CCategory.BODY
+            BOX_COLLIDER -> CCategory.COLLIDER
 
-            else -> Category.MISC
+            else -> CCategory.MISC
         }
 
     companion object  {
-        enum class Category {
-            COLLIDER,
-            LIGHT,
-            BODY,
-            MISC,
-        }
-
         fun asArray(): Array<String> {
             return entries
                 .filter { it != SCRIPTS }

@@ -1,6 +1,7 @@
 package me.johanrong.glare.engine.core
 
 import me.johanrong.glare.engine.node.Node
+import me.johanrong.glare.engine.node.component.CCategory
 import me.johanrong.glare.engine.node.component.Component
 import me.johanrong.glare.engine.node.component.physics.RigidbodyComponent
 import me.johanrong.glare.engine.node.component.physics.collision.BoxColliderComponent
@@ -13,7 +14,7 @@ class Physics(engine: Engine) {
 
     fun add(node: Node) {
         node.getComponent(Component.RIGIDBODY)?.let { rigidbodies.add(it as RigidbodyComponent) }
-        val colliders = node.getComponentsFromCategory(Component.Companion.Category.COLLIDER)
+        val colliders = node.getComponentsFromCategory(CCategory.COLLIDER)
         for (collider in colliders) {
             this.colliders.add(collider as ColliderComponent)
         }

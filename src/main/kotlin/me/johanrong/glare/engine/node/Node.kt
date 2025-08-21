@@ -2,6 +2,7 @@ package me.johanrong.glare.engine.node
 
 import me.johanrong.glare.engine.common.Transform
 import me.johanrong.glare.engine.core.Engine
+import me.johanrong.glare.engine.node.component.CCategory
 import me.johanrong.glare.engine.node.component.Component
 import me.johanrong.glare.engine.node.component.IComponent
 import me.johanrong.glare.engine.node.component.core.ScriptsComponent
@@ -105,7 +106,7 @@ open class Node (
         return components.firstOrNull { it.type == type }
     }
 
-    fun getComponentsFromCategory(category: Component.Companion.Category): Array<IComponent> {
+    fun getComponentsFromCategory(category: CCategory): Array<IComponent> {
         return components.filter { it.type.category == category }.toTypedArray()
     }
 
@@ -113,7 +114,7 @@ open class Node (
         return components.any { it.type == type }
     }
 
-    fun hasComponentsFromCategory(category: Component.Companion.Category): Boolean {
+    fun hasComponentsFromCategory(category: CCategory): Boolean {
         return components.any { it.type.category == category }
     }
 
@@ -147,7 +148,7 @@ open class Node (
                 throw Exception("Node '${node.name}' cannot have more than one collider component")
             }
 
-            if (colliderComponents.isNotEmpty() && !node.hasComponentsFromCategory(Component.Companion.Category.BODY)) {
+            if (colliderComponents.isNotEmpty() && !node.hasComponentsFromCategory(CCategory.BODY)) {
                 throw Exception("Node '${node.name}' has a collider component but no body component. " +
                         "Please add a RigidbodyComponent to the node.")
             }

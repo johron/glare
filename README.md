@@ -3,7 +3,7 @@
 
 ## TODO
 - [ ] Add new shader system, with builtin lighting and stuff?!
-  - [ ] Have to change Renderer so that it loops over all nodes and then gives each node to a sub-renderer. Then implement a Light Renderer sub-renderer
+    - [ ] Have to change Renderer so that it loops over all nodes and then gives each node to a sub-renderer. Then implement a Light Renderer sub-renderer
 
 ## Dependencies and frameworks used
 - Java 22
@@ -20,32 +20,34 @@
 ```
 
 ## Example Usage
-- Example is probably already outdated. 
+- Example is probably already outdated.
 ```kotlin
 fun main() {
-    val window = Window(
-        "Glare GE",
-        1280,
-        720,
+    val config = EngineConfig(
+        title = "Glare GE",
+        windowWidth = 1280,
+        windowHeight = 720,
         maximized = false,
-        vSync = true,
+        vSync = false,
+        fov = 70.0f,
     )
 
-    Engine(window, OpenGL(), TestGame())
+    Engine(config, TestGame())
 }
 
 class TestGame : IScript {
     lateinit var engine: Engine
-  
+
     override fun init(root: Node) {
-        engine = root.engine
+        engine= root.engine
 
         val camera = Node.builder {
             name = "Freecam"
-            transform = Transform(Euler(0.0, 0.0, -90.0))
+            transform = Transform(Vector3d(0.0, 5.0, 5.0), Euler(0.0, 0.0, -90.0))
             parent = root
             components = mutableListOf(
                 CameraComponent(),
+                ScriptsComponent(mutableListOf(FreecamScript())),
             )
         }
 
@@ -70,11 +72,7 @@ class TestGame : IScript {
     override fun update(delta: Double) {
         val node = engine.root.getFirstChild("Node")
         node!!.transform.rotation.addYaw(100.0 * delta)
-  }
-
-  override fun fixedUpdate() {}
-  override fun render() {}
-  override fun cleanup() {}
+    }
 }
 ```
 

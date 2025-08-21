@@ -12,7 +12,12 @@ project.ext.objVersion = "0.4.0"
 project.ext.imguiVersion = "1.89.0"
 
 group = 'me.johanrong.glare.engine'
-version = '25w34a'
+
+def now = Calendar.instance
+def year = now.get(Calendar.YEAR) % 100 // Get last 2 digits of year
+def week = String.format('%02d', now.get(Calendar.WEEK_OF_YEAR))
+def letter = 'a'
+version = "${year}w${week}${letter}"
 
 repositories {
     mavenCentral()

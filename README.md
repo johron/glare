@@ -11,6 +11,7 @@
     - OpenGL 4.6
 - [JOML 1.10.8](https://github.com/JOML-CI/JOML)
 - [Obj 0.4.0](https://github.com/javagl/Obj)
+- [ImGui Java 1.86.11](https://github.com/SpaiR/imgui-java)
 
 ## Additional Setup
 - Generate Constants

@@ -3,6 +3,7 @@
 
 ## TODO
 - [ ] Do stuff
+- [ ] Split engine and editor
 
 ## Dependencies and frameworks used
 - Java 22

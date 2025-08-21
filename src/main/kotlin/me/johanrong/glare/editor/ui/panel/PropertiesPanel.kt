@@ -8,7 +8,6 @@ import me.johanrong.glare.engine.node.component.Component
 import me.johanrong.glare.engine.node.component.IComponent
 import me.johanrong.glare.engine.node.component.core.ScriptsComponent
 import me.johanrong.glare.engine.ui.IPanel
-import kotlin.reflect.typeOf
 
 class PropertiesPanel : IPanel {
     override var name: String = "Properties"

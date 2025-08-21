@@ -2,8 +2,7 @@
 - A modular, cross-platform 3D game engine built in Kotlin using LWJGL and OpenGL
 
 ## TODO
-- [ ] Add new shader system, with builtin lighting and stuff?!
-    - [ ] Have to change Renderer so that it loops over all nodes and then gives each node to a sub-renderer. Then implement a Light Renderer sub-renderer
+- [ ] Do stuff
 
 ## Dependencies and frameworks used
 - Java 22

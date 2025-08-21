@@ -31,6 +31,7 @@ enum class Component {
     val category: Category
         get() = when (this) {
             DIRECTIONAL_LIGHT, POINT_LIGHT -> Category.LIGHT
+            STATICBODY, RIGIDBODY -> Category.BODY
             BOX_COLLIDER -> Category.COLLIDER
 
             else -> Category.MISC
@@ -40,6 +41,7 @@ enum class Component {
         enum class Category {
             COLLIDER,
             LIGHT,
+            BODY,
             MISC,
         }
 

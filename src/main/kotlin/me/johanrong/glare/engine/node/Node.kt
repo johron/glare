@@ -144,8 +144,12 @@ open class Node (
             }
 
             if (colliderComponents.size > 1) {
-                println("exception")
                 throw Exception("Node '${node.name}' cannot have more than one collider component")
+            }
+
+            if (colliderComponents.isNotEmpty() && !node.hasComponentsFromCategory(Component.Companion.Category.BODY)) {
+                throw Exception("Node '${node.name}' has a collider component but no body component. " +
+                        "Please add a RigidbodyComponent to the node.")
             }
         }
     }

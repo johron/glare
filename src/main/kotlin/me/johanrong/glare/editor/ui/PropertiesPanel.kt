@@ -4,6 +4,7 @@ import me.johanrong.glare.engine.event.EventBus
 import me.johanrong.glare.engine.event.NodeSelectedEvent
 import me.johanrong.glare.engine.node.Node
 import me.johanrong.glare.engine.node.component.Component
+import me.johanrong.glare.engine.node.component.IComponent
 import me.johanrong.glare.engine.node.component.core.ScriptsComponent
 import me.johanrong.glare.engine.ui.IPanel
 
@@ -54,18 +55,22 @@ class PropertiesPanel : IPanel {
             }
         }
 
-        treeNode("Components") {
-            val comps = node!!.getComponents()
-            for (component in comps) {
+        treeNodeEx("Components", 32) {
+            val toRemove = mutableListOf<IComponent>()
+            for (component in node!!.getComponents()) {
                 if (component is ScriptsComponent) continue
 
                 text(component.getComponentName())
                 sameLine()
                 button("X") {
                     println("Removing component: ${component.getComponentName()} from node: ${node!!.name}")
-                    node!!.removeComponent(component)
+                    toRemove.add(component)
                 }
                 separator()
+            }
+
+            for (component in toRemove) {
+                node!!.removeComponent(component)
             }
 
             val components = Component.asArray()

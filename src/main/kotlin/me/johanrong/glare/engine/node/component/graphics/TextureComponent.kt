@@ -16,8 +16,8 @@ class TextureComponent(var path: String? = null) : IComponent {
 
     private var id: Int = GL46.glGenTextures()
 
-    override fun apply() {
-        if (path == null) return
+    init {
+        //if (path == null) return
 
         val width: Int
         val height: Int

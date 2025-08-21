@@ -35,6 +35,12 @@ interface IPanel {
     fun spacing() = apply {
         ImGui.spacing()
     }
+    fun selectable(label: String, selected: Boolean, callback: (selected: Boolean) -> Unit) = apply {
+        val imBool = ImBoolean(selected)
+        if (ImGui.selectable(label(label), imBool)) {
+            callback(imBool.get())
+        }
+    }
 
     fun button(label: String, callback: () -> Unit = {}) = apply {
         if (ImGui.button(label(label))) {
@@ -101,6 +107,18 @@ interface IPanel {
             ImGui.treePop()
         }
         return opened
+    }
+    fun treeNodeEx2(label: String, flags: Int, callback: () -> Unit): Boolean {
+        val result = ImGui.treeNodeEx(label(label), flags)
+        // Call the callback when clicked (regardless of open state)
+        if (ImGui.isItemClicked()) {
+            callback()
+        }
+        if (result) {
+            callback()
+            ImGui.treePop()
+        }
+        return result
     }
 
     fun render()

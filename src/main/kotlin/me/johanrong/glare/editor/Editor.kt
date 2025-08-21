@@ -10,7 +10,15 @@ import me.johanrong.glare.engine.node.Node
 import me.johanrong.glare.engine.node.component.core.CameraComponent
 import me.johanrong.glare.engine.node.component.core.IScript
 import me.johanrong.glare.engine.node.component.core.ScriptsComponent
+import me.johanrong.glare.engine.node.component.graphics.MaterialComponent
+import me.johanrong.glare.engine.node.component.graphics.MeshComponent
+import me.johanrong.glare.engine.node.component.graphics.ShaderComponent
+import me.johanrong.glare.engine.node.component.graphics.TextureComponent
+import me.johanrong.glare.engine.node.component.lighting.PointLightComponent
+import me.johanrong.glare.engine.node.component.physics.StaticbodyComponent
+import me.johanrong.glare.engine.node.component.physics.collision.BoxColliderComponent
 import org.joml.Vector3d
+import org.joml.Vector3f
 
 fun main() {
     val config = EngineConfig(
@@ -20,7 +28,7 @@ fun main() {
         maximized = false,
         vSync = false,
         fov = 70.0f,
-        disableScripts = true
+        disableScripts = false
     )
 
     Engine(config, Editor())
@@ -41,6 +49,17 @@ class Editor : IScript {
         }
 
         engine.setCamera(camera)
+
+        Node.builder {
+            name = "Node1"
+            parent = camera
+        }
+
+
+        Node.builder {
+            name = "Node2"
+            parent = root
+        }
 
         engine.panels.add(ExplorerPanel())
         engine.panels.add(PropertiesPanel())

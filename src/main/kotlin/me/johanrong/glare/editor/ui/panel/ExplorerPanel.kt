@@ -1,4 +1,4 @@
-package me.johanrong.glare.editor.ui
+package me.johanrong.glare.editor.ui.panel
 
 import me.johanrong.glare.engine.core.Engine
 import me.johanrong.glare.engine.event.EventBus
@@ -17,9 +17,7 @@ class ExplorerPanel : IPanel {
         }
 
         separator()
-        button("Root")
-        sameLine()
-        treeNodeEx(" ", 32) {
+        treeNodeEx("Root", 32) {
             makeTree(engine?.root!!)
         }
         separator()
@@ -28,7 +26,7 @@ class ExplorerPanel : IPanel {
     fun makeTree(node: Node) {
         val nodes = node.getChildren()
         for (node in nodes) {
-            button(node.name) {
+            checkbox(node.name, false) {
                 EventBus.publish(NodeSelectedEvent(node))
             }
             if (node.getChildren().isNotEmpty()) {

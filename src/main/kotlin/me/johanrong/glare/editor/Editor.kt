@@ -1,7 +1,7 @@
 package me.johanrong.glare.editor
 
-import me.johanrong.glare.editor.ui.ExplorerPanel
-import me.johanrong.glare.editor.ui.PropertiesPanel
+import me.johanrong.glare.editor.ui.panel.ExplorerPanel
+import me.johanrong.glare.editor.ui.panel.PropertiesPanel
 import me.johanrong.glare.engine.common.Euler
 import me.johanrong.glare.engine.common.Transform
 import me.johanrong.glare.engine.core.Engine

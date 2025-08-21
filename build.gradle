@@ -1,5 +1,6 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '2.1.20'
+    id 'application'
 }
 
 project.ext.lwjglVersion = "3.3.3"
@@ -35,6 +36,8 @@ dependencies {
     implementation("io.github.spair:imgui-java-lwjgl3:${imguiVersion}")
     implementation("io.github.spair:imgui-java-natives-linux:${imguiVersion}")
     implementation("io.github.spair:imgui-java-natives-windows:${imguiVersion}")
+
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     implementation "org.lwjgl:lwjgl"
     implementation "org.lwjgl:lwjgl-assimp"
@@ -123,10 +126,14 @@ tasks.jar {
         attributes(
                 'Implementation-Title': 'Glare',
                 'Implementation-Version': version,
+                'Main-Class': 'me.johanrong.glare.editor.EditorKt'
         )
     }
     from {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    from('LICENSE') {
+        into('me/johanrong/glare')
     }
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
@@ -144,10 +151,8 @@ task generateConstants {
     }
 }
 
-jar {
-    from('LICENSE') {
-        into('me/johanrong/glare')
-    }
+application {
+    mainClass.set('me.johanrong.glare.editor.EditorKt')
 }
 
 compileKotlin.dependsOn(generateConstants)

@@ -1,6 +1,7 @@
 package me.johanrong.glare.engine.ui
 
 import imgui.ImGui
+import imgui.type.ImBoolean
 import imgui.type.ImInt
 import imgui.type.ImString
 import me.johanrong.glare.engine.core.Engine
@@ -56,8 +57,9 @@ interface IPanel {
         }
     }
     fun checkbox(label: String, active: Boolean, callback: (Boolean) -> Unit) = apply {
-        if (ImGui.checkbox(label(label), active)) {
-            callback(!active)
+        val imBool = ImBoolean(active)
+        if (ImGui.checkbox(label(label), imBool)) {
+            callback(imBool.get())
             println("Checkbox callback, make sure this works correctly")
         }
     }

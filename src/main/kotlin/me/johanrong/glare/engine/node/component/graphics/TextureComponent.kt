@@ -41,9 +41,9 @@ class TextureComponent(var path: String? = null) : IComponent {
 
                 buffer = STBImage.stbi_load_from_memory(imageBuffer, w, h, c, 4)!!
 
-                if (buffer == null) {
-                    throw java.lang.Exception("Could not load texture file: " + path + ": " + STBImage.stbi_failure_reason())
-                }
+                //if (buffer == null) {
+                //    throw java.lang.Exception("Could not load texture file: " + path + ": " + STBImage.stbi_failure_reason())
+                //}
 
                 width = w.get()
                 height = h.get()

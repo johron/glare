@@ -1,27 +1,17 @@
 name: Build Glare
-
 on: push
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 22
         uses: actions/setup-java@v1
         with:
           java-version: 22
-
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-        with:
-          gradle-version: 8.10.2
-
       - name: Build
         run: gradle build
-
       - name: Upload
         uses: actions/upload-artifact@v4
         with:

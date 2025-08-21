@@ -109,7 +109,7 @@ class Window (
 
     private fun setIcons(paths: List<String>) {
         MemoryStack.stackPush().use { stack ->
-            val icons = GLFWImage.mallocStack(paths.size, stack)
+            val icons = GLFWImage.malloc(paths.size, stack)
 
             for (i in paths.indices) {
                 val iconBuffer = loadImage(paths[i], stack)
@@ -123,7 +123,7 @@ class Window (
                         val width = w.get()
                         val height = h.get()
 
-                        val image = GLFWImage.mallocStack(stack)
+                        val image = GLFWImage.malloc(stack)
                         image.set(width, height, buffer)
                         icons.put(image)
 

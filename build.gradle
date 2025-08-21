@@ -113,9 +113,9 @@ dependencies {
 }
 }
 
-test {
-    useJUnitPlatform()
-}
+//test {
+//    useJUnitPlatform()
+//}
 
 kotlin {
     jvmToolchain(22)

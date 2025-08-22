@@ -4,13 +4,16 @@ import me.johanrong.glare.engine.core.Engine
 import me.johanrong.glare.engine.io.Keycode
 import me.johanrong.glare.engine.io.MouseButton
 import me.johanrong.glare.engine.node.Node
+import me.johanrong.glare.engine.node.component.Exported
 import me.johanrong.glare.engine.node.component.core.IScript
 import org.joml.Math
 import org.joml.Vector3d
 
-class FreecamScript(var speed: Double = 5.0) : IScript {
+class FreecamScript() : IScript {
     lateinit var node: Node
     lateinit var engine: Engine
+
+    @Exported("Speed") var speed: Float = 5.0f
 
     override fun init(node: Node) {
         this.node = node

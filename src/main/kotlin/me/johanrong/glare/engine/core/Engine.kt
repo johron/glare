@@ -10,6 +10,7 @@ import me.johanrong.glare.engine.render.ImGuiRenderer
 import me.johanrong.glare.engine.render.LightRenderer
 import me.johanrong.glare.engine.render.MeshRenderer
 import me.johanrong.glare.engine.render.Renderer
+import me.johanrong.glare.engine.ui.IImGuiWrapper
 import me.johanrong.glare.engine.ui.IPanel
 import me.johanrong.glare.engine.util.GeneratedConstants
 import me.johanrong.glare.engine.util.log

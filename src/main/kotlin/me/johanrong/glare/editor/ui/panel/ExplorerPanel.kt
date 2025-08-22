@@ -27,7 +27,7 @@ class ExplorerPanel : IPanel {
             })
         }
         val isSelected = selectedNode == engine?.root
-        val flag = if (isSelected) ImGuiTreeNodeFlags.Selected or ImGuiTreeNodeFlags.OpenOnDoubleClick else ImGuiTreeNodeFlags.OpenOnDoubleClick
+        val flag = if (isSelected) ImGuiTreeNodeFlags.Selected or 32 or ImGuiTreeNodeFlags.OpenOnDoubleClick else ImGuiTreeNodeFlags.OpenOnDoubleClick or 32
         treeNodeEx2("Root", flag) {
             if (ImGui.isItemClicked()) {
                 selectedNode = engine!!.root

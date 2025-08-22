@@ -1,12 +1,14 @@
 package me.johanrong.glare.engine.util
 
 import me.johanrong.glare.engine.core.Engine
-import me.johanrong.glare.engine.node.component.ExportProperty
-import me.johanrong.glare.engine.node.component.ExportPropertyInfo
+import me.johanrong.glare.engine.node.component.Exported
+import me.johanrong.glare.engine.node.component.ExportedProperty
+import me.johanrong.glare.engine.node.component.IComponent
+import me.johanrong.glare.engine.node.component.core.IScript
 import org.lwjgl.system.MemoryStack
 import org.lwjgl.system.MemoryUtil
 import java.nio.ByteBuffer
-import kotlin.reflect.KClass
+import kotlin.reflect.KMutableProperty1
 import kotlin.reflect.full.findAnnotation
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.jvm.isAccessible
@@ -36,22 +38,44 @@ fun loadImage(path: String, stack: MemoryStack): ByteBuffer? {
     }
 }
 
-fun Any.getExportProperties(): List<ExportPropertyInfo> {
-    val result = mutableListOf<ExportPropertyInfo>()
+fun getExportedProperties(script: IScript): List<ExportedProperty> {
+    val kClass = script::class
+    return kClass.memberProperties
+        .filter { it.findAnnotation<Exported>() != null }
+        .map { prop ->
+            prop.isAccessible = true
+            val ann = prop.findAnnotation<Exported>()!!
+            val displayName = ann.name.ifEmpty { prop.name }
 
-    this::class.memberProperties.forEach { property ->
-        if (property.findAnnotation<ExportProperty>() != null) {
-            property.isAccessible = true
-            val value = property.getter.call(this)
-
-            result.add(ExportPropertyInfo(
-                name = property.name,
-                value = value,
-                property = property,
-                mutable = property.findAnnotation<ExportProperty>()?.mutable ?: true
-            ))
+            ExportedProperty(
+                name = displayName,
+                type = prop.returnType,
+                get = { prop.getter.call(script) },
+                set = { value ->
+                    (prop as? KMutableProperty1<IScript, Any?>)
+                        ?.setter?.call(script, value)
+                }
+            )
         }
-    }
+}
 
-    return result
+fun getExportedProperties(component: IComponent): List<ExportedProperty> {
+    val kClass = component::class
+    return kClass.memberProperties
+        .filter { it.findAnnotation<Exported>() != null }
+        .map { prop ->
+            prop.isAccessible = true
+            val ann = prop.findAnnotation<Exported>()!!
+            val displayName = ann.name.ifEmpty { prop.name }
+
+            ExportedProperty(
+                name = displayName,
+                type = prop.returnType,
+                get = { prop.getter.call(component) },
+                set = { value ->
+                    (prop as? KMutableProperty1<IScript, Any?>)
+                        ?.setter?.call(component, value)
+                }
+            )
+        }
 }

@@ -1,6 +1,6 @@
 package me.johanrong.glare.editor.ui.panel
 
-import me.johanrong.glare.editor.ui.element.Field
+import me.johanrong.glare.editor.ui.field.Field
 import me.johanrong.glare.engine.core.Engine
 import me.johanrong.glare.engine.event.EventBus
 import me.johanrong.glare.engine.event.NodeSelectedEvent
@@ -9,10 +9,7 @@ import me.johanrong.glare.engine.node.component.Component
 import me.johanrong.glare.engine.node.component.IComponent
 import me.johanrong.glare.engine.node.component.core.ScriptsComponent
 import me.johanrong.glare.engine.ui.IPanel
-import me.johanrong.glare.engine.util.getExportProperties
-import org.joml.Vector3d
-import org.joml.Vector3f
-import kotlin.reflect.full.createType
+import me.johanrong.glare.engine.util.getExportedProperties
 
 class PropertiesPanel : IPanel {
     override var name: String = "Properties"
@@ -37,28 +34,16 @@ class PropertiesPanel : IPanel {
         separator()
         treeNodeEx("Transform", 32) {
             val transform = node!!.transform
-            treeNodeEx("Position", 32) {
-                text("X: ${transform.position.x}")
-                sameLine()
-                text("Y: ${transform.position.y}")
-                sameLine()
-                text("Z: ${transform.position.z}")
+            inputVector3d("Position", transform.position) { newPos ->
+                transform.position.set(newPos)
             }
 
-            treeNodeEx("Rotation", 32) {
-                text("X: ${transform.rotation.getRoll()}")
-                sameLine()
-                text("Y: ${transform.rotation.getPitch()}")
-                sameLine()
-                text("Z: ${transform.rotation.getYaw()}")
+            inputVector3f("Rotation", transform.rotation.toRadians()) { newRot ->
+                //transform.rotation.set(newRot.x, newRot.y, newRot.z)
             }
 
-            treeNodeEx("Scale", 32) {
-                text("X: ${transform.scale.x}")
-                sameLine()
-                text("Y: ${transform.scale.y}")
-                sameLine()
-                text("Z: ${transform.scale.z}")
+            inputVector3f("Scale", transform.scale) { newScale ->
+                transform.scale.set(newScale)
             }
         }
 
@@ -68,8 +53,9 @@ class PropertiesPanel : IPanel {
                 if (component is ScriptsComponent) continue
 
                 treeNode(component.getComponentName()) {
-                    val properties = component.getExportProperties()
+                    val properties = getExportedProperties(component)
                     for (property in properties) {
+                        //println("Property: ${property.name} (${property.type}), Value: ${property.get()}")
                         Field(property)
                     }
                     button("Remove") {
@@ -110,17 +96,16 @@ class PropertiesPanel : IPanel {
             val scriptsComponent = node!!.getComponent(Component.SCRIPTS) as ScriptsComponent
             for (script in scriptsComponent.scripts) {
                 val name = script::class.simpleName ?: "Unknown Script"
-                val properties = script.getExportProperties()
-                for (property in properties) {
-                    text("${property.name}: ${property.value}")
-                    val type = property.property.returnType
-                    text(type.toString())
-                    if (property.mutable) {
-                        sameLine()
-                        button("Edit")
+
+                treeNode(name) {
+                    val properties = getExportedProperties(script)
+                    for (property in properties) {
+                        Field(property)
+                    }
+                    button("Remove") {
+                        println("TODO: Remove script: $name from node: ${node!!.name}")
                     }
                 }
-                text(name)
             }
         }
     }

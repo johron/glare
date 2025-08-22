@@ -42,6 +42,12 @@ data class Euler (
         yaw = value % 360
     }
 
+    fun set(value: Euler) {
+        this.roll = value.roll % 360
+        this.pitch = value.pitch % 360
+        this.yaw = value.yaw % 360
+    }
+
     fun rotateXYZ(roll: Double, pitch: Double, yaw: Double) {
         this.roll = (this.roll + roll) % 360
         this.pitch = (this.pitch + pitch) % 360

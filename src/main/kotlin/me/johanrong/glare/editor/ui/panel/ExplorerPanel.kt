@@ -21,10 +21,10 @@ class ExplorerPanel : IPanel {
 
         separator()
         button("Add") {
-            engine!!.addNode(Node.builder {
+            Node.builder {
                 name = "Node"
                 parent = selectedNode ?: engine?.root
-            })
+            }
         }
         val isSelected = selectedNode == engine?.root
         val flag = if (isSelected) ImGuiTreeNodeFlags.Selected or 32 or ImGuiTreeNodeFlags.OpenOnDoubleClick else ImGuiTreeNodeFlags.OpenOnDoubleClick or 32

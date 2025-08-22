@@ -38,8 +38,8 @@ class PropertiesPanel : IPanel {
                 transform.position.set(newPos)
             }
 
-            inputVector3f("Rotation", transform.rotation.toRadians()) { newRot ->
-                //transform.rotation.set(newRot.x, newRot.y, newRot.z)
+            inputEuler("Rotation", transform.rotation) { newRot ->
+                transform.rotation.set(newRot)
             }
 
             inputVector3f("Scale", transform.scale) { newScale ->

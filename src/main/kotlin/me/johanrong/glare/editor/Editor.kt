@@ -28,13 +28,13 @@ fun main() {
 }
 
 class Editor : IScript {
-    override fun init(root: Node) {
-        val engine: Engine = root.engine
+    override fun init(node: Node) {
+        val engine: Engine = node.engine
 
         val camera = Node.builder {
             name = "Camera"
             transform = Transform(Vector3d(0.0, 5.0, 5.0), Euler(0.0, 0.0, -90.0))
-            parent = root
+            parent = node
             components = mutableListOf(
                 CameraComponent(),
                 ScriptsComponent(mutableListOf(
@@ -57,7 +57,7 @@ class Editor : IScript {
 
         engine.addNode(Node.builder {
             name = "Node2"
-            parent = root
+            parent = node
         })
 
         engine.panels.add(ExplorerPanel())

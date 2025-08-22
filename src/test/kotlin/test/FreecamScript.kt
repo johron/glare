@@ -12,9 +12,9 @@ class FreecamScript(var speed: Double = 5.0) : IScript {
     lateinit var node: Node
     lateinit var engine: Engine
 
-    override fun init(parent: Node) {
-        this.node = parent
-        this.engine = parent.engine
+    override fun init(node: Node) {
+        this.node = node
+        this.engine = node.engine
     }
 
     override fun update(delta: Double) {

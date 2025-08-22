@@ -34,13 +34,13 @@ fun main() {
 }
 
 class TestGame : IScript {
-    override fun init(parent: Node) {
-        val engine: Engine = parent.engine
+    override fun init(node: Node) {
+        val engine: Engine = node.engine
 
         val camera = Node.builder {
             name = "Freecam"
             transform = Transform(Vector3d(0.0, 5.0, 5.0), Euler(0.0, 0.0, -90.0))
-            this.parent = parent
+            this.parent = node
             components = mutableListOf(
                 CameraComponent(),
                 ScriptsComponent(mutableListOf(FreecamScript())),
@@ -52,7 +52,7 @@ class TestGame : IScript {
         Node.builder {
             name = "Sun"
             transform = Transform(50.0, 100.0, 0.0)
-            this.parent = parent
+            this.parent = node
             components = mutableListOf(
                 PointLightComponent(intensity = 1000f),
             )
@@ -78,7 +78,7 @@ class TestGame : IScript {
         Node.builder {
             name = "Node"
             transform = Transform(Vector3d(0.0, 0.0, 0.0), Euler(0.0), Vector3f(5.0f, 0.5f, 5.0f))
-            this.parent = parent
+            this.parent = node
             components = mutableListOf(
                 MeshComponent("/model/cube.obj"),
                 TextureComponent("/texture/blue.png"),

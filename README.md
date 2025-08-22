@@ -2,7 +2,7 @@
 - A modular, cross-platform 3D game engine built in Kotlin using LWJGL and OpenGL
 
 ## TODO
-- [ ] ¿?
+- [ ] Add dependencies to components, so that they can only exist or maybe be run/started with it's requirements
 
 ## Dependencies and frameworks used
 - Java 22

@@ -2,9 +2,7 @@
 - A modular, cross-platform 3D game engine built in Kotlin using LWJGL and OpenGL
 
 ## TODO
-- [ ] Nodes should be added to parents through the engine, not at construction, since this
-      can cause concurrent modification exceptions in atleast the renderer.
-- [ ] Split engine and editor
+- [ ] Split engine and editor into own repos?
 
 ## Dependencies and frameworks used
 - Java 22

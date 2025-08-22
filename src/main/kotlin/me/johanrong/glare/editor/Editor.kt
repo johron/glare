@@ -43,22 +43,21 @@ class Editor : IScript {
             )
         }
 
-        engine.addNode(camera)
         engine.setCamera(camera)
 
-        engine.addNode(Node.builder {
+        Node.builder {
             name = "Node1"
             parent = camera
             components = mutableListOf(
                 RigidbodyComponent()
             )
-        })
+        }
 
 
-        engine.addNode(Node.builder {
+        Node.builder {
             name = "Node2"
             parent = node
-        })
+        }
 
         engine.panels.add(ExplorerPanel())
         engine.panels.add(PropertiesPanel())

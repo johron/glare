@@ -58,7 +58,6 @@ class Engine(var config: EngineConfig, game: IScript) {
         renderer.addRenderer(LightRenderer(this))
         renderer.addRenderer(MeshRenderer(this))
         renderer.addRenderer(ImGuiRenderer(this))
-        //renderer.addRenderer(BillboardTextRenderer(this)) do this later
 
         root.engine = this
         game.init(root)

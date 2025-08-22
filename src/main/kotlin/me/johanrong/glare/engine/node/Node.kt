@@ -19,6 +19,7 @@ open class Node (
     init {
         if (parent != null) {
             engine = parent!!.engine
+            engine.addNode(this)
         }
 
         for (component in components) {
@@ -28,7 +29,6 @@ open class Node (
         if (!hasComponent(Component.SCRIPTS) && parent != null) {
             addComponent(ScriptsComponent())
         }
-        //parent?.addChild(this)
     }
 
     fun addChild(child: Node) {

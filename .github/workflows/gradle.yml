@@ -23,3 +23,11 @@ jobs:
           path: |
             build/libs/glare-editor-*.jar
             build/libs/glare-engine-*.jar
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            build/libs/glare-editor-*.jar
+            build/libs/glare-engine-*.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

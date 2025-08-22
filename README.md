@@ -18,6 +18,12 @@
 ./gradlew generateConstants
 ```
 
+## Building
+- Generates a `glare-editor` and `glare-engine`
+```
+./gradlew build
+```
+
 ## Example Usage
 - Example is probably already outdated.
 ```kotlin

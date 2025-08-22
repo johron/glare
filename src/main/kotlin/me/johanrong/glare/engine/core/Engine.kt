@@ -5,6 +5,7 @@ import me.johanrong.glare.engine.io.Input
 import me.johanrong.glare.engine.node.Node
 import me.johanrong.glare.engine.node.component.Component
 import me.johanrong.glare.engine.node.component.core.IScript
+import me.johanrong.glare.engine.node.component.core.ScriptsComponent
 import me.johanrong.glare.engine.render.ImGuiRenderer
 import me.johanrong.glare.engine.render.LightRenderer
 import me.johanrong.glare.engine.render.MeshRenderer
@@ -22,12 +23,16 @@ class Engine(var config: EngineConfig, game: IScript) {
     var root = Node.builder {
         name = "Root"
         parent = null
+        components = mutableListOf(
+            ScriptsComponent()
+        )
     }
 
     val input: Input = Input(this)
     val physics: Physics = Physics(this)
     private val renderer: Renderer = Renderer(this)
 
+    private var nodesToAdd: MutableList<Node> = mutableListOf()
     var panels: MutableList<IPanel> = mutableListOf()
 
     val window = Window(
@@ -68,6 +73,12 @@ class Engine(var config: EngineConfig, game: IScript) {
             if (!config.disableScripts) {
                 root.update(delta)
             }
+
+            for (node in nodesToAdd) {
+                node.getParent()!!.addChild(node)
+            }
+            nodesToAdd.clear()
+
             game.update(delta)
             window.update()
             renderer.render()
@@ -105,6 +116,10 @@ class Engine(var config: EngineConfig, game: IScript) {
 
     fun getDelta(): Double {
         return delta
+    }
+
+    fun addNode(node: Node) {
+        nodesToAdd.add(node)
     }
 
     fun getCamera(exception: Boolean = false): Node? {

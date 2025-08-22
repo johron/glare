@@ -21,13 +21,19 @@ class ExplorerPanel : IPanel {
 
         separator()
         button("Add") {
-            Node.builder {
+            engine!!.addNode(Node.builder {
                 name = "Node"
                 parent = selectedNode ?: engine?.root
-            }
+            })
         }
-        treeNodeEx("Root", 32) {
-            makeTree(engine?.root!!)
+        val isSelected = selectedNode == engine?.root
+        val flag = if (isSelected) ImGuiTreeNodeFlags.Selected or ImGuiTreeNodeFlags.OpenOnDoubleClick else ImGuiTreeNodeFlags.OpenOnDoubleClick
+        treeNodeEx2("Root", flag) {
+            if (ImGui.isItemClicked()) {
+                selectedNode = engine!!.root
+                EventBus.publish(NodeSelectedEvent(engine!!.root))
+            }
+            makeTree(engine!!.root)
         }
         separator()
     }

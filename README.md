@@ -2,7 +2,7 @@
 - A modular, cross-platform 3D game engine built in Kotlin using LWJGL and OpenGL
 
 ## TODO
-- [ ] Split engine and editor into own repos?
+- [ ] ¿?
 
 ## Dependencies and frameworks used
 - Java 22

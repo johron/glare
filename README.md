@@ -2,9 +2,7 @@
 - A modular, cross-platform 3D game engine built in Kotlin using LWJGL and OpenGL
 
 ## TODO
-- [ ] Nodes should be added to parents through the engine, not at construction, since this
-      can cause concurrent modification exceptions in atleast the renderer.
-- [ ] Split engine and editor
+- [ ] Add dependencies to components, so that they can only exist or maybe be run/started with it's requirements
 
 ## Dependencies and frameworks used
 - Java 22
@@ -18,6 +16,12 @@
 - Generate Constants
 ```bash
 ./gradlew generateConstants
+```
+
+## Building
+- Generates a `glare-editor` and `glare-engine`
+```
+./gradlew build
 ```
 
 ## Example Usage

@@ -10,6 +10,7 @@ import me.johanrong.glare.engine.node.Node
 import me.johanrong.glare.engine.node.component.core.CameraComponent
 import me.johanrong.glare.engine.node.component.core.IScript
 import me.johanrong.glare.engine.node.component.core.ScriptsComponent
+import me.johanrong.glare.engine.node.component.physics.RigidbodyComponent
 import org.joml.Vector3d
 
 fun main() {
@@ -36,7 +37,9 @@ class Editor : IScript {
             parent = root
             components = mutableListOf(
                 CameraComponent(),
-                ScriptsComponent()
+                ScriptsComponent(mutableListOf(
+                    FreecamScript()
+                ))
             )
         }
 
@@ -45,6 +48,9 @@ class Editor : IScript {
         Node.builder {
             name = "Node1"
             parent = camera
+            components = mutableListOf(
+                RigidbodyComponent()
+            )
         }
 
 

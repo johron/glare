@@ -23,24 +23,4 @@ interface IComponent {
     }
 
     fun cleanup() {}
-
-    fun getExportProperties(): List<ExportPropertyInfo> {
-        val result = mutableListOf<ExportPropertyInfo>()
-
-        this::class.memberProperties.forEach { property ->
-            if (property.findAnnotation<ExportProperty>() != null) {
-                property.isAccessible = true
-                val value = property.getter.call(this)
-
-                result.add(ExportPropertyInfo(
-                    name = property.name,
-                    value = value,
-                    property = property,
-                    mutable = property.findAnnotation<ExportProperty>()?.mutable ?: true
-                ))
-            }
-        }
-
-        return result
-    }
 }

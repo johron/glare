@@ -1,5 +1,6 @@
 package me.johanrong.glare.editor.ui.panel
 
+import me.johanrong.glare.editor.ui.element.Field
 import me.johanrong.glare.engine.core.Engine
 import me.johanrong.glare.engine.event.EventBus
 import me.johanrong.glare.engine.event.NodeSelectedEvent
@@ -8,12 +9,17 @@ import me.johanrong.glare.engine.node.component.Component
 import me.johanrong.glare.engine.node.component.IComponent
 import me.johanrong.glare.engine.node.component.core.ScriptsComponent
 import me.johanrong.glare.engine.ui.IPanel
+import me.johanrong.glare.engine.util.getExportProperties
+import org.joml.Vector3d
+import org.joml.Vector3f
+import kotlin.reflect.full.createType
 
 class PropertiesPanel : IPanel {
     override var name: String = "Properties"
     override var engine: Engine? = null
 
     private var node: Node? = null
+    private var selectedAdditionComponent = 0
 
     init {
         EventBus.subscribe<NodeSelectedEvent> { event ->
@@ -61,29 +67,16 @@ class PropertiesPanel : IPanel {
             for (component in node!!.getComponents()) {
                 if (component is ScriptsComponent) continue
 
-                text(component.getComponentName())
-                sameLine()
-                button("X") {
-                    println("Removing component: ${component.getComponentName()} from node: ${node!!.name}")
-                    toRemove.add(component)
-                }
-
-                val properties = component.getExportProperties()
-                if (properties.isEmpty()) continue
-
-                treeNodeEx("Properties", 32) {
+                treeNode(component.getComponentName()) {
+                    val properties = component.getExportProperties()
                     for (property in properties) {
-                        text("${property.name}: ${property.value}")
-                        val type = property.property.returnType
-                        text(type.toString())
-                        if (property.mutable) {
-                        sameLine()
-                            button("Edit")
-                        }
+                        Field(property)
+                    }
+                    button("Remove") {
+                        println("Removing component: ${component.getComponentName()} from node: ${node!!.name}")
+                        toRemove.add(component)
                     }
                 }
-
-                separator()
             }
 
             for (component in toRemove) {
@@ -100,12 +93,34 @@ class PropertiesPanel : IPanel {
                 list.add(c.toString())
             }
 
-            combo("+", 0, list.toTypedArray()) { selected ->
-                val comp = Component.fromString(list[selected])
+            combo(" ", selectedAdditionComponent, list.toTypedArray()) { selected ->
+                selectedAdditionComponent = selected
+            }
+            sameLine()
+            button("Add") {
+                val comp = Component.fromString(list[selectedAdditionComponent])
                 if (comp != null) {
-                    println("Adding component: ${comp.getComponentName()} to node: ${node!!.name}")
                     node!!.addComponent(comp)
+                    selectedAdditionComponent = 0
                 }
+            }
+        }
+
+        treeNodeEx("Scripts", 32) {
+            val scriptsComponent = node!!.getComponent(Component.SCRIPTS) as ScriptsComponent
+            for (script in scriptsComponent.scripts) {
+                val name = script::class.simpleName ?: "Unknown Script"
+                val properties = script.getExportProperties()
+                for (property in properties) {
+                    text("${property.name}: ${property.value}")
+                    val type = property.property.returnType
+                    text(type.toString())
+                    if (property.mutable) {
+                        sameLine()
+                        button("Edit")
+                    }
+                }
+                text(name)
             }
         }
     }

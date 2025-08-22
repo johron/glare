@@ -28,7 +28,7 @@ open class Node (
         if (!hasComponent(Component.SCRIPTS) && parent != null) {
             addComponent(ScriptsComponent())
         }
-        parent?.addChild(this)
+        //parent?.addChild(this)
     }
 
     fun addChild(child: Node) {

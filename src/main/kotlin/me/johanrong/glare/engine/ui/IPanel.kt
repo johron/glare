@@ -121,7 +121,7 @@ interface IPanel {
         return result
     }
 
-    fun render()
+    fun render() {}
 
     fun begin() {
         counter = 0

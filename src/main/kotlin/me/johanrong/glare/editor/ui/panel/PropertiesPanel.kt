@@ -1,5 +1,6 @@
 package me.johanrong.glare.editor.ui.panel
 
+import me.johanrong.glare.editor.ui.element.Field
 import me.johanrong.glare.engine.core.Engine
 import me.johanrong.glare.engine.event.EventBus
 import me.johanrong.glare.engine.event.NodeSelectedEvent
@@ -9,6 +10,9 @@ import me.johanrong.glare.engine.node.component.IComponent
 import me.johanrong.glare.engine.node.component.core.ScriptsComponent
 import me.johanrong.glare.engine.ui.IPanel
 import me.johanrong.glare.engine.util.getExportProperties
+import org.joml.Vector3d
+import org.joml.Vector3f
+import kotlin.reflect.full.createType
 
 class PropertiesPanel : IPanel {
     override var name: String = "Properties"
@@ -66,13 +70,7 @@ class PropertiesPanel : IPanel {
                 treeNode(component.getComponentName()) {
                     val properties = component.getExportProperties()
                     for (property in properties) {
-                        text("${property.name}: ${property.value}")
-                        val type = property.property.returnType
-                        text(type.toString())
-                        if (property.mutable) {
-                            sameLine()
-                            button("Edit")
-                        }
+                        Field(property)
                     }
                     button("Remove") {
                         println("Removing component: ${component.getComponentName()} from node: ${node!!.name}")

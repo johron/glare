@@ -20,6 +20,12 @@ class ExplorerPanel : IPanel {
         }
 
         separator()
+        button("Add") {
+            Node.builder {
+                name = "Node"
+                parent = selectedNode ?: engine?.root
+            }
+        }
         treeNodeEx("Root", 32) {
             makeTree(engine?.root!!)
         }

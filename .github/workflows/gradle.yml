@@ -21,4 +21,5 @@ jobs:
         with:
           name: Glare
           path: |
-            build/libs/glare-*.jar
+            build/libs/glare-editor-*.jar
+            build/libs/glare-engine-*.jar

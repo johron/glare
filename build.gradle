@@ -121,7 +121,39 @@ kotlin {
     jvmToolchain(22)
 }
 
+task buildEngine(type: Jar) {
+    archiveBaseName = 'glare-engine'
+
+    manifest {
+        attributes(
+                'Implementation-Title': 'Glare Engine',
+                'Implementation-Version': version
+        )
+    }
+
+    // Only include engine classes
+    from(sourceSets.main.output) {
+        include 'me/johanrong/glare/engine/**'
+        include 'me/johanrong/glare/assets/**'
+    }
+
+    // Include dependencies
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+
+    from('LICENSE') {
+        into('me/johanrong/glare')
+    }
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
 tasks.jar {
+    archiveBaseName = 'glare-editor'
+
+    dependsOn buildEngine
+
     manifest {
         attributes(
                 'Implementation-Title': 'Glare',
@@ -132,6 +164,13 @@ tasks.jar {
     from {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
+
+    from(sourceSets.main.output) {
+        include 'me/johanrong/glare/editor/**'
+        include 'me/johanrong/glare/engine/**'
+        include 'me/johanrong/glare/assets/**'
+    }
+
     from('LICENSE') {
         into('me/johanrong/glare')
     }

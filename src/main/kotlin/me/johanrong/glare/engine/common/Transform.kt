@@ -62,20 +62,8 @@ data class Transform (
         return Vector3f(position.x.toFloat(), position.y.toFloat(), position.z.toFloat())
     }
 
-    fun getRight(): Vector3f {
-        return Vector3f(
-            Math.cos(rotation.toRadians().y) * Math.cos(rotation.toRadians().x),
-            Math.sin(rotation.toRadians().x),
-            Math.sin(rotation.toRadians().y) * Math.cos(rotation.toRadians().x)
-        )
-    }
-
-    fun getUp(): Vector3f {
-        return Vector3f(
-            Math.cos(rotation.toRadians().y) * Math.sin(rotation.toRadians().x),
-            -Math.cos(rotation.toRadians().x),
-            Math.sin(rotation.toRadians().y) * Math.sin(rotation.toRadians().x)
-        )
+    fun getGlobal(): Transform {
+        TODO("i think im gonna make the Transform a component so it can access the parent node")
     }
 
     fun getTransformMatrix(): Matrix4f {

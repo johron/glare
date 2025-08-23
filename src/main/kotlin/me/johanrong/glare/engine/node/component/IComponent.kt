@@ -2,9 +2,6 @@ package me.johanrong.glare.engine.node.component
 
 import me.johanrong.glare.engine.node.Node
 import me.johanrong.glare.engine.util.log
-import kotlin.reflect.full.findAnnotation
-import kotlin.reflect.full.memberProperties
-import kotlin.reflect.jvm.isAccessible
 
 interface IComponent {
     val type: Component

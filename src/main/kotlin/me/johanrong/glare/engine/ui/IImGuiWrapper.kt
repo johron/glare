@@ -6,7 +6,6 @@ import imgui.type.ImFloat
 import imgui.type.ImInt
 import imgui.type.ImString
 import me.johanrong.glare.engine.common.Euler
-import me.johanrong.glare.engine.core.Engine
 import org.joml.Vector3d
 import org.joml.Vector3f
 
@@ -97,20 +96,54 @@ interface IImGuiWrapper {
         }
     }
     fun inputVector3f(label: String, vector: Vector3f, callback: (Vector3f) -> Unit) = apply {
-        val vec = floatArrayOf(vector.x, vector.y, vector.z)
-        if (ImGui.inputFloat3(label(label), vec)) {
-            callback(Vector3f(vec[0], vec[1], vec[2]))
+        if (label.isNotEmpty()) {
+            ImGui.text(label)
+        }
+
+        val vecX = ImFloat(vector.x)
+        val vecY = ImFloat(vector.y)
+        val vecZ = ImFloat(vector.z)
+        var changed = false
+
+        ImGui.pushItemWidth(60f)
+        ImGui.text("x")
+        ImGui.sameLine()
+        if (ImGui.inputFloat(label("##x"), vecX)) {
+            changed = true
+        }
+        ImGui.popItemWidth()
+        ImGui.sameLine()
+
+        ImGui.pushItemWidth(60f)
+        ImGui.text("y")
+        ImGui.sameLine()
+        if (ImGui.inputFloat(label("##y"), vecY)) {
+            changed = true
+        }
+        ImGui.popItemWidth()
+        ImGui.sameLine()
+
+        ImGui.pushItemWidth(60f)
+        ImGui.text("z")
+        ImGui.sameLine()
+        if (ImGui.inputFloat(label("##z"), vecZ)) {
+            changed = true
+        }
+        ImGui.popItemWidth()
+
+        if (changed) {
+            callback(Vector3f(vecX.get(), vecY.get(), vecZ.get()))
         }
     }
     fun inputVector3d(label: String, vector: Vector3d, callback: (Vector3d) -> Unit) = apply {
-        val vec = floatArrayOf(vector.x.toFloat(), vector.y.toFloat(), vector.z.toFloat())
-        if (ImGui.inputFloat3(label(label), vec)) {
+        val vec = Vector3f(vector.x.toFloat(), vector.y.toFloat(), vector.z.toFloat())
+        inputVector3f(label, vec) {
             callback(Vector3d(vec[0].toDouble(), vec[1].toDouble(), vec[2].toDouble()))
         }
     }
     fun inputEuler(label: String, euler: Euler, callback: (Euler) -> Unit) = apply {
-        val vec = floatArrayOf(euler.getRoll().toFloat(), euler.getPitch().toFloat(), euler.getYaw().toFloat())
-        if (ImGui.inputFloat3(label(label), vec)) {
+        val vec = Vector3f(euler.getRoll().toFloat(), euler.getPitch().toFloat(), euler.getYaw().toFloat())
+        inputVector3f(label, vec) {
             callback(Euler(vec[0].toDouble(), vec[1].toDouble(), vec[2].toDouble()))
         }
     }

@@ -79,3 +79,15 @@ fun getExportedProperties(component: IComponent): List<ExportedProperty> {
             )
         }
 }
+
+fun getPrettyName(script: IScript): String {
+    var name = script::class.simpleName ?: "Unknown"
+    name += ".kt"
+    return name
+}
+
+fun getPrettyName(component: IComponent): String {
+    var name = component::class.simpleName ?: "Unknown"
+    name = name.removeSuffix("Component").replace(Regex("(?<!^)([A-Z])"), " $1")
+    return name
+}

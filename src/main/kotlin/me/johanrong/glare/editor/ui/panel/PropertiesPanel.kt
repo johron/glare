@@ -10,6 +10,7 @@ import me.johanrong.glare.engine.node.component.IComponent
 import me.johanrong.glare.engine.node.component.core.ScriptsComponent
 import me.johanrong.glare.engine.ui.IPanel
 import me.johanrong.glare.engine.util.getExportedProperties
+import me.johanrong.glare.engine.util.getPrettyName
 
 class PropertiesPanel : IPanel {
     override var name: String = "Properties"
@@ -34,6 +35,7 @@ class PropertiesPanel : IPanel {
         separator()
         treeNodeEx("Transform", 32) {
             val transform = node!!.transform
+
             inputVector3d("Position", transform.position) { newPos ->
                 transform.position.set(newPos)
             }
@@ -47,66 +49,63 @@ class PropertiesPanel : IPanel {
             }
         }
 
-        treeNodeEx("Components", 32) {
-            val toRemove = mutableListOf<IComponent>()
-            for (component in node!!.getComponents()) {
-                if (component is ScriptsComponent) continue
+        val toRemove = mutableListOf<IComponent>()
+        for (component in node!!.getComponents()) {
+            if (component is ScriptsComponent) continue
 
-                treeNode(component.getComponentName()) {
-                    val properties = getExportedProperties(component)
-                    for (property in properties) {
-                        //println("Property: ${property.name} (${property.type}), Value: ${property.get()}")
-                        Field(property)
-                    }
-                    button("Remove") {
-                        println("Removing component: ${component.getComponentName()} from node: ${node!!.name}")
-                        toRemove.add(component)
-                    }
+            treeNode(getPrettyName(component)) {
+                val properties = getExportedProperties(component)
+                for (property in properties) {
+                    //println("Property: ${property.name} (${property.type}), Value: ${property.get()}")
+                    Field(property)
                 }
-            }
-
-            for (component in toRemove) {
-                node!!.removeComponent(component)
-            }
-
-            val components = Component.asArray()
-            val list: MutableList<String> = mutableListOf()
-            for (component in components) {
-                val c = Component.fromStringEnum(component)
-                if (c == null) continue
-                if (node!!.hasComponent(c)) continue
-                if (c == Component.SCRIPTS) continue
-                list.add(c.toString())
-            }
-
-            combo(" ", selectedAdditionComponent, list.toTypedArray()) { selected ->
-                selectedAdditionComponent = selected
-            }
-            sameLine()
-            button("Add") {
-                val comp = Component.fromString(list[selectedAdditionComponent])
-                if (comp != null) {
-                    node!!.addComponent(comp)
-                    selectedAdditionComponent = 0
+                button("Remove") {
+                    println("Removing component: ${component.getComponentName()} from node: ${node!!.name}")
+                    toRemove.add(component)
                 }
             }
         }
 
-        treeNodeEx("Scripts", 32) {
-            val scriptsComponent = node!!.getComponent(Component.SCRIPTS) as ScriptsComponent
-            for (script in scriptsComponent.scripts) {
-                val name = script::class.simpleName ?: "Unknown Script"
+        for (component in toRemove) {
+            node!!.removeComponent(component)
+        }
 
-                treeNode(name) {
-                    val properties = getExportedProperties(script)
-                    for (property in properties) {
-                        Field(property)
-                    }
-                    button("Remove") {
-                        println("TODO: Remove script: $name from node: ${node!!.name}")
-                    }
+        val scriptsComponent = node!!.getComponent(Component.SCRIPTS) as ScriptsComponent
+        for (script in scriptsComponent.scripts) {
+            val name = getPrettyName(script)
+
+            treeNode(name) {
+                val properties = getExportedProperties(script)
+                for (property in properties) {
+                    Field(property)
+                }
+                button("Remove") {
+                    println("TODO: Remove script: $name from node: ${node!!.name}")
                 }
             }
         }
+
+        val components = Component.asArray()
+        val list: MutableList<String> = mutableListOf()
+        for (component in components) {
+            val c = Component.fromStringEnum(component)
+            if (c == null) continue
+            if (node!!.hasComponent(c)) continue
+            if (c == Component.SCRIPTS) continue
+            list.add(c.toString())
+        }
+
+        combo(" ", selectedAdditionComponent, list.toTypedArray()) { selected ->
+            selectedAdditionComponent = selected
+        }
+        sameLine()
+        button("Add") {
+            val comp = Component.fromString(list[selectedAdditionComponent])
+            if (comp != null) {
+                node!!.addComponent(comp)
+                selectedAdditionComponent = 0
+            }
+        }
+
     }
 }

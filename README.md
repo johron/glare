@@ -19,7 +19,7 @@
 ```
 
 ## Building
-- Generates a `glare-editor` and `glare-engine`
+- Generates `glare-editor` and `glare-engine`
 ```
 ./gradlew build
 ```

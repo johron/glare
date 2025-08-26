@@ -38,10 +38,6 @@ dependencies {
     implementation("io.github.spair:imgui-java-natives-windows:${imguiVersion}")
 
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation "org.jetbrains.kotlin:kotlin-scripting-common"
-    implementation "org.jetbrains.kotlin:kotlin-scripting-jvm"
-    implementation "org.jetbrains.kotlin:kotlin-scripting-jvm-host"
-    implementation "org.jetbrains.kotlin:kotlin-scripting-jsr223"
 
     implementation "org.lwjgl:lwjgl"
     implementation "org.lwjgl:lwjgl-assimp"

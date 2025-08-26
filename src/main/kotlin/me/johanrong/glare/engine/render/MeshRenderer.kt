@@ -1,11 +1,11 @@
 package me.johanrong.glare.engine.render
 
+import me.johanrong.glare.engine.component.Component
+import me.johanrong.glare.engine.component.graphics.MaterialComponent
+import me.johanrong.glare.engine.component.graphics.MeshComponent
+import me.johanrong.glare.engine.component.graphics.TextureComponent
 import me.johanrong.glare.engine.core.Engine
-import me.johanrong.glare.engine.node.Node
-import me.johanrong.glare.engine.node.component.Component
-import me.johanrong.glare.engine.node.component.graphics.MaterialComponent
-import me.johanrong.glare.engine.node.component.graphics.MeshComponent
-import me.johanrong.glare.engine.node.component.graphics.TextureComponent
+import me.johanrong.glare.engine.core.Node
 import org.lwjgl.opengl.GL46
 
 class MeshRenderer(val engine: Engine) : IRenderer {

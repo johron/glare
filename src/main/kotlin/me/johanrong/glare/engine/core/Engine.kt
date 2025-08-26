@@ -1,15 +1,14 @@
 package me.johanrong.glare.engine.core
 
 import imgui.ImGui
+import me.johanrong.glare.engine.component.Component
+import me.johanrong.glare.engine.component.core.ScriptsComponent
 import me.johanrong.glare.engine.io.Input
-import me.johanrong.glare.engine.node.Node
-import me.johanrong.glare.engine.node.component.Component
-import me.johanrong.glare.engine.node.component.core.IScript
-import me.johanrong.glare.engine.node.component.core.ScriptsComponent
 import me.johanrong.glare.engine.render.ImGuiRenderer
 import me.johanrong.glare.engine.render.LightRenderer
 import me.johanrong.glare.engine.render.MeshRenderer
 import me.johanrong.glare.engine.render.Renderer
+import me.johanrong.glare.engine.scripting.IScript
 import me.johanrong.glare.engine.ui.IPanel
 import me.johanrong.glare.engine.util.GeneratedConstants
 import me.johanrong.glare.engine.util.log
@@ -59,7 +58,8 @@ class Engine(var config: EngineConfig, game: IScript) {
         renderer.addRenderer(ImGuiRenderer(this))
 
         root.engine = this
-        game.init(root)
+        game.onAttach(root)
+        game.init()
 
         var frames = 0
         while (isRunning) {

@@ -5,7 +5,7 @@ import imgui.type.ImBoolean
 import imgui.type.ImFloat
 import imgui.type.ImInt
 import imgui.type.ImString
-import me.johanrong.glare.engine.common.Euler
+import me.johanrong.glare.engine.type.Euler
 import org.joml.Vector3d
 import org.joml.Vector3f
 

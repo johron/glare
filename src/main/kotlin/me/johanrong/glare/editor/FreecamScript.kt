@@ -1,24 +1,14 @@
 package me.johanrong.glare.editor
 
-import me.johanrong.glare.engine.core.Engine
+import me.johanrong.glare.engine.component.Exported
 import me.johanrong.glare.engine.io.Keycode
 import me.johanrong.glare.engine.io.MouseButton
-import me.johanrong.glare.engine.node.Node
-import me.johanrong.glare.engine.node.component.Exported
-import me.johanrong.glare.engine.node.component.core.IScript
+import me.johanrong.glare.engine.scripting.Script
 import org.joml.Math
 import org.joml.Vector3d
 
-class FreecamScript() : IScript {
-    lateinit var node: Node
-    lateinit var engine: Engine
-
+class FreecamScript() : Script() {
     @Exported("Speed") var speed: Float = 5.0f
-
-    override fun init(node: Node) {
-        this.node = node
-        this.engine = node.engine
-    }
 
     override fun update(delta: Double) {
         if (engine.input.isKeyHeld(Keycode.W)) {

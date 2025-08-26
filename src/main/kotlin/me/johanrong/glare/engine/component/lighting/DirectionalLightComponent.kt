@@ -1,0 +1,18 @@
+package me.johanrong.glare.engine.component.lighting
+
+import me.johanrong.glare.engine.component.Component
+import me.johanrong.glare.engine.component.graphics.ShaderComponent
+import org.joml.Vector3f
+
+class DirectionalLightComponent: LightComponent() {
+    override val type = Component.DIRECTIONAL_LIGHT
+    var direction: Vector3f = Vector3f(0f, -1f, 0f)
+
+    override fun applyToShader(shader: ShaderComponent, index: Int) {
+        shader.setUniform("uDirLights[$index].direction", direction)
+        shader.setUniform("uDirLights[$index].color", color.toVector3f())
+        shader.setUniform("uDirLights[$index].intensity", intensity)
+    }
+
+    override fun cleanup() {}
+}

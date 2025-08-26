@@ -1,13 +1,13 @@
 package me.johanrong.glare.editor.ui.panel
 
 import me.johanrong.glare.editor.ui.field.Field
+import me.johanrong.glare.engine.component.Component
+import me.johanrong.glare.engine.component.IComponent
+import me.johanrong.glare.engine.component.core.ScriptsComponent
 import me.johanrong.glare.engine.core.Engine
+import me.johanrong.glare.engine.core.Node
 import me.johanrong.glare.engine.event.EventBus
 import me.johanrong.glare.engine.event.NodeSelectedEvent
-import me.johanrong.glare.engine.node.Node
-import me.johanrong.glare.engine.node.component.Component
-import me.johanrong.glare.engine.node.component.IComponent
-import me.johanrong.glare.engine.node.component.core.ScriptsComponent
 import me.johanrong.glare.engine.ui.IPanel
 import me.johanrong.glare.engine.util.getExportedProperties
 import me.johanrong.glare.engine.util.getPrettyName

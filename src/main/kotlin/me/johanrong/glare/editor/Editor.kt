@@ -2,15 +2,15 @@ package me.johanrong.glare.editor
 
 import me.johanrong.glare.editor.ui.panel.ExplorerPanel
 import me.johanrong.glare.editor.ui.panel.PropertiesPanel
-import me.johanrong.glare.engine.common.Euler
-import me.johanrong.glare.engine.common.Transform
+import me.johanrong.glare.engine.component.core.CameraComponent
+import me.johanrong.glare.engine.component.core.ScriptsComponent
+import me.johanrong.glare.engine.component.physics.RigidbodyComponent
 import me.johanrong.glare.engine.core.Engine
 import me.johanrong.glare.engine.core.EngineConfig
-import me.johanrong.glare.engine.node.Node
-import me.johanrong.glare.engine.node.component.core.CameraComponent
-import me.johanrong.glare.engine.node.component.core.IScript
-import me.johanrong.glare.engine.node.component.core.ScriptsComponent
-import me.johanrong.glare.engine.node.component.physics.RigidbodyComponent
+import me.johanrong.glare.engine.core.Node
+import me.johanrong.glare.engine.scripting.Script
+import me.johanrong.glare.engine.type.Euler
+import me.johanrong.glare.engine.type.Transform
 import org.joml.Vector3d
 
 fun main() {
@@ -27,19 +27,15 @@ fun main() {
     Engine(config, Editor())
 }
 
-class Editor : IScript {
-    override fun init(node: Node) {
-        val engine: Engine = node.engine
-
+class Editor : Script() {
+    override fun init() {
         val camera = Node.builder {
             name = "Camera"
             transform = Transform(Vector3d(0.0, 5.0, 5.0), Euler(0.0, 0.0, -90.0))
             parent = node
             components = mutableListOf(
                 CameraComponent(),
-                ScriptsComponent(mutableListOf(
-                    FreecamScript()
-                ))
+                ScriptsComponent(mutableListOf(FreecamScript()))
             )
         }
 

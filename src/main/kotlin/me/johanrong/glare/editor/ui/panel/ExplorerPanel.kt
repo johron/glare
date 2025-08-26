@@ -3,9 +3,9 @@ package me.johanrong.glare.editor.ui.panel
 import imgui.ImGui
 import imgui.flag.ImGuiTreeNodeFlags
 import me.johanrong.glare.engine.core.Engine
+import me.johanrong.glare.engine.core.Node
 import me.johanrong.glare.engine.event.EventBus
 import me.johanrong.glare.engine.event.NodeSelectedEvent
-import me.johanrong.glare.engine.node.Node
 import me.johanrong.glare.engine.ui.IPanel
 
 class ExplorerPanel : IPanel {

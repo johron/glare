@@ -1,11 +1,10 @@
 package me.johanrong.glare.engine.core
 
-import me.johanrong.glare.engine.node.Node
-import me.johanrong.glare.engine.node.component.CCategory
-import me.johanrong.glare.engine.node.component.Component
-import me.johanrong.glare.engine.node.component.physics.RigidbodyComponent
-import me.johanrong.glare.engine.node.component.physics.collision.BoxColliderComponent
-import me.johanrong.glare.engine.node.component.physics.collision.ColliderComponent
+import me.johanrong.glare.engine.component.CCategory
+import me.johanrong.glare.engine.component.Component
+import me.johanrong.glare.engine.component.physics.RigidbodyComponent
+import me.johanrong.glare.engine.component.physics.collision.BoxColliderComponent
+import me.johanrong.glare.engine.component.physics.collision.ColliderComponent
 import org.joml.Vector3f
 
 class Physics(engine: Engine) {

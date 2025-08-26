@@ -8,7 +8,7 @@ import imgui.flag.ImGuiWindowFlags
 import imgui.gl3.ImGuiImplGl3
 import imgui.glfw.ImGuiImplGlfw
 import me.johanrong.glare.engine.core.Engine
-import me.johanrong.glare.engine.node.Node
+import me.johanrong.glare.engine.core.Node
 
 class ImGuiRenderer(val engine: Engine) : IRenderer {
     private val imGuiGlfw = ImGuiImplGlfw()

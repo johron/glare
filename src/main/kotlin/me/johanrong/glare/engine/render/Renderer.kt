@@ -1,8 +1,8 @@
 package me.johanrong.glare.engine.render
 
+import me.johanrong.glare.engine.component.Component
+import me.johanrong.glare.engine.component.graphics.ShaderComponent
 import me.johanrong.glare.engine.core.Engine
-import me.johanrong.glare.engine.node.component.Component
-import me.johanrong.glare.engine.node.component.graphics.ShaderComponent
 import org.lwjgl.opengl.GL46
 
 class Renderer(val engine: Engine) {

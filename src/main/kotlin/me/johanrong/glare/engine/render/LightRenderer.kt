@@ -1,9 +1,9 @@
 package me.johanrong.glare.engine.render
 
+import me.johanrong.glare.engine.component.CCategory
+import me.johanrong.glare.engine.component.lighting.LightComponent
 import me.johanrong.glare.engine.core.Engine
-import me.johanrong.glare.engine.node.Node
-import me.johanrong.glare.engine.node.component.CCategory
-import me.johanrong.glare.engine.node.component.lighting.LightComponent
+import me.johanrong.glare.engine.core.Node
 
 class LightRenderer(val engine: Engine) : IRenderer {
     private var lights = mutableListOf<LightComponent>()

@@ -1,6 +1,6 @@
 package me.johanrong.glare.engine.render
 
-import me.johanrong.glare.engine.node.Node
+import me.johanrong.glare.engine.core.Node
 
 interface IRenderer {
     fun init()

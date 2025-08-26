@@ -3,6 +3,7 @@
 
 ## TODO
 - [ ] Add dependencies to components, so that they can only exist or maybe be run/started with it's requirements
+- [ ] Undersøk om det er mulig å importere andre jar filer (sikkert mulig), og så har glare-engine egen jar og så ha glare-editor i sin egen som da bruker engine som bibliotek og ikke ha glare-engine inne i glare-editor jar, for å gjøre det bedre?
 
 ## Dependencies and frameworks used
 - Java 22

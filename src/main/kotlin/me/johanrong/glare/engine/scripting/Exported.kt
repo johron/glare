@@ -1,4 +1,4 @@
-package me.johanrong.glare.engine.component
+package me.johanrong.glare.engine.scripting
 
 @Target(AnnotationTarget.PROPERTY)
 @Retention(AnnotationRetention.RUNTIME)

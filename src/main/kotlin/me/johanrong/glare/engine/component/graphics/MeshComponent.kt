@@ -14,6 +14,12 @@ import java.nio.IntBuffer
 open class MeshComponent(isPrimary: Boolean = true) : IComponent {
     override val type = Component.MESH
     override var node: Node? = null
+
+    override val dependencies: List<Component> = listOf(
+        Component.SHADER,
+        Component.TEXTURE,
+        Component.MATERIAL,
+    )
     
     private val id: Int = createVAO()
 

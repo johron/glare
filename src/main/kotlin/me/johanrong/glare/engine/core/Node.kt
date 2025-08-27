@@ -25,6 +25,8 @@ open class Node (
             component.onAttach(this)
         }
 
+        validateComponents(this)
+
         if (!hasComponent(Component.SCRIPTS) && parent != null) {
             addComponent(ScriptsComponent())
         }
@@ -150,6 +152,22 @@ open class Node (
             if (colliderComponents.isNotEmpty() && !node.hasComponentsFromCategory(CCategory.BODY)) {
                 throw Exception("Node '${node.name}' has a collider component but no body component. " +
                         "Please add a RigidbodyComponent to the node.")
+            }
+
+            val deps: MutableList<Component> = mutableListOf()
+            for (component in node.components) {
+                deps += component.dependencies
+            }
+
+            for (dep in deps) {
+                if (!node.hasComponent(dep)) {
+                    val component = Component.fromString(dep.name)
+                    if (component != null) {
+                        node.addComponent(component)
+                    } else {
+                        throw Exception("Could not find dependency of type ${dep.name}")
+                    }
+                }
             }
         }
     }

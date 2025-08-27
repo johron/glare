@@ -1,6 +1,6 @@
 package me.johanrong.glare.editor
 
-import me.johanrong.glare.engine.component.Exported
+import me.johanrong.glare.engine.scripting.Exported
 import me.johanrong.glare.engine.io.Keycode
 import me.johanrong.glare.engine.io.MouseButton
 import me.johanrong.glare.engine.scripting.Script

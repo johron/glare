@@ -1,4 +1,4 @@
-package me.johanrong.glare.engine.component
+package me.johanrong.glare.engine.scripting
 
 import kotlin.reflect.KType
 

@@ -1,7 +1,7 @@
 package me.johanrong.glare.engine.util
 
-import me.johanrong.glare.engine.component.Exported
-import me.johanrong.glare.engine.component.ExportedProperty
+import me.johanrong.glare.engine.scripting.Exported
+import me.johanrong.glare.engine.scripting.ExportedProperty
 import me.johanrong.glare.engine.component.IComponent
 import me.johanrong.glare.engine.core.Engine
 import me.johanrong.glare.engine.scripting.IScript

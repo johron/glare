@@ -1,6 +1,6 @@
 package me.johanrong.glare.editor.ui.field
 
-import me.johanrong.glare.engine.component.ExportedProperty
+import me.johanrong.glare.engine.scripting.ExportedProperty
 import me.johanrong.glare.engine.ui.IImGuiWrapper
 import org.joml.Vector3f
 import kotlin.reflect.full.createType

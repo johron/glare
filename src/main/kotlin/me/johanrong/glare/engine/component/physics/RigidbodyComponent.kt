@@ -1,7 +1,7 @@
 package me.johanrong.glare.engine.component.physics
 
 import me.johanrong.glare.engine.component.Component
-import me.johanrong.glare.engine.component.Exported
+import me.johanrong.glare.engine.scripting.Exported
 import me.johanrong.glare.engine.component.IComponent
 import me.johanrong.glare.engine.core.Node
 import org.joml.Vector3f

@@ -8,7 +8,7 @@ import org.joml.Math
 import org.joml.Vector3d
 
 class FreecamScript() : Script() {
-    @Exported("Speed") var speed: Float = 5.0f
+    @Exported var speed: Float = 5.0f
 
     override fun update(delta: Double) {
         if (engine.input.isKeyHeld(Keycode.W)) {

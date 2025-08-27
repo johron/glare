@@ -45,11 +45,13 @@ fun getExportedProperties(script: IScript): List<ExportedProperty> {
         .map { prop ->
             prop.isAccessible = true
             val ann = prop.findAnnotation<Exported>()!!
-            val displayName = ann.name.ifEmpty { prop.name }
+            val displayName = getPrettyName(prop.name)
+
 
             ExportedProperty(
                 name = displayName,
                 type = prop.returnType,
+                mutable = ann.mutable,
                 get = { prop.getter.call(script) },
                 set = { value ->
                     (prop as? KMutableProperty1<IScript, Any?>)
@@ -66,11 +68,12 @@ fun getExportedProperties(component: IComponent): List<ExportedProperty> {
         .map { prop ->
             prop.isAccessible = true
             val ann = prop.findAnnotation<Exported>()!!
-            val displayName = ann.name.ifEmpty { prop.name }
+            val displayName = getPrettyName(prop.name)
 
             ExportedProperty(
                 name = displayName,
                 type = prop.returnType,
+                mutable = ann.mutable,
                 get = { prop.getter.call(component) },
                 set = { value ->
                     (prop as? KMutableProperty1<IScript, Any?>)
@@ -90,4 +93,8 @@ fun getPrettyName(component: IComponent): String {
     var name = component::class.simpleName ?: "Unknown"
     name = name.removeSuffix("Component").replace(Regex("(?<!^)([A-Z])"), " $1")
     return name
+}
+
+fun getPrettyName(name: String): String {
+    return name.split('_').joinToString(" ") { it.replaceFirstChar { char -> char.uppercase() } }
 }

@@ -10,10 +10,10 @@ open class RigidbodyComponent : IComponent {
     override val type = Component.RIGIDBODY
     override var node: Node? = null
 
-    @Exported("Velocity") var velocity = Vector3f(0f, 0f, 0f)
-    @Exported("Mass") var mass: Float = 1f
-    @Exported("Force") var force = Vector3f(0f, 0f, 0f)
-    @Exported("Freeze", false) open var freeze = false
+    @Exported var velocity = Vector3f(0f, 0f, 0f)
+    @Exported var mass: Float = 1f
+    @Exported var force = Vector3f(0f, 0f, 0f)
+    @Exported(false) open var freeze = false
 
     fun applyForce(f: Vector3f) {
         force.add(f)

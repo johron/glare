@@ -6,7 +6,6 @@ import me.johanrong.glare.engine.core.Engine
 import me.johanrong.glare.engine.core.EngineConfig
 import me.johanrong.glare.engine.core.Node
 import me.johanrong.glare.engine.component.core.CameraComponent
-import me.johanrong.glare.engine.scripting.IScript
 import me.johanrong.glare.engine.component.core.ScriptsComponent
 import me.johanrong.glare.engine.component.graphics.MaterialComponent
 import me.johanrong.glare.engine.component.graphics.MeshComponent
@@ -80,14 +79,15 @@ class TestGame : Script() {
             this.parent = node
             components = mutableListOf(
                 MeshComponent("/model/cube.obj"),
-                TextureComponent("/texture/blue.png"),
+                TextureComponent().apply {
+                    path = "/texture/blue.png"
+                    loadTexture()
+                },
                 ShaderComponent.Builder()
                     .vertex("/shader/mesh.vert")
                     .fragment("/shader/mesh.frag")
                     .build(),
                 MaterialComponent(),
-                StaticbodyComponent(),
-                BoxColliderComponent(Transform(Vector3d(0.0), Euler(0.0), Vector3f(5.0f, 0.5f, 5.0f))),
             )
         }
     }

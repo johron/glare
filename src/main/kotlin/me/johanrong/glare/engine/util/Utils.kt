@@ -11,6 +11,7 @@ import java.nio.ByteBuffer
 import kotlin.reflect.KMutableProperty1
 import kotlin.reflect.full.findAnnotation
 import kotlin.reflect.full.memberProperties
+import kotlin.reflect.full.withNullability
 import kotlin.reflect.jvm.isAccessible
 
 fun log(message: String) {
@@ -38,46 +39,24 @@ fun loadImage(path: String, stack: MemoryStack): ByteBuffer? {
     }
 }
 
-fun getExportedProperties(script: IScript): List<ExportedProperty> {
-    val kClass = script::class
+fun getExportedProperties(clazz: Any): List<ExportedProperty> {
+    val kClass = clazz::class
     return kClass.memberProperties
         .filter { it.findAnnotation<Exported>() != null }
         .map { prop ->
             prop.isAccessible = true
             val ann = prop.findAnnotation<Exported>()!!
             val displayName = getPrettyName(prop.name)
-
-
-            ExportedProperty(
-                name = displayName,
-                type = prop.returnType,
-                mutable = ann.mutable,
-                get = { prop.getter.call(script) },
-                set = { value ->
-                    (prop as? KMutableProperty1<IScript, Any?>)
-                        ?.setter?.call(script, value)
-                }
-            )
-        }
-}
-
-fun getExportedProperties(component: IComponent): List<ExportedProperty> {
-    val kClass = component::class
-    return kClass.memberProperties
-        .filter { it.findAnnotation<Exported>() != null }
-        .map { prop ->
-            prop.isAccessible = true
-            val ann = prop.findAnnotation<Exported>()!!
-            val displayName = getPrettyName(prop.name)
+            val type = if (prop.returnType.isMarkedNullable) prop.returnType.withNullability(false) else prop.returnType
 
             ExportedProperty(
                 name = displayName,
-                type = prop.returnType,
+                type = type,
                 mutable = ann.mutable,
-                get = { prop.getter.call(component) },
+                get = { prop.getter.call(clazz) },
                 set = { value ->
-                    (prop as? KMutableProperty1<IScript, Any?>)
-                        ?.setter?.call(component, value)
+                    (prop as? KMutableProperty1<*, *>)
+                        ?.setter?.call(clazz, value)
                 }
             )
         }

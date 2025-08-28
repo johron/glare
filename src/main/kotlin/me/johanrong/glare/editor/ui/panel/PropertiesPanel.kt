@@ -56,7 +56,6 @@ class PropertiesPanel : IPanel {
             treeNode(getPrettyName(component)) {
                 val properties = getExportedProperties(component)
                 for (property in properties) {
-                    //println("Property: ${property.name} (${property.type}), Value: ${property.get()}")
                     Field(property)
                 }
                 button("Remove") {

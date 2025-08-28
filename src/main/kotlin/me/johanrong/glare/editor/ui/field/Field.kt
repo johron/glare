@@ -1,6 +1,7 @@
 package me.johanrong.glare.editor.ui.field
 
 import me.johanrong.glare.engine.scripting.ExportedProperty
+import me.johanrong.glare.engine.type.Color
 import me.johanrong.glare.engine.ui.IImGuiWrapper
 import org.joml.Vector3f
 import kotlin.reflect.full.createType
@@ -47,6 +48,15 @@ class Field(property: ExportedProperty) : IImGuiWrapper {
                 sameLine()
                 inputVector3f(" ", property.get() as Vector3f) { new ->
                     println("New Vector3f: $new")
+                    property.set(new)
+                }
+            }
+
+            Color::class.createType() -> {
+                text(property.name)
+                sameLine()
+                inputColor(" ", property.get() as Color) { new ->
+                    println("New Color: $new")
                     property.set(new)
                 }
             }

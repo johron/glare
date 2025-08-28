@@ -5,6 +5,7 @@ import imgui.type.ImBoolean
 import imgui.type.ImFloat
 import imgui.type.ImInt
 import imgui.type.ImString
+import me.johanrong.glare.engine.type.Color
 import me.johanrong.glare.engine.type.Euler
 import org.joml.Vector3d
 import org.joml.Vector3f
@@ -145,6 +146,12 @@ interface IImGuiWrapper {
         val vec = Vector3f(euler.getRoll().toFloat(), euler.getPitch().toFloat(), euler.getYaw().toFloat())
         inputVector3f(label, vec) {
             callback(Euler(vec[0].toDouble(), vec[1].toDouble(), vec[2].toDouble()))
+        }
+    }
+    fun inputColor(label: String, color: Color, callback: (Color) -> Unit) = apply {
+        val col = floatArrayOf(color.red, color.green, color.blue)
+        if (ImGui.colorEdit3(label(label), col)) {
+            callback(Color(col[0], col[1], col[2]))
         }
     }
 

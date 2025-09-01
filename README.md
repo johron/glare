@@ -5,7 +5,7 @@
 - [x] Add dependencies to components, so that they can only exist or maybe be run/started with it's requirements
 - [ ] Undersøk om det er mulig å importere andre jar filer (sikkert mulig), og så har glare-engine egen jar og så ha glare-editor i sin egen som da bruker engine som bibliotek og ikke ha glare-engine inne i glare-editor jar, for å gjøre det bedre?
 - [ ] Fix coloring of textures
-- [ ] Make all components contactable without arguments
+- [ ] Make all components constructable without arguments
 - [ ] Ability to add custom IRenderers to Renderer
 - [ ] Prefabricated textures, models, shaders, etc
 
